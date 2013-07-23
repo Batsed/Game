@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +14,7 @@ public class frame extends JFrame implements ActionListener {
 /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 private static JButton schliessen;
 private static JButton einstellung;
 private static JButton info;
@@ -23,13 +25,13 @@ static Image MenüBackground;
 static JPanel kontainer;
 static JLabel label;
 static JFrame fenster;
-//static JLabel bild = new JLabel(new ImageIcon(Texturepack."Texturepack/menue_background.png"));
+static JLabel label2;
 
 	public static void main (String[]args) throws Exception{ 			 								
 		
 		frame = new frame("Menü");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(250,400);
+		frame.setSize(1280,700);
         frame.setIconImage(Texturepack.game_icon);
         frame.setLocationRelativeTo(null);
 		frame.setLayout(null);
@@ -48,44 +50,51 @@ static JFrame fenster;
 		kontainer = new JPanel(); 
 		setContentPane(kontainer); 
 		kontainer.setLayout(null);
-		Texturepack.image.setBounds(0,0,400,400);		
+		Texturepack.image.setBounds(0,0,1280,700);		
 		
 		spielen = new JButton("Weiterspielen");
-		spielen.setBounds(45, 40, 160, 40);
+		spielen.setBounds(370, 260, 540, 40);
 		spielen.addActionListener(this);
 		spielen.setVisible(false);
 		add(spielen);				
 		
 		schliessen = new JButton("Spiel starten");
-		schliessen.setBounds(45, 40, 160, 40);
+		schliessen.setBounds(370, 260, 540, 40);
 		schliessen.addActionListener(this);
 		schliessen.setVisible(false);		
 		add(schliessen);				
 		
 		einstellung = new JButton("Einstellungen");
-		einstellung.setBounds(45, 120, 160, 40);
+		einstellung.setBounds(370, 340, 540, 40);
 		einstellung.addActionListener(this);
 		einstellung.setVisible(false);
 		add(einstellung);
 	
 		
 		info = new JButton("Credits");
-		info.setBounds(45, 200, 160, 40);
+		info.setBounds(370, 420, 540, 40);
 		info.addActionListener(this);
 		info.setVisible(false);
 		add(info);
 	
 		
 	    ende = new JButton("Beenden");
-	    ende.setBounds(45, 280, 160, 40);
+	    ende.setBounds(370, 500, 540, 40);
 	    ende.addActionListener(this);
 	    ende.setVisible(false);
 	    add(ende);
 	   	    
 		label = new JLabel("Made by batsed (Alpha Build 0.1)");
-		label.setBounds(35,340,250,20);
+		label.setBounds(550,580,250,20);
 		label.setVisible(false);
 		add(label);	
+		
+		label2 = new JLabel("GAME");
+		label2.setFont(new Font("Sans", Font.PLAIN, 130)); 
+		label2.setForeground(Color.WHITE);
+		label2.setBounds(450,80,500,140);
+		label2.setVisible(true);
+		add(label2);	
 		
 		kontainer.add(Texturepack.image);		
 	}
@@ -151,7 +160,7 @@ static JFrame fenster;
 	 
 	public static void animation() {
 		try {
-			Thread.sleep(300);
+			Thread.sleep(200);
 		} catch (InterruptedException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -159,7 +168,7 @@ static JFrame fenster;
 		schliessen.setVisible(true);
 		
 		try {
-			Thread.sleep(300);
+			Thread.sleep(200);
 		} catch (InterruptedException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -167,21 +176,21 @@ static JFrame fenster;
 		einstellung.setVisible(true);
 				
 		try {
-			Thread.sleep(300);
+			Thread.sleep(200);
 		} catch (InterruptedException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		info.setVisible(true);
 		try {
-			Thread.sleep(300);
+			Thread.sleep(200);
 		} catch (InterruptedException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		ende.setVisible(true);
 		try {
-			Thread.sleep(300);
+			Thread.sleep(200);
 		} catch (InterruptedException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -209,7 +218,8 @@ static JFrame fenster;
 	}		
 	public static void framevisible() {
 		frame.setVisible(true);
-		settings.SFrame.setVisible(false);				
+		settings.SFrame.setVisible(false);		
+		Texturepack.image.setBounds(0,0,1280,700);	
 		kontainer.add(Texturepack.image);
 	}
 }

@@ -1,6 +1,19 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+
 
 
 
@@ -10,7 +23,12 @@ public class gui extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 Timer time;
+
+//Bild vom Gamebackground
 static Image img;
+
+//Bild vom Boden
+static Image Boden;
 
 int key;
 
@@ -21,31 +39,43 @@ static int speed;
 static int anzahl = 0; 
 static int anzahl2 = 0;
 
+static int BodenAnzahl = 0;
+static int BodenAnzahl2 = 0;
+
 //fps
+long firstFrame;
+int frames;
+long currentFrame;
 int fps;
+String fpsvisible = "false";
 
 //Seconds
 int Seconds;
 
-int Bildhöhe = 700;
+//Höhe für offscreenimage
+int Bildhöhe = frame.fenster.getHeight();
 
-//Bildbreite
-static int BildbreiteMal1 = 1280;
-
-//Bildbreite * 2
+//Bildbreite für Gamebackground
+static int BildbreiteMal1 = 1920;
+//Bildbreite * 2 für Gamebackground
 static int BildbreiteMal2 = BildbreiteMal1 * 2;
-
-//Bildbreite * 3
+//Bildbreite * 3 für Gamebackground
 static int BildbreiteMal3 = BildbreiteMal1 * 3;
 
+//Bildbreite * 1 für Boden
+static int BodenBreiteMal1 = 1000;
+//Bildbreite * 2 für Boden
+static int BodenBreiteMal2 = BodenBreiteMal1 * 2;
+//Bildbreite * 3 für Boden
+static int BodenBreiteMal3 = BodenBreiteMal1 * 3;
+
 //Geschwindigkeit der Perfomance
-int Geschwindigkeit = 25;
+int Geschwindigkeit = 1;
 
 //Auf diesen Bild wird dann gezeichnet
 Image offscreen;
 
-//Dies ist die Grafik Device des Bildes(Image offscreen),
-//worauf man einfach zeichnen kann.
+//Offscreen Image
 static Graphics bg; 
 
 static int schleife = 1;  
@@ -53,17 +83,23 @@ static int schleife = 1;
 static int KeySchleifeAnAus = 3;
 
 	public gui() { 				
-
-		setFocusable(true);
-
+		
+		setFocusable(true);				
+		
+		//Lädt das Bild vom Spielhintergrund
 		String Pfad = Texturepack.game_background;
 		ImageIcon u = new ImageIcon(Pfad);
-		img = u.getImage();			
+		img = u.getImage();	
+		
+		//Lädt das Bild vom Boden
+		String Pfad2 = Texturepack.Boden;
+		ImageIcon o = new ImageIcon(Pfad2);
+		Boden = o.getImage();	
+		
+		//Fügt einen Keylistener hinzu
+		addKeyListener(new AL());	
 
-		addKeyListener(new AL());								
-		//setDoubleBuffered(true);
-
-		//SchlumpfSpriteLaufen.SchlumpfSpriteLaufen();
+		//Öffnet neuen Thread für Character
 		SchlumpfSpriteLaufen.main();
 		
 		time = new Timer(Geschwindigkeit,this);
@@ -80,50 +116,87 @@ static int KeySchleifeAnAus = 3;
 		offscreen = createImage(BildbreiteMal1,Bildhöhe);
 		bg = offscreen.getGraphics();
 
-		bg.clearRect(0,0,BildbreiteMal1,Bildhöhe);
-
-		if(Seconds >= 1000) {					
-			String Fps = String.valueOf(fps);
-			frame.fenster.setTitle("Game | fps: " + Fps);
-			fps = 0;
-			Seconds = 0;
-		}else{
-			Seconds += Geschwindigkeit;
-			fps += 1;			
-		}
+		bg.clearRect(0,0,BildbreiteMal1,Bildhöhe);									
 
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;				
-
+		
+		//Anfang vom Zeichnen des Gamehintergrunds
 		if(anzahl2 >= -20) {
 			if(!(anzahl2 >= BildbreiteMal3)) {
 				bg.drawImage(img, 0 - anzahl2, 0,null);
 			}
-		}
+		}				
 
 		if (anzahl >= 0) {
 			if(!(anzahl >= BildbreiteMal3)) {
 				bg.drawImage(img, BildbreiteMal1 - anzahl, 0,null);
 			}
-		}		
+		}				
 
 		if (anzahl >= BildbreiteMal1){
 			if(!(anzahl >= BildbreiteMal3)) {
 				bg.drawImage(img, BildbreiteMal2 - anzahl, 0,null);
 			}
-		}
+		}				
 
 		if (anzahl >= BildbreiteMal2){
 			if(!(anzahl >= BildbreiteMal3)) {
 				bg.drawImage(img, BildbreiteMal3 - anzahl, 0,null);
 			}
 		}
+		//Ende vom Zeichnen des Gamehintergrunds
+		
+		//Anfang vom Zeichnen des Bodens
+		if(BodenAnzahl2 >= -20) {
+			if(!(BodenAnzahl2 >= BodenBreiteMal3)) {
+				bg.drawImage(Boden, 0 - BodenAnzahl2, 600,null);
+			}
+		}
+		
+		if (BodenAnzahl >= 0) {
+			if(!(BodenAnzahl >= BodenBreiteMal3)) {
+				bg.drawImage(Boden, BodenBreiteMal1 - BodenAnzahl, 600,null);
+			}
+		}
+		
+		if (BodenAnzahl >= BodenBreiteMal1){
+			if(!(BodenAnzahl >= BodenBreiteMal3)) {
+				bg.drawImage(Boden, BodenBreiteMal2 - BodenAnzahl, 600,null);
+			}
+		}
+		
+		if (BodenAnzahl >= BodenBreiteMal2){
+			if(!(BodenAnzahl >= BodenBreiteMal3)) {
+				bg.drawImage(Boden, BodenBreiteMal3 - BodenAnzahl, 600,null);
+			}
+		}
+		//Ende vom Zeichnen des Bodens
+		
+		//Anfang vom Zeichnen des Characters
 		if(!(SchlumpfSpriteLaufen.character == null)) {
 			if(!(SchlumpfSpriteLaufen.y + SchlumpfSpriteLaufen.characterHöheFrame < SchlumpfSpriteLaufen.characterHöheFrame)){
-				bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(SchlumpfSpriteLaufen.x, SchlumpfSpriteLaufen.y, SchlumpfSpriteLaufen.characterBreiteFrame, SchlumpfSpriteLaufen.characterHöheFrame), 600, 500, this);
+				bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(SchlumpfSpriteLaufen.x, SchlumpfSpriteLaufen.y, SchlumpfSpriteLaufen.characterBreiteFrame, SchlumpfSpriteLaufen.characterHöheFrame), 600, 480, this);
 			}
 		}    	
+		//Ende vom Zeichnen des Characters				
 		
+		
+		//Anzeige für Fps
+		if(fpsvisible.equalsIgnoreCase("true")){						
+			frames++;
+			currentFrame = System.currentTimeMillis();
+			if(currentFrame > firstFrame + 1000){
+				firstFrame = currentFrame;
+				fps = frames;
+				frames = 0;
+			}
+			String Fps = String.valueOf(fps);
+			bg.setFont(new Font("Sans", Font.PLAIN, 30)); 
+			bg.setColor(Color.WHITE); 
+		    bg.drawString("fps: " + Fps, 50, 50);
+		}
+        
 		//Doublebuffer
 		g2d.drawImage(offscreen,0,0,null);
 		
@@ -133,24 +206,25 @@ static int KeySchleifeAnAus = 3;
 	{ 
 		paint(g); 
 	}
-
+	
+	//Keyevent
 	private class AL extends KeyAdapter{
 
 		 public AL() {
 
 		 }
+		 
+		 //Anfang vom überprüfen ob eine Taste losgelassen wurde
+		 public void keyReleased(KeyEvent e){
 
-		  //Taste gedrückt
-		public void keyReleased(KeyEvent e){
+			 key = e.getKeyCode();
 
-			key = e.getKeyCode();
+			 if(key == KeyEvent.VK_LEFT){
 
-			if(key == KeyEvent.VK_LEFT){
+				 speed = 0;
+			 }
 
-				speed = 0;
-			}
-
-			if( key == KeyEvent.VK_RIGHT){	
+			 if( key == KeyEvent.VK_RIGHT){	
 				schleife = 1;
 				KeySchleifeAnAus = 1;
 				KeySchleife.KeyRightPressed = "aus";
@@ -158,9 +232,11 @@ static int KeySchleifeAnAus = 3;
 				SchlumpfSpriteLaufen.aa = 1;				
 				speed = 0;																
 
-			}
-		}
+			 }
+		 }
+		 //Ende vom überprüfen ob eine Taste losgelassen wurde
 
+		//Anfang vom überprüfen ob eine Taste gedrückt wurde
 		 public void keyPressed(KeyEvent e){
 
 
@@ -172,12 +248,22 @@ static int KeySchleifeAnAus = 3;
 
 				anzahl += speed;
 				anzahl2 += speed;	
+				BodenAnzahl += speed;
+				BodenAnzahl2 += speed;
+				
 
 				if(anzahl <= 20) {
-					anzahl = BildbreiteMal3;											
+					anzahl = BildbreiteMal3;					
+				}
+				if(BodenAnzahl <= 20) {
+					BodenAnzahl = BodenBreiteMal1;
 				}
 				if(anzahl == BildbreiteMal1) {
 					anzahl2 = BildbreiteMal1;	
+					
+				}
+				if(BodenAnzahl == BodenBreiteMal1) {
+					BodenAnzahl2 = BodenBreiteMal1;
 				}
 			} 
 
@@ -192,12 +278,19 @@ static int KeySchleifeAnAus = 3;
 				}
 			}
 				
+			if(key == KeyEvent.VK_F3) {
+				if(fpsvisible.equalsIgnoreCase("true")) {
+					fpsvisible = "false";
+				}else{
+					fpsvisible = "true";
+				}
+			}
 					
-					
-				if(key == KeyEvent.VK_ESCAPE) {
+			if(key == KeyEvent.VK_ESCAPE) {
 
-					frame.visible();
-				}		 					
+				frame.visible();
+			}		 					
 		 }
+		//Ende vom überprüfen ob eine Taste gedrückt wurde
 	}
 }

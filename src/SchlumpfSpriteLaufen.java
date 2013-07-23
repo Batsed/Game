@@ -54,8 +54,8 @@ public class SchlumpfSpriteLaufen {
 								
 				
 	        	while (true) {	
-	        		System.out.println(Standbild);
-	        		if(!(Standbild.equalsIgnoreCase("aus"))) {
+	        		String standbild = Standbild;
+	        		if(!(standbild.equalsIgnoreCase("aus"))) {
 												
 						if(runde == 1) {						
 							x = 0;
