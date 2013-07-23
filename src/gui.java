@@ -82,6 +82,8 @@ static int schleife = 1;
 
 static int KeySchleifeAnAus = 3;
 
+static int ySpace = 0;
+
 	public gui() { 				
 		
 		setFocusable(true);				
@@ -176,7 +178,7 @@ static int KeySchleifeAnAus = 3;
 		//Anfang vom Zeichnen des Characters
 		if(!(SchlumpfSpriteLaufen.character == null)) {
 			if(!(SchlumpfSpriteLaufen.y + SchlumpfSpriteLaufen.characterHöheFrame < SchlumpfSpriteLaufen.characterHöheFrame)){
-				bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(SchlumpfSpriteLaufen.x, SchlumpfSpriteLaufen.y, SchlumpfSpriteLaufen.characterBreiteFrame, SchlumpfSpriteLaufen.characterHöheFrame), 600, 480, this);
+				bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(SchlumpfSpriteLaufen.x, SchlumpfSpriteLaufen.y, SchlumpfSpriteLaufen.characterBreiteFrame, SchlumpfSpriteLaufen.characterHöheFrame), 600, 480  - ySpace, this);
 			}
 		}    	
 		//Ende vom Zeichnen des Characters				
@@ -227,7 +229,7 @@ static int KeySchleifeAnAus = 3;
 			 if( key == KeyEvent.VK_RIGHT){	
 				schleife = 1;
 				KeySchleifeAnAus = 1;
-				KeySchleife.KeyRightPressed = "aus";
+				KeySchleife.KeyPressedRight = "aus";
 				SchlumpfSpriteLaufen.Standbild = "aus";
 				SchlumpfSpriteLaufen.aa = 1;				
 				speed = 0;																
@@ -270,7 +272,7 @@ static int KeySchleifeAnAus = 3;
 
 			if(key == KeyEvent.VK_RIGHT) {
 				
-				KeySchleife.KeyRightPressed = "an";											
+				KeySchleife.KeyPressedRight = "an";											
 				
 				if(KeySchleifeAnAus == 3) {
 					KeySchleife.main();
@@ -289,7 +291,10 @@ static int KeySchleifeAnAus = 3;
 			if(key == KeyEvent.VK_ESCAPE) {
 
 				frame.visible();
-			}		 					
+			}
+			if(key == KeyEvent.VK_SPACE) {
+				KeySchleife.KeyPressedSpace = "true";
+			}
 		 }
 		//Ende vom überprüfen ob eine Taste gedrückt wurde
 	}

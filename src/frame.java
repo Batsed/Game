@@ -156,6 +156,7 @@ static JLabel label2;
 			}
 			
 		}
+		
 	}
 	 
 	public static void animation() {
