@@ -87,7 +87,7 @@ public class SchlumpfSpriteLaufen {
 				        } catch (InterruptedException e) {
 				        	e.printStackTrace();
 				        }					
-	        		}else{
+	        		}else{	        				        			
 	    				
 	        			if(!(aa == 2)) {
 	        				x = 0;
@@ -95,6 +95,11 @@ public class SchlumpfSpriteLaufen {
 		        			
 		        			aa = 2;
 	        			}
+	        			try {
+							Thread.sleep(30);
+				        } catch (InterruptedException e) {
+				        	e.printStackTrace();
+				        }	
 	        			
 	        		}
 	        			

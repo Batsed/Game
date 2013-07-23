@@ -10,6 +10,10 @@ import javax.swing.JPanel;
 
 public class settings extends JFrame implements ActionListener{
 	
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 static JFrame SFrame;
 public static JButton SPfad;
 public static JButton SOk;

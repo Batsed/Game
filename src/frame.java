@@ -1,23 +1,18 @@
-import java.awt.Component;
-import java.awt.Frame;
 import java.awt.Image;
-import java.awt.MediaTracker;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 public class frame extends JFrame implements ActionListener {
 	
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 private static JButton schliessen;
 private static JButton einstellung;
 private static JButton info;

@@ -5,6 +5,10 @@ import javax.swing.*;
 
 
 public class gui extends JPanel implements ActionListener {
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 Timer time;
 static Image img;
 
@@ -35,7 +39,7 @@ static int BildbreiteMal2 = BildbreiteMal1 * 2;
 static int BildbreiteMal3 = BildbreiteMal1 * 3;
 
 //Geschwindigkeit der Perfomance
-int Geschwindigkeit = 1;
+int Geschwindigkeit = 25;
 
 //Auf diesen Bild wird dann gezeichnet
 Image offscreen;
@@ -115,7 +119,9 @@ static int KeySchleifeAnAus = 3;
 			}
 		}
 		if(!(SchlumpfSpriteLaufen.character == null)) {
-			bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(SchlumpfSpriteLaufen.x, SchlumpfSpriteLaufen.y, SchlumpfSpriteLaufen.characterBreiteFrame, SchlumpfSpriteLaufen.characterHöheFrame), 600, 500, this);
+			if(!(SchlumpfSpriteLaufen.y + SchlumpfSpriteLaufen.characterHöheFrame < SchlumpfSpriteLaufen.characterHöheFrame)){
+				bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(SchlumpfSpriteLaufen.x, SchlumpfSpriteLaufen.y, SchlumpfSpriteLaufen.characterBreiteFrame, SchlumpfSpriteLaufen.characterHöheFrame), 600, 500, this);
+			}
 		}    	
 		
 		//Doublebuffer
@@ -178,8 +184,7 @@ static int KeySchleifeAnAus = 3;
 
 			if(key == KeyEvent.VK_RIGHT) {
 				
-				KeySchleife.KeyRightPressed = "an";				
-				SchlumpfSpriteLaufen.Standbild = "an";				
+				KeySchleife.KeyRightPressed = "an";											
 				
 				if(KeySchleifeAnAus == 3) {
 					KeySchleife.main();

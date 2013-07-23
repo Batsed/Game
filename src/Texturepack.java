@@ -1,9 +1,4 @@
-import java.awt.Component;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.awt.image.VolatileImage;
-import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -19,6 +14,7 @@ static URL hauptpfadUrl;
 static String hauptpfadString;
 
 
+	@SuppressWarnings("rawtypes")
 	public static URL getPath(Class cls) {
 	
 		String cn = cls.getName();
