@@ -11,11 +11,11 @@ static Image img;
 int key;
 
 //Geschwindigkeit des scrollens des Bildes
-int speed; 
+static int speed; 
 
 //Aktuelle Breite des Bildes
-int anzahl = 0; 
-int anzahl2 = 0;
+static int anzahl = 0; 
+static int anzahl2 = 0;
 
 //fps
 int fps;
@@ -26,13 +26,13 @@ int Seconds;
 int Bildhöhe = 700;
 
 //Bildbreite
-int BildbreiteMal1 = 1280;
+static int BildbreiteMal1 = 1280;
 
 //Bildbreite * 2
-int BildbreiteMal2 = BildbreiteMal1 * 2;
+static int BildbreiteMal2 = BildbreiteMal1 * 2;
 
 //Bildbreite * 3
-int BildbreiteMal3 = BildbreiteMal1 * 3;
+static int BildbreiteMal3 = BildbreiteMal1 * 3;
 
 //Geschwindigkeit der Perfomance
 int Geschwindigkeit = 1;
@@ -43,6 +43,10 @@ Image offscreen;
 //Dies ist die Grafik Device des Bildes(Image offscreen),
 //worauf man einfach zeichnen kann.
 static Graphics bg; 
+
+static int schleife = 1;  
+
+static int KeySchleifeAnAus = 3;
 
 	public gui() { 				
 
@@ -110,13 +114,12 @@ static Graphics bg;
 				bg.drawImage(img, BildbreiteMal3 - anzahl, 0,null);
 			}
 		}
-		
-    	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(SchlumpfSpriteLaufen.x, 0, SchlumpfSpriteLaufen.characterBreiteFrame, SchlumpfSpriteLaufen.characterHöhe), 600, 500, this);
+		if(!(SchlumpfSpriteLaufen.character == null)) {
+			bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(SchlumpfSpriteLaufen.x, SchlumpfSpriteLaufen.y, SchlumpfSpriteLaufen.characterBreiteFrame, SchlumpfSpriteLaufen.characterHöheFrame), 600, 500, this);
+		}    	
 		
 		//Doublebuffer
 		g2d.drawImage(offscreen,0,0,null);
-		
-		//Bildsynroniesierung mit Sprites
 		
 	}
 
@@ -141,8 +144,12 @@ static Graphics bg;
 				speed = 0;
 			}
 
-			if( key == KeyEvent.VK_RIGHT){
-
+			if( key == KeyEvent.VK_RIGHT){	
+				schleife = 1;
+				KeySchleifeAnAus = 1;
+				KeySchleife.KeyRightPressed = "aus";
+				SchlumpfSpriteLaufen.Standbild = "aus";
+				SchlumpfSpriteLaufen.aa = 1;				
 				speed = 0;																
 
 			}
@@ -153,34 +160,35 @@ static Graphics bg;
 
 			 key = e.getKeyCode();
 
-				if (key == KeyEvent.VK_LEFT ){
+			if (key == KeyEvent.VK_LEFT ){
 
-					speed = -20;
+				speed = -20;
 
-					anzahl += speed;
-					anzahl2 += speed;	
+				anzahl += speed;
+				anzahl2 += speed;	
 
-					if(anzahl <= 20) {
-						anzahl = BildbreiteMal3;											
-					}
-					if(anzahl == BildbreiteMal1) {
-						anzahl2 = BildbreiteMal1;	
-					}
-				} 
-
-
-				if(key == KeyEvent.VK_RIGHT) {
-
-					speed = 20;
-
-					anzahl += speed;
-					anzahl2 += speed;					
-
-					if(anzahl >= BildbreiteMal3) {
-						anzahl = 0;
-						anzahl2 = 0;						
-					}					
+				if(anzahl <= 20) {
+					anzahl = BildbreiteMal3;											
 				}
+				if(anzahl == BildbreiteMal1) {
+					anzahl2 = BildbreiteMal1;	
+				}
+			} 
+
+
+			if(key == KeyEvent.VK_RIGHT) {
+				
+				KeySchleife.KeyRightPressed = "an";				
+				SchlumpfSpriteLaufen.Standbild = "an";				
+				
+				if(KeySchleifeAnAus == 3) {
+					KeySchleife.main();
+					KeySchleifeAnAus = 1;										
+				}
+			}
+				
+					
+					
 				if(key == KeyEvent.VK_ESCAPE) {
 
 					frame.visible();
