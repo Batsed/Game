@@ -23,11 +23,11 @@ private static JButton einstellung;
 private static JButton info;
 private static JButton ende;
 private static JButton spielen;
-static JFrame fenster;
 public static JFrame frame;
 static Image MenüBackground;
 static JPanel kontainer;
 static JLabel label;
+static JFrame fenster;
 //static JLabel bild = new JLabel(new ImageIcon(Texturepack."Texturepack/menue_background.png"));
 
 	public static void main (String[]args) throws Exception{ 			 								
@@ -115,10 +115,7 @@ static JLabel label;
 		if (e.getSource() == info){
 			Object[] options = { "OK"};
 			JOptionPane.showOptionDialog(null, "Programmiert von batsed. Hompage: Batsed.de", "Information",
-
-			        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-
-			        null, options, options[0]);
+					JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 		}
 		
 		if (e.getSource() == einstellung){
@@ -198,20 +195,14 @@ static JLabel label;
 	}
 	
 	public static void fenster(){
-				
 		fenster = new JFrame("Game");
 		fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		fenster.setSize(1280,700);		
-		fenster.add(new gui());		
-		fenster.setIconImage(Texturepack.game_icon);
-		fenster.setLocationRelativeTo(null);
-		fenster.setVisible(true);
-		fenster.setResizable(false);	
-	}
-	
-	private static Component TilesTest() {
-		// TODO Auto-generated method stub
-		return null;
+    	fenster.setSize(1280,700);				
+    	fenster.add(new gui());	
+    	fenster.setIconImage(Texturepack.game_icon);
+    	fenster.setLocationRelativeTo(null);
+    	fenster.setVisible(true);
+    	fenster.setResizable(false);  
 	}
 
 	public static void visible(){
