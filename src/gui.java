@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -56,7 +59,8 @@ int Seconds;
 int Bildhöhe = frame.fenster.getHeight();
 
 //Bildbreite für Gamebackground
-static int BildbreiteMal1 = 1920;
+static int ImageWidthSpeed  = -15;
+static int BildbreiteMal1 = 1920 + ImageWidthSpeed;
 //Bildbreite * 2 für Gamebackground
 static int BildbreiteMal2 = BildbreiteMal1 * 2;
 //Bildbreite * 3 für Gamebackground
@@ -70,7 +74,7 @@ static int BodenBreiteMal2 = BodenBreiteMal1 * 2;
 static int BodenBreiteMal3 = BodenBreiteMal1 * 3;
 
 //Geschwindigkeit der Perfomance
-int Geschwindigkeit = 1;
+int Geschwindigkeit = 10;
 
 //Auf diesen Bild wird dann gezeichnet
 Image offscreen;
@@ -98,11 +102,14 @@ static int ySpace = 0;
 		ImageIcon o = new ImageIcon(Pfad2);
 		Boden = o.getImage();	
 		
+		KeySchleife.main();
+		
+		//Öffnet neuen Thread für Character
+		SchlumpfSpriteLaufen.main();
 		//Fügt einen Keylistener hinzu
 		addKeyListener(new AL());	
 
-		//Öffnet neuen Thread für Character
-		SchlumpfSpriteLaufen.main();
+		
 		
 		time = new Timer(Geschwindigkeit,this);
 		time.start();
@@ -124,61 +131,45 @@ static int ySpace = 0;
 		Graphics2D g2d = (Graphics2D) g;				
 		
 		//Anfang vom Zeichnen des Gamehintergrunds
-		if(anzahl2 >= -20) {
-			if(!(anzahl2 >= BildbreiteMal3)) {
-				bg.drawImage(img, 0 - anzahl2, 0,null);
-			}
-		}				
+		bg.drawImage(img, 0 - anzahl2, 0,null);			
 
-		if (anzahl >= 0) {
-			if(!(anzahl >= BildbreiteMal3)) {
-				bg.drawImage(img, BildbreiteMal1 - anzahl, 0,null);
-			}
-		}				
+		bg.drawImage(img, BildbreiteMal1 - anzahl, 0,null);				
 
-		if (anzahl >= BildbreiteMal1){
-			if(!(anzahl >= BildbreiteMal3)) {
-				bg.drawImage(img, BildbreiteMal2 - anzahl, 0,null);
-			}
-		}				
+		bg.drawImage(img, BildbreiteMal2 - anzahl, 0,null);			
 
-		if (anzahl >= BildbreiteMal2){
-			if(!(anzahl >= BildbreiteMal3)) {
-				bg.drawImage(img, BildbreiteMal3 - anzahl, 0,null);
-			}
-		}
+		bg.drawImage(img, BildbreiteMal3 - anzahl, 0,null);
 		//Ende vom Zeichnen des Gamehintergrunds
 		
 		//Anfang vom Zeichnen des Bodens
-		if(BodenAnzahl2 >= -20) {
-			if(!(BodenAnzahl2 >= BodenBreiteMal3)) {
-				bg.drawImage(Boden, 0 - BodenAnzahl2, 600,null);
-			}
-		}
-		
-		if (BodenAnzahl >= 0) {
-			if(!(BodenAnzahl >= BodenBreiteMal3)) {
-				bg.drawImage(Boden, BodenBreiteMal1 - BodenAnzahl, 600,null);
-			}
-		}
-		
-		if (BodenAnzahl >= BodenBreiteMal1){
-			if(!(BodenAnzahl >= BodenBreiteMal3)) {
-				bg.drawImage(Boden, BodenBreiteMal2 - BodenAnzahl, 600,null);
-			}
-		}
-		
-		if (BodenAnzahl >= BodenBreiteMal2){
-			if(!(BodenAnzahl >= BodenBreiteMal3)) {
-				bg.drawImage(Boden, BodenBreiteMal3 - BodenAnzahl, 600,null);
-			}
-		}
+		bg.drawImage(Boden, 0 - BodenAnzahl2, 600,null);
+
+		bg.drawImage(Boden, BodenBreiteMal1 - BodenAnzahl, 600,null);
+
+		bg.drawImage(Boden, BodenBreiteMal2 - BodenAnzahl, 600,null);
+
+		bg.drawImage(Boden, BodenBreiteMal3 - BodenAnzahl, 600,null);
+
 		//Ende vom Zeichnen des Bodens
 		
 		//Anfang vom Zeichnen des Characters
 		if(!(SchlumpfSpriteLaufen.character == null)) {
 			if(!(SchlumpfSpriteLaufen.y + SchlumpfSpriteLaufen.characterHöheFrame < SchlumpfSpriteLaufen.characterHöheFrame)){
-				bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(SchlumpfSpriteLaufen.x, SchlumpfSpriteLaufen.y, SchlumpfSpriteLaufen.characterBreiteFrame, SchlumpfSpriteLaufen.characterHöheFrame), 600, 480  - ySpace, this);
+				//double degrees = 180;
+				//AffineTransformOp op = new AffineTransformOp(AffineTransform.getRotateInstance(Math.toRadians(degrees),(double)SchlumpfSpriteLaufen.character.getWidth()/2.0, (double)SchlumpfSpriteLaufen.character.getHeight()/2.0), AffineTransformOp.TYPE_BILINEAR); 
+				//BufferedImage character2 = op.filter(SchlumpfSpriteLaufen.character, null);  
+				
+
+				int y = SchlumpfSpriteLaufen.y;
+		        int x = SchlumpfSpriteLaufen.x;
+		        int CharBreite = SchlumpfSpriteLaufen.characterBreiteFrame;
+		        int CharHöhe = SchlumpfSpriteLaufen.characterHöheFrame;
+		        
+		        if(!(CharHöhe + y >= 513)) {
+		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y, CharBreite, CharHöhe), 600, 480  - ySpace, this);
+		        }else{
+		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y - 384, CharBreite, CharHöhe), 600, 480  - ySpace, this);
+		        }
+				
 			}
 		}    	
 		//Ende vom Zeichnen des Characters				
@@ -221,14 +212,20 @@ static int ySpace = 0;
 
 			 key = e.getKeyCode();
 
-			 if(key == KeyEvent.VK_LEFT){
-
+			 if(key == KeyEvent.VK_LEFT){	
+				 KeySchleife.ChaLeftUpdateSchleife = 1;
+				 KeySchleife.KeyPressed = "aus";	
+				 KeySchleife.KeyPressedLeft = "false";
+				 SchlumpfSpriteLaufen.LaufenLinks = "false";
+				 SchlumpfSpriteLaufen.Standbild = "aus";
+				 SchlumpfSpriteLaufen.aa = 1;				
 				 speed = 0;
 			 }
 
 			 if( key == KeyEvent.VK_RIGHT){	
 				schleife = 1;
 				KeySchleifeAnAus = 1;
+				KeySchleife.KeyPressed = "aus";	
 				KeySchleife.KeyPressedRight = "aus";
 				SchlumpfSpriteLaufen.Standbild = "aus";
 				SchlumpfSpriteLaufen.aa = 1;				
@@ -245,37 +242,23 @@ static int ySpace = 0;
 			 key = e.getKeyCode();
 
 			if (key == KeyEvent.VK_LEFT ){
-
-				speed = -20;
-
-				anzahl += speed;
-				anzahl2 += speed;	
-				BodenAnzahl += speed;
-				BodenAnzahl2 += speed;
-				
-
-				if(anzahl <= 20) {
-					anzahl = BildbreiteMal3;					
+				if(KeySchleife.ChaLeftUpdateSchleife == 1) {
+					KeySchleife.ChaLeftUpdate = "true"; 
+					KeySchleife.ChaLeftUpdateSchleife = 2;
+					KeySchleife.KeyPressed = "an";	
 				}
-				if(BodenAnzahl <= 20) {
-					BodenAnzahl = BodenBreiteMal1;
-				}
-				if(anzahl == BildbreiteMal1) {
-					anzahl2 = BildbreiteMal1;	
-					
-				}
-				if(BodenAnzahl == BodenBreiteMal1) {
-					BodenAnzahl2 = BodenBreiteMal1;
-				}
+				KeySchleife.KeyPressedLeft = "true";
+				SchlumpfSpriteLaufen.RightLeft = "left";
 			} 
 
 
 			if(key == KeyEvent.VK_RIGHT) {
+				KeySchleife.KeyPressedRight = "an";	
+				KeySchleife.KeyPressed = "an";	
+				KeySchleife.KeyPressedRight = "an";	
+				SchlumpfSpriteLaufen.RightLeft = "right";
 				
-				KeySchleife.KeyPressedRight = "an";											
-				
-				if(KeySchleifeAnAus == 3) {
-					KeySchleife.main();
+				if(KeySchleifeAnAus == 3) {					
 					KeySchleifeAnAus = 1;										
 				}
 			}

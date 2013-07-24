@@ -1,4 +1,5 @@
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -23,6 +24,8 @@ public class SchlumpfSpriteLaufen {
 	
 	static int characterHöheFrame;
 	
+	static String LaufenLinks = "false";
+	
 	static int x = 0;
 	
 	static int y = 0;
@@ -37,26 +40,71 @@ public class SchlumpfSpriteLaufen {
 	
 	static int aa = 1;
 	
+	static String RightLeft = "right";
+	
+	int one = 1;
+	
 	 private Thread SSLR = new Thread() {
-	        public void run() {
-	        	try {
-					character = ImageIO.read(new File(Texturepack.pic_url));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}										
-	        	
-				characterBreite = character.getWidth(null);
-				characterHöhe = character.getHeight(null);
+	        public void run() {	        												        													
 				
-				characterBreiteFrame = characterBreite / SpriteAnzahlBreite;
-				characterHöheFrame = characterHöhe / SpriteAnzahlHöhe;
-								
-				
-	        	while (true) {	
+	        	while (true) {
 	        		String standbild = Standbild;
+	        		String laufenLinks = LaufenLinks;
 	        		if(!(standbild.equalsIgnoreCase("aus"))) {
-												
+		        		if(!(laufenLinks.equalsIgnoreCase("true"))) {
+			        		try {
+								character = ImageIO.read(new File(Texturepack.pic_url));
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+		        		}
+	        		}
+	        		if(!(standbild.equalsIgnoreCase("aus"))) {
+		        		if(laufenLinks.equalsIgnoreCase("true")) {		        					        				        			
+		        			try {
+								character = ImageIO.read(new File(Texturepack.ChaLinks));
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+		        		}
+	        		}	        			        		
+	        		
+					if(one == 1) {
+						try {
+							character = ImageIO.read(new File(Texturepack.pic_url));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						characterBreite = character.getWidth(null);
+						characterHöhe = character.getHeight(null);
+						
+						characterBreiteFrame = characterBreite / SpriteAnzahlBreite;
+						characterHöheFrame = characterHöhe / SpriteAnzahlHöhe;
+						one = 2;
+	        		}
+					
+					characterBreite = character.getWidth(null);
+					characterHöhe = character.getHeight(null);
+					
+					characterBreiteFrame = characterBreite / SpriteAnzahlBreite;
+					characterHöheFrame = characterHöhe / SpriteAnzahlHöhe;
+	        		
+	        		if(!(standbild.equalsIgnoreCase("aus"))) {	        				        		
+						
+	        			if(KeySchleife.ChaLeftUpdate.equalsIgnoreCase("true")) {
+	        				x = 0;	        				
+	        				y = 0;	        				
+	        				runde = 1;	        				
+	        				rundeVonHöhe = 0;	        				
+	        				rundenaussatz = 0;	
+	        				
+	        				KeySchleife.ChaLeftUpdate = "false";
+	        			}	        			  	        		
+	        			
 						if(runde == 1) {						
 							x = 0;
 						}
@@ -81,27 +129,39 @@ public class SchlumpfSpriteLaufen {
 																				
 						runde = runde + 1;
 						rundenaussatz += 1;
-						
-						try {
-							Thread.sleep(21);
-				        } catch (InterruptedException e) {
-				        	e.printStackTrace();
-				        }					
-	        		}else{	        				        			
+					
+	        		}else{	  	        				        			
 	    				
 	        			if(!(aa == 2)) {
+	        				if(RightLeft.equalsIgnoreCase("left")){	        				
+	    	        			try {
+	    							character = ImageIO.read(new File(Texturepack.ChaLinks));
+	    						} catch (IOException e) {
+	    							// TODO Auto-generated catch block
+	    							e.printStackTrace();
+	    						}	    	        			        					        				
+		        			}else{
+		        				try {
+									character = ImageIO.read(new File(Texturepack.pic_url));
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+		        			}
+	        				
+	        				
 	        				x = 0;
 		        			y = characterBreiteFrame * (SpriteStehen - 1);
 		        			
-		        			aa = 2;
-	        			}
-	        			try {
-							Thread.sleep(30);
-				        } catch (InterruptedException e) {
-				        	e.printStackTrace();
-				        }	
-	        			
+		        			aa = 2;		        			
+	        			}		        			
 	        		}
+	        		
+	        		try {
+						Thread.sleep(30);
+			        } catch (InterruptedException e) {
+			        	e.printStackTrace();
+			        }	
 	        			
 	        	}
 	        }

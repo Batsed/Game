@@ -1,15 +1,23 @@
 
 public class KeySchleife {
-	
-	static String KeyPressedRight;
+
+	static String KeyPressedRight = "aus";
 	
 	static String KeyPressedSpace = "false";
+	
+	static String KeyPressedLeft = "false";
+	
+	static String ChaLeftUpdate = "false";
+	
+	static String KeyPressed = "aus";
 	
 	int yhöhe = 0;
 	
 	String yOn = "false";
 	
-	int ytiefe = 0;
+	int ytiefe = 0;		
+	
+	static int ChaLeftUpdateSchleife = 2;
 	
 	private Thread KeySchleife = new Thread() {
         public void run() {
@@ -17,20 +25,35 @@ public class KeySchleife {
         		
         		if(KeyPressedSpace.equalsIgnoreCase("true")) {
         			if(!(yOn.equalsIgnoreCase("true"))) {
-        				if(yhöhe <= 150) {
-            				gui.ySpace += 10;            				
-            			}	
+        				
+        				if(KeyPressed.equalsIgnoreCase("aus")) {
+        					if(gui.ySpace <= 180) {
+                				gui.ySpace += 15;            				
+                			}
+        				}else{
+        					if(gui.ySpace <= 100) {
+                				gui.ySpace += 15;            				
+                			}
+            				if(gui.ySpace >= 100) {
+            					if(!(gui.ySpace >= 170)) {        						        					
+            					gui.ySpace += 8; 
+            					}
+            				}
+            				if(gui.ySpace >= 170) {
+            					gui.ySpace += 2;
+            				}
+        				}        				
         			}
-        			
-        			if(gui.ySpace >= 150) {
+        			if(gui.ySpace >= 180) {
         				yOn = "true";        				
         			}
         			if(yOn.equalsIgnoreCase("true")) {
-        				if(gui.ySpace <= 150) {
-        					gui.ySpace += -10;
-        				}
-        				if(gui.ySpace == 0) {
+        				
+        				gui.ySpace += -15;
+        				
+        				if(gui.ySpace <= 0) {
         					KeyPressedSpace = "false";
+        					gui.ySpace = 0;
         					yOn = "false";
         				}
         			}
@@ -38,7 +61,7 @@ public class KeySchleife {
         		}
         		
         		if(!(KeyPressedRight.equalsIgnoreCase("aus"))) {
-		        	gui.speed = 20;																				
+		        	gui.speed = 15;																				
 		
 		        	gui.anzahl += gui.speed - 8;
 					gui.anzahl2 += gui.speed - 8;
@@ -57,15 +80,41 @@ public class KeySchleife {
 						SchlumpfSpriteLaufen.an();
 						gui.schleife = 2;
 					}	
-					SchlumpfSpriteLaufen.Standbild = "an";	
-					try {
-						Thread.sleep(12);
-			        } catch (InterruptedException e) {
-			        	e.printStackTrace();
-			        }
-        		}  
+					SchlumpfSpriteLaufen.Standbild = "an";					
+        		}
+        		
+        		if(KeyPressedLeft.equalsIgnoreCase("true")){
+        			gui.speed = -15;
+
+        			gui.anzahl += gui.speed + 8;
+        			gui.anzahl2 += gui.speed + 8;	
+        			gui.BodenAnzahl += gui.speed;
+        			gui.BodenAnzahl2 += gui.speed;
+    				
+        			//Gamebackground
+    				if(gui.anzahl <= 0) {
+    					gui.anzahl = gui.BildbreiteMal2;					
+    				}				
+    				
+    				if(gui.anzahl2 <= gui.BildbreiteMal1 - (gui.BildbreiteMal1 * 2)) {
+    					gui.anzahl2 = gui.BildbreiteMal1;						
+    				}
+    				
+    				
+    				//Boden
+    				if(gui.BodenAnzahl <= 0) {
+    					gui.BodenAnzahl = gui.BodenBreiteMal1;
+    				}
+    				if(gui.BodenAnzahl == gui.BodenBreiteMal1) {
+    					gui.BodenAnzahl2 = gui.BodenBreiteMal1;
+    				}
+    				SchlumpfSpriteLaufen.Standbild = "an";
+    				SchlumpfSpriteLaufen.LaufenLinks = "true";
+        		}
+        		
+        		
         		try {
-					Thread.sleep(20);
+					Thread.sleep(25);
 		        } catch (InterruptedException e) {
 		        	e.printStackTrace();
 		        }	
