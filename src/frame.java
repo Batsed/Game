@@ -240,13 +240,6 @@ static JLabel label2;
 		Texturepack.image.setBounds(0,0,1280,700);	
 		kontainer.add(Texturepack.image);
 	}
-	public static void audio(String[] args) throws Exception {
-		File f = new File(AudioPath.f);
-		System.out.println("Datei da?: " + f.exists()+", "+ f.getAbsolutePath());
-		frame.setVisible(false);
-		Audio.main();
-	}
-	
 }
 	
 	

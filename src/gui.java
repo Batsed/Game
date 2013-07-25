@@ -97,7 +97,7 @@ static int ySpace = 0;
 		ImageIcon o = new ImageIcon(Pfad2);
 		Boden = o.getImage();	
 		
-		frame.audio(null);				
+		Audio.main();
 		
 		KeySchleife.main();
 		

@@ -10,7 +10,7 @@ public class Audio {
 	      @Override
 	      public void run() {
 	        try {
-	         // playMp3.play();
+	        	playMp3.play();
 	        } catch (Exception e) {
 	            System.err.printf("%s\n", e.getMessage());
 	        }
