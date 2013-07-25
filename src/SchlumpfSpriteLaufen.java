@@ -157,11 +157,20 @@ public class SchlumpfSpriteLaufen {
 	        			}		        			
 	        		}
 	        		
-	        		try {
-						Thread.sleep(30);
-			        } catch (InterruptedException e) {
-			        	e.printStackTrace();
-			        }	
+	        		if(KeySchleife.KeyPressedShift == "false") {
+	        			try {
+							Thread.sleep(30);
+				        } catch (InterruptedException e) {
+				        	e.printStackTrace();
+				        }
+	        		}
+	        		if(KeySchleife.KeyPressedShift == "true") {
+	        			try {
+							Thread.sleep(15);
+				        } catch (InterruptedException e) {
+				        	e.printStackTrace();
+				        }
+	        		}	
 	        			
 	        	}
 	        }

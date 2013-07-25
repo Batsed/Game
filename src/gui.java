@@ -7,12 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -74,7 +69,7 @@ static int BodenBreiteMal2 = BodenBreiteMal1 * 2;
 static int BodenBreiteMal3 = BodenBreiteMal1 * 3;
 
 //Geschwindigkeit der Perfomance
-int Geschwindigkeit = 10;
+int Geschwindigkeit = 1;
 
 //Auf diesen Bild wird dann gezeichnet
 Image offscreen;
@@ -88,9 +83,9 @@ static int KeySchleifeAnAus = 3;
 
 static int ySpace = 0;
 
-	public gui() { 				
+	public gui() throws Exception { 				
 		
-		setFocusable(true);				
+		setFocusable(true);					        		       			
 		
 		//Lädt das Bild vom Spielhintergrund
 		String Pfad = Texturepack.game_background;
@@ -101,6 +96,8 @@ static int ySpace = 0;
 		String Pfad2 = Texturepack.Boden;
 		ImageIcon o = new ImageIcon(Pfad2);
 		Boden = o.getImage();	
+		
+		frame.audio(null);				
 		
 		KeySchleife.main();
 		
@@ -165,9 +162,9 @@ static int ySpace = 0;
 		        int CharHöhe = SchlumpfSpriteLaufen.characterHöheFrame;
 		        
 		        if(!(CharHöhe + y >= 513)) {
-		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y, CharBreite, CharHöhe), 600, 480  - ySpace, this);
+		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y, CharBreite, CharHöhe), 550, 480  - ySpace, this);
 		        }else{
-		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y - 384, CharBreite, CharHöhe), 600, 480  - ySpace, this);
+		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y - 384, CharBreite, CharHöhe), 550, 480  - ySpace, this);
 		        }
 				
 			}
@@ -232,6 +229,10 @@ static int ySpace = 0;
 				speed = 0;																
 
 			 }
+			 if(key == KeyEvent.VK_SHIFT) {
+				 KeySchleife.run = 0;
+				 KeySchleife.KeyPressedShift = "false";
+			 }
 		 }
 		 //Ende vom überprüfen ob eine Taste losgelassen wurde
 
@@ -274,6 +275,9 @@ static int ySpace = 0;
 			if(key == KeyEvent.VK_ESCAPE) {
 
 				frame.visible();
+			}
+			if(key == KeyEvent.VK_SHIFT) {
+				KeySchleife.KeyPressedShift = "true";
 			}
 			if(key == KeyEvent.VK_SPACE) {
 				KeySchleife.KeyPressedSpace = "true";

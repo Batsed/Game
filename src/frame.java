@@ -1,9 +1,15 @@
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,8 +33,8 @@ static JLabel label;
 static JFrame fenster;
 static JLabel label2;
 
-	public static void main (String[]args) throws Exception{ 			 								
-		
+	public static void main (String[]args) throws Exception{ 							
+            
 		frame = new frame("Menü");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1280,700);
@@ -46,6 +52,8 @@ static JLabel label2;
 		
 		Texturepack.getPath(this.getClass());
 		Texturepack.Texturepack();
+		
+		AudioPath.AudioPath();
 
 		kontainer = new JPanel(); 
 		setContentPane(kontainer); 
@@ -103,7 +111,16 @@ static JLabel label2;
 		
 		if (e.getSource() == schliessen){
 			if(!(settings.BukkitPfad == null)) {
-				fenster();
+				try {
+					fenster();
+				} catch (LineUnavailableException
+						| UnsupportedAudioFileException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				frame.setVisible(false);
 			}else{
 				try {
@@ -199,7 +216,7 @@ static JLabel label2;
 		label.setVisible(true);
 	}
 	
-	public static void fenster(){
+	public static void fenster() throws Exception{
 		fenster = new JFrame("Game");
 		fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	fenster.setSize(1280,700);				
@@ -223,6 +240,13 @@ static JLabel label2;
 		Texturepack.image.setBounds(0,0,1280,700);	
 		kontainer.add(Texturepack.image);
 	}
+	public static void audio(String[] args) throws Exception {
+		File f = new File(AudioPath.f);
+		System.out.println("Datei da?: " + f.exists()+", "+ f.getAbsolutePath());
+		frame.setVisible(false);
+		Audio.main();
+	}
+	
 }
 	
 	

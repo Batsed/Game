@@ -11,11 +11,15 @@ public class KeySchleife {
 	
 	static String KeyPressed = "aus";
 	
+	static String KeyPressedShift = "false";
+	
 	int yhöhe = 0;
 	
 	String yOn = "false";
 	
 	int ytiefe = 0;		
+	
+	static int run = 0;
 	
 	static int ChaLeftUpdateSchleife = 2;
 	
@@ -60,9 +64,13 @@ public class KeySchleife {
         			
         		}
         		
-        		if(!(KeyPressedRight.equalsIgnoreCase("aus"))) {
-		        	gui.speed = 15;																				
-		
+        		if(!(KeyPressedRight.equalsIgnoreCase("aus"))) {		        																					
+		        	if(KeyPressedShift.equalsIgnoreCase("true")) {
+		        		run = 5;
+		        	}
+		        	
+		        	gui.speed = 15 + run;	
+		        	
 		        	gui.anzahl += gui.speed - 8;
 					gui.anzahl2 += gui.speed - 8;
 					gui.BodenAnzahl += gui.speed;
@@ -83,8 +91,12 @@ public class KeySchleife {
 					SchlumpfSpriteLaufen.Standbild = "an";					
         		}
         		
-        		if(KeyPressedLeft.equalsIgnoreCase("true")){
-        			gui.speed = -15;
+        		if(KeyPressedLeft.equalsIgnoreCase("true")){        			
+        			if(KeyPressedShift.equalsIgnoreCase("true")) {
+		        		run = 5;
+		        	}
+        			
+        			gui.speed = -15 - run;
 
         			gui.anzahl += gui.speed + 8;
         			gui.anzahl2 += gui.speed + 8;	
