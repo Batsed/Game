@@ -14,6 +14,7 @@ static URL hauptpfad;
 static JLabel image;
 static URL hauptpfadUrl;
 static String hauptpfadString;
+static String Brick;
 
 
 	@SuppressWarnings("rawtypes")
@@ -55,6 +56,9 @@ static String hauptpfadString;
 		ImageIcon u = new ImageIcon(Pfad);
 		game_icon = u.getImage();
 		
+		//Brick
+		String Brick2 = (hauptpfad + "Texturepack/brick.png");
+		Brick = Brick2.substring(6);
 		
 	}
 

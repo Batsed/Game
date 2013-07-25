@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -28,7 +29,8 @@ static Image img;
 //Bild vom Boden
 static Image Boden;
 
-int key;
+//Block
+static Image Block;
 
 //Geschwindigkeit des scrollens des Bildes
 static int speed; 
@@ -40,6 +42,8 @@ static int anzahl2 = 0;
 static int BodenAnzahl = 0;
 static int BodenAnzahl2 = 0;
 
+static int Brick = 0;
+
 //fps
 long firstFrame;
 int frames;
@@ -49,6 +53,9 @@ String fpsvisible = "false";
 
 //Seconds
 int Seconds;
+
+Rectangle rect1 = new Rectangle();
+Rectangle rect2 = new Rectangle();
 
 //Höhe für offscreenimage
 int Bildhöhe = frame.fenster.getHeight();
@@ -97,7 +104,10 @@ static int ySpace = 0;
 		ImageIcon o = new ImageIcon(Pfad2);
 		Boden = o.getImage();	
 		
-		Audio.main();
+		//Lädt Block
+		String Block2 = Texturepack.Brick;
+		ImageIcon o2 = new ImageIcon(Block2);
+		Block = o2.getImage();
 		
 		KeySchleife.main();
 		
@@ -125,7 +135,7 @@ static int ySpace = 0;
 		bg.clearRect(0,0,BildbreiteMal1,Bildhöhe);									
 
 		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;				
+		Graphics2D g2d = (Graphics2D) g;										
 		
 		//Anfang vom Zeichnen des Gamehintergrunds
 		bg.drawImage(img, 0 - anzahl2, 0,null);			
@@ -148,6 +158,14 @@ static int ySpace = 0;
 
 		//Ende vom Zeichnen des Bodens
 		
+		//Anfang vom Zeichnen des Blocks
+		//bg.setColor(Color.GREEN);	
+		//bg.drawRect(0 - Brick, 500, 50, 50);
+		rect1.setBounds(0 - Brick, 500, 50, 50);
+		bg.drawImage(Block, 0 - Brick, 500,null);
+		bg.drawImage(Block, 0 - Brick, 550,null);
+		
+		
 		//Anfang vom Zeichnen des Characters
 		if(!(SchlumpfSpriteLaufen.character == null)) {
 			if(!(SchlumpfSpriteLaufen.y + SchlumpfSpriteLaufen.characterHöheFrame < SchlumpfSpriteLaufen.characterHöheFrame)){
@@ -162,14 +180,22 @@ static int ySpace = 0;
 		        int CharHöhe = SchlumpfSpriteLaufen.characterHöheFrame;
 		        
 		        if(!(CharHöhe + y >= 513)) {
+		    		//bg.drawRect(570, 480 - ySpace, 80, 120);
+		    		rect2.setBounds(570, 480 - ySpace, 80, 120);
 		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y, CharBreite, CharHöhe), 550, 480  - ySpace, this);
 		        }else{
+		        	//bg.drawRect(570, 480 - ySpace, 80, 120);
+		        	rect2.setBounds(570, 480 - ySpace, 80, 120);
 		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y - 384, CharBreite, CharHöhe), 550, 480  - ySpace, this);
 		        }
-				
+		        		        
+		        
+		        
 			}
 		}    	
 		//Ende vom Zeichnen des Characters				
+		
+		//Überprüfen 
 		
 		
 		//Anzeige für Fps
@@ -190,7 +216,17 @@ static int ySpace = 0;
 		//Doublebuffer
 		g2d.drawImage(offscreen,0,0,null);
 		
+		//Kolliesionen überprüfen
+		if(rect1.intersects(rect2)){		        	
+        	
+        	Strings.Zusammenstoß = "true";
+        	
+        }else{
+        	Strings.Zusammenstoß = "false";
+        }
+		
 	}
+
 
 	public void update(Graphics g)
 	{ 
@@ -207,9 +243,9 @@ static int ySpace = 0;
 		 //Anfang vom überprüfen ob eine Taste losgelassen wurde
 		 public void keyReleased(KeyEvent e){
 
-			 key = e.getKeyCode();
-
-			 if(key == KeyEvent.VK_LEFT){	
+			 Strings.key = e.getKeyCode();
+			 
+			 if(Strings.key == KeyEvent.VK_LEFT){	
 				 KeySchleife.ChaLeftUpdateSchleife = 1;
 				 KeySchleife.KeyPressed = "aus";	
 				 KeySchleife.KeyPressedLeft = "false";
@@ -219,7 +255,7 @@ static int ySpace = 0;
 				 speed = 0;
 			 }
 
-			 if( key == KeyEvent.VK_RIGHT){	
+			 if(Strings.key == KeyEvent.VK_RIGHT){	
 				schleife = 1;
 				KeySchleifeAnAus = 1;
 				KeySchleife.KeyPressed = "aus";	
@@ -229,7 +265,7 @@ static int ySpace = 0;
 				speed = 0;																
 
 			 }
-			 if(key == KeyEvent.VK_SHIFT) {
+			 if(Strings.key == KeyEvent.VK_SHIFT) {
 				 KeySchleife.run = 0;
 				 KeySchleife.KeyPressedShift = "false";
 			 }
@@ -238,51 +274,53 @@ static int ySpace = 0;
 
 		//Anfang vom überprüfen ob eine Taste gedrückt wurde
 		 public void keyPressed(KeyEvent e){
+			 Strings.key = e.getKeyCode();  
+			 if(Strings.key == KeyEvent.VK_F3) {
+					if(fpsvisible.equalsIgnoreCase("true")) {
+						fpsvisible = "false";
+					}else{
+						fpsvisible = "true";
+					}
+				}
+						
+				if(Strings.key == KeyEvent.VK_ESCAPE) {
+					Strings.ChaJump = "false";
+					Strings.MenüMusik = "true";
+					frame.visible();
+				}
+				if(Strings.key == KeyEvent.VK_SHIFT) {
+					KeySchleife.KeyPressedShift = "true";
+				}
+				if(Strings.key == KeyEvent.VK_SPACE) {
+					KeySchleife.KeyPressedSpace = "true";					
+				}
+			 
 
+				
+				if (Strings.key == KeyEvent.VK_LEFT ){
+					if(KeySchleife.ChaLeftUpdateSchleife == 1) {
+						KeySchleife.ChaLeftUpdate = "true"; 
+						KeySchleife.ChaLeftUpdateSchleife = 2;
+						KeySchleife.KeyPressed = "an";	
+					}
+					KeySchleife.KeyPressedLeft = "true";
+					SchlumpfSpriteLaufen.RightLeft = "left";										
+				} 
 
-			 key = e.getKeyCode();
-
-			if (key == KeyEvent.VK_LEFT ){
-				if(KeySchleife.ChaLeftUpdateSchleife == 1) {
-					KeySchleife.ChaLeftUpdate = "true"; 
-					KeySchleife.ChaLeftUpdateSchleife = 2;
+	
+	
+				if(Strings.key == KeyEvent.VK_RIGHT) {
+					KeySchleife.KeyPressedRight = "an";	
 					KeySchleife.KeyPressed = "an";	
-				}
-				KeySchleife.KeyPressedLeft = "true";
-				SchlumpfSpriteLaufen.RightLeft = "left";
-			} 
-
-
-			if(key == KeyEvent.VK_RIGHT) {
-				KeySchleife.KeyPressedRight = "an";	
-				KeySchleife.KeyPressed = "an";	
-				KeySchleife.KeyPressedRight = "an";	
-				SchlumpfSpriteLaufen.RightLeft = "right";
-				
-				if(KeySchleifeAnAus == 3) {					
-					KeySchleifeAnAus = 1;										
-				}
-			}
-				
-			if(key == KeyEvent.VK_F3) {
-				if(fpsvisible.equalsIgnoreCase("true")) {
-					fpsvisible = "false";
-				}else{
-					fpsvisible = "true";
-				}
-			}
+					SchlumpfSpriteLaufen.RightLeft = "right";									
 					
-			if(key == KeyEvent.VK_ESCAPE) {
-
-				frame.visible();
-			}
-			if(key == KeyEvent.VK_SHIFT) {
-				KeySchleife.KeyPressedShift = "true";
-			}
-			if(key == KeyEvent.VK_SPACE) {
-				KeySchleife.KeyPressedSpace = "true";
-			}
-		 }
+					if(KeySchleifeAnAus == 3) {					
+						KeySchleifeAnAus = 1;										
+					}
+				}
+			 }
+		 
+			
 		//Ende vom überprüfen ob eine Taste gedrückt wurde
 	}
 }

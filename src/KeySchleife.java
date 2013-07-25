@@ -21,16 +21,25 @@ public class KeySchleife {
 	
 	static int run = 0;
 	
+	static int setX = 0;
+	
 	static int ChaLeftUpdateSchleife = 2;
+	
+	String stoﬂrechts = "false";
+	
+	String stoﬂlinks = "false";
 	
 	private Thread KeySchleife = new Thread() {
         public void run() {
-        	while (true) {        		
-        		
+        	while (true) {        		        		
         		if(KeyPressedSpace.equalsIgnoreCase("true")) {
         			if(!(yOn.equalsIgnoreCase("true"))) {
-        				
+        				if(gui.ySpace <= 0) {
+    						Strings.ChaJump = "true";
+    						Audio.main();		
+    					}
         				if(KeyPressed.equalsIgnoreCase("aus")) {
+        					
         					if(gui.ySpace <= 180) {
                 				gui.ySpace += 15;            				
                 			}
@@ -64,66 +73,56 @@ public class KeySchleife {
         			
         		}
         		
-        		if(!(KeyPressedRight.equalsIgnoreCase("aus"))) {		        																					
-		        	if(KeyPressedShift.equalsIgnoreCase("true")) {
-		        		run = 5;
-		        	}
-		        	
-		        	gui.speed = 15 + run;	
-		        	
-		        	gui.anzahl += gui.speed - 8;
-					gui.anzahl2 += gui.speed - 8;
-					gui.BodenAnzahl += gui.speed;
-					gui.BodenAnzahl2 += gui.speed;
-					
-					if(gui.anzahl >= gui.BildbreiteMal3) {
-						gui.anzahl = 0;
-						gui.anzahl2 = 0;
-					}	
-					if(gui.BodenAnzahl >= gui.BodenBreiteMal3) {
-						gui.BodenAnzahl = 0;
-						gui.BodenAnzahl2 = 0;
-					}
-					if(gui.schleife == 1) {
-						SchlumpfSpriteLaufen.an();
-						gui.schleife = 2;
-					}	
-					SchlumpfSpriteLaufen.Standbild = "an";					
+        		if(!(KeyPressedRight.equalsIgnoreCase("aus"))) {          		 
+        				if(Strings.Zusammenstoﬂ.equalsIgnoreCase("true")) {
+        					SchlumpfSpriteLaufen.Standbild = "aus";
+	        				SchlumpfSpriteLaufen.aa = 1;
+        					if(!(stoﬂrechts.equalsIgnoreCase("true"))) {
+        						stoﬂlinks = "true";
+        					}else{
+        						KeyPressedRight();
+        					}
+        					
+        					if(!(stoﬂrechts.equalsIgnoreCase("false"))) {			    			
+			    				stoﬂlinks = "true";
+			    				//gui.schleife = 1;
+			    				//gui.KeySchleifeAnAus = 1;
+			    				KeyPressed = "aus";	
+			    				//KeyPressedRight = "aus";
+			    				SchlumpfSpriteLaufen.Standbild = "aus";
+			    				SchlumpfSpriteLaufen.aa = 1;				
+			    				gui.speed = 0;
+			    			}
+        				}else{
+        					
+        					stoﬂlinks = "false";
+        					KeyPressedRight();
+        				}						        		
+		    		
         		}
         		
-        		if(KeyPressedLeft.equalsIgnoreCase("true")){        			
-        			if(KeyPressedShift.equalsIgnoreCase("true")) {
-		        		run = 5;
-		        	}
-        			
-        			gui.speed = -15 - run;
-
-        			gui.anzahl += gui.speed + 8;
-        			gui.anzahl2 += gui.speed + 8;	
-        			gui.BodenAnzahl += gui.speed;
-        			gui.BodenAnzahl2 += gui.speed;
-    				
-        			//Gamebackground
-    				if(gui.anzahl <= 0) {
-    					gui.anzahl = gui.BildbreiteMal2;					
-    				}				
-    				
-    				if(gui.anzahl2 <= gui.BildbreiteMal1 - (gui.BildbreiteMal1 * 2)) {
-    					gui.anzahl2 = gui.BildbreiteMal1;						
-    				}
-    				
-    				
-    				//Boden
-    				if(gui.BodenAnzahl <= 0) {
-    					gui.BodenAnzahl = gui.BodenBreiteMal1;
-    				}
-    				if(gui.BodenAnzahl == gui.BodenBreiteMal1) {
-    					gui.BodenAnzahl2 = gui.BodenBreiteMal1;
-    				}
-    				SchlumpfSpriteLaufen.Standbild = "an";
-    				SchlumpfSpriteLaufen.LaufenLinks = "true";
+        		if(KeyPressedLeft.equalsIgnoreCase("true")){   
+        				if(Strings.Zusammenstoﬂ.equalsIgnoreCase("true")) {
+        					SchlumpfSpriteLaufen.Standbild = "aus";
+	        				SchlumpfSpriteLaufen.aa = 1;
+        					if(!(stoﬂlinks.equalsIgnoreCase("true"))) {
+        						stoﬂrechts = "true";
+        					}else{
+        						KeyPressedLeft();
+        					}
+        					        					
+        					if(!(stoﬂlinks.equalsIgnoreCase("false"))) {
+		        				//ChaLeftUpdateSchleife = 1;
+		        				KeyPressed = "aus";	
+		        				//KeyPressedLeft = "false";
+		        				//SchlumpfSpriteLaufen.LaufenLinks = "false";		        								
+		        				gui.speed = 0;
+		        			}
+        				}else{          					
+        					stoﬂrechts = "false";
+        					KeyPressedLeft();	        							    										    		
+			    		}	        		
         		}
-        		
         		
         		try {
 					Thread.sleep(25);
@@ -134,6 +133,67 @@ public class KeySchleife {
 	        }
         }
 	};
+	
+	public static void KeyPressedRight() {
+		if(KeyPressedShift.equalsIgnoreCase("true")) {
+    		run = 5;
+    	}
+		
+		gui.speed = 15 + run;			    				    								    							        				        
+    	
+    	gui.anzahl += gui.speed - 8;
+		gui.anzahl2 += gui.speed - 8;
+		gui.BodenAnzahl += gui.speed;
+		gui.BodenAnzahl2 += gui.speed;
+		gui.Brick += gui.speed;
+		
+		if(gui.anzahl >= gui.BildbreiteMal3) {
+			gui.anzahl = 0;
+			gui.anzahl2 = 0;
+		}	
+		if(gui.BodenAnzahl >= gui.BodenBreiteMal3) {
+			gui.BodenAnzahl = 0;
+			gui.BodenAnzahl2 = 0;
+		}
+		if(gui.schleife == 1) {
+			SchlumpfSpriteLaufen.an();
+			gui.schleife = 2;
+		}	
+		SchlumpfSpriteLaufen.Standbild = "an";
+	}
+	
+	public static void KeyPressedLeft () {
+		if(KeyPressedShift.equalsIgnoreCase("true")) {
+    		run = 5;
+    	}
+		
+		gui.speed = -15 - run;
+
+		gui.anzahl += gui.speed + 8;
+		gui.anzahl2 += gui.speed + 8;	
+		gui.BodenAnzahl += gui.speed;
+		gui.BodenAnzahl2 += gui.speed;
+		gui.Brick += gui.speed;
+		
+		//Gamebackground
+		if(gui.anzahl <= 0) {
+			gui.anzahl = gui.BildbreiteMal2;					
+		}				
+		
+		if(gui.anzahl2 <= gui.BildbreiteMal1 - (gui.BildbreiteMal1 * 2)) {
+			gui.anzahl2 = gui.BildbreiteMal1;						
+		}
+		    				
+		//Boden
+		if(gui.BodenAnzahl <= 0) {
+			gui.BodenAnzahl = gui.BodenBreiteMal1;
+		}
+		if(gui.BodenAnzahl == gui.BodenBreiteMal1) {
+			gui.BodenAnzahl2 = gui.BodenBreiteMal1;
+		}
+		SchlumpfSpriteLaufen.Standbild = "an";
+		SchlumpfSpriteLaufen.LaufenLinks = "true";
+	}
 	
 	public static void main() {
         new KeySchleife().start();

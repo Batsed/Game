@@ -1,11 +1,8 @@
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import javax.sound.sampled.LineUnavailableException;
@@ -44,7 +41,12 @@ static JLabel label2;
 		frame.setTitle("Menü");
 		frame.setResizable(false);
         frame.setVisible(true);
-		
+        
+        Strings.Strings();
+        
+        //Starten der Menü Musik
+        Audio.main();                
+        
         animation();
 	}
 
@@ -112,6 +114,8 @@ static JLabel label2;
 		if (e.getSource() == schliessen){
 			if(!(settings.BukkitPfad == null)) {
 				try {
+					Audio.playMp3.close();
+					Strings.MenüMusik = "false";
 					fenster();
 				} catch (LineUnavailableException
 						| UnsupportedAudioFileException | IOException e1) {
@@ -162,6 +166,8 @@ static JLabel label2;
 				spielen.setVisible(false);
 				schliessen.setVisible(true);
 				frame.setTitle("Menü");
+				Audio.playMp3.close();
+				Strings.MenüMusik = "false";
 			}else{
 				try {
 					frame.setVisible(false);
@@ -233,6 +239,8 @@ static JLabel label2;
 		frame.setTitle("Pause");
 		frame.setVisible(true);
 		fenster.setVisible(false);
+		Strings.MenüMusik = "true";
+		Audio.main();
 	}		
 	public static void framevisible() {
 		frame.setVisible(true);
