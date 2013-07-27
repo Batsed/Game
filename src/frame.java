@@ -30,7 +30,7 @@ static JLabel label;
 static JFrame fenster;
 static JLabel label2;
 
-	public static void main (String[]args) throws Exception{ 							
+	public static void main (String[]args) throws Exception { 							
             
 		frame = new frame("Menü");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,6 +42,7 @@ static JLabel label2;
 		frame.setResizable(false);
         frame.setVisible(true);
         
+        //Laden der Strings
         Strings.Strings();
         
         //Starten der Menü Musik

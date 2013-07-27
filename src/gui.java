@@ -54,8 +54,12 @@ String fpsvisible = "false";
 //Seconds
 int Seconds;
 
-Rectangle rect1 = new Rectangle();
-Rectangle rect2 = new Rectangle();
+static Rectangle rect1 = new Rectangle();
+static Rectangle BrickReck1 = new Rectangle();
+static Rectangle BrickReck2 = new Rectangle();
+static Rectangle BrickReck3 = new Rectangle();
+
+static Rectangle rect2 = new Rectangle();
 
 //Höhe für offscreenimage
 int Bildhöhe = frame.fenster.getHeight();
@@ -160,11 +164,20 @@ static int ySpace = 0;
 		
 		//Anfang vom Zeichnen des Blocks
 		//bg.setColor(Color.GREEN);	
-		//bg.drawRect(0 - Brick, 500, 50, 50);
-		rect1.setBounds(0 - Brick, 500, 50, 50);
-		bg.drawImage(Block, 0 - Brick, 500,null);
-		bg.drawImage(Block, 0 - Brick, 550,null);
+		//bg.drawRect(500 - Brick, 340, 50, 60);
 		
+		//Block 1
+		bg.drawImage(Block, 0 - Brick, 550,null);
+		BrickReck1.setBounds(0 - Brick,540, 50, 60);
+		//Block 2			
+		bg.drawImage(Block, 250 - Brick, 450,null);
+		rect1.setBounds(250 - Brick,440, 50, 60);
+		//Block 3
+		bg.drawImage(Block, 500 - Brick, 350, null);
+		BrickReck2.setBounds(500 - Brick,340, 50, 60);
+		//Block 4
+		bg.drawImage(Block, 750 - Brick, 250, null);
+		BrickReck3.setBounds(750 - Brick,240, 50, 60);
 		
 		//Anfang vom Zeichnen des Characters
 		if(!(SchlumpfSpriteLaufen.character == null)) {
@@ -180,13 +193,13 @@ static int ySpace = 0;
 		        int CharHöhe = SchlumpfSpriteLaufen.characterHöheFrame;
 		        
 		        if(!(CharHöhe + y >= 513)) {
-		    		//bg.drawRect(570, 480 - ySpace, 80, 120);
-		    		rect2.setBounds(570, 480 - ySpace, 80, 120);
-		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y, CharBreite, CharHöhe), 550, 480  - ySpace, this);
+		    		//bg.drawRect(590, 480 - ySpace  - Strings.ChaY, 60, 120);
+		    		rect2.setBounds(590, 480 - ySpace  - Strings.ChaY, 60, 120);
+		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY, this);
 		        }else{
-		        	//bg.drawRect(570, 480 - ySpace, 80, 120);
-		        	rect2.setBounds(570, 480 - ySpace, 80, 120);
-		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y - 384, CharBreite, CharHöhe), 550, 480  - ySpace, this);
+		        	//bg.drawRect(590, 480 - ySpace  - Strings.ChaY, 60, 120);
+		        	rect2.setBounds(590, 480 - ySpace  - Strings.ChaY, 60, 120);
+		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y - 384, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY, this);
 		        }
 		        		        
 		        
@@ -216,17 +229,33 @@ static int ySpace = 0;
 		//Doublebuffer
 		g2d.drawImage(offscreen,0,0,null);
 		
-		//Kolliesionen überprüfen
-		if(rect1.intersects(rect2)){		        	
-        	
-        	Strings.Zusammenstoß = "true";
-        	
-        }else{
-        	Strings.Zusammenstoß = "false";
+		//Kolliesionen überprüfen	
+		if(370 >= 608 - ySpace - Strings.ChaY) {
+			//System.out.println("Brick: " + (370) + " Cha: " + (608 - ySpace - Strings.ChaY));
+			//System.out.println("Cha ist höher");
+		}
+		if(BrickReck1.intersects(rect2)){				 
+			KollisionsUpdater.BrickReck1();
         }
-		
-	}
-
+		if(rect1.intersects(rect2)){	
+			KollisionsUpdater.rect1();		
+		}
+		if(BrickReck2.intersects(rect2)) {
+			KollisionsUpdater.BrickReck2();
+		}
+		if(BrickReck3.intersects(rect2)) {
+			KollisionsUpdater.BrickReck3();
+		}
+		if(!(BrickReck1.intersects(rect2))){
+			if(!(BrickReck2.intersects(rect2))){
+				if(!(rect1.intersects(rect2))){
+					if(!(BrickReck3.intersects(rect2))) {											
+					KollisionsUpdater.NoK();
+					}
+				}
+			}
+		}		
+	}	
 
 	public void update(Graphics g)
 	{ 
@@ -255,7 +284,7 @@ static int ySpace = 0;
 				 speed = 0;
 			 }
 
-			 if(Strings.key == KeyEvent.VK_RIGHT){	
+			 if(Strings.key == KeyEvent.VK_RIGHT){					 
 				schleife = 1;
 				KeySchleifeAnAus = 1;
 				KeySchleife.KeyPressed = "aus";	
@@ -292,7 +321,9 @@ static int ySpace = 0;
 					KeySchleife.KeyPressedShift = "true";
 				}
 				if(Strings.key == KeyEvent.VK_SPACE) {
-					KeySchleife.KeyPressedSpace = "true";					
+					if(!(Strings.AnimationY == true)) {
+						KeySchleife.KeyPressedSpace = "true";	
+					}								
 				}
 			 
 
@@ -308,9 +339,10 @@ static int ySpace = 0;
 				} 
 
 	
-	
-				if(Strings.key == KeyEvent.VK_RIGHT) {
-					KeySchleife.KeyPressedRight = "an";	
+				
+
+				if(Strings.key == KeyEvent.VK_RIGHT) {	
+					KeySchleife.KeyPressedRight = "an";
 					KeySchleife.KeyPressed = "an";	
 					SchlumpfSpriteLaufen.RightLeft = "right";									
 					
@@ -319,7 +351,7 @@ static int ySpace = 0;
 					}
 				}
 			 }
-		 
+	
 			
 		//Ende vom überprüfen ob eine Taste gedrückt wurde
 	}

@@ -15,7 +15,7 @@ public class KeySchleife {
 	
 	int yhöhe = 0;
 	
-	String yOn = "false";
+	static String yOn = "false";
 	
 	int ytiefe = 0;		
 	
@@ -31,12 +31,16 @@ public class KeySchleife {
 	
 	private Thread KeySchleife = new Thread() {
         public void run() {
-        	while (true) {        		        		
+        	while (true) { 
+        		
+        		AnimationY.AnimationY();
+        		
         		if(KeyPressedSpace.equalsIgnoreCase("true")) {
         			if(!(yOn.equalsIgnoreCase("true"))) {
         				if(gui.ySpace <= 0) {
     						Strings.ChaJump = "true";
-    						Audio.main();		
+    						Audio.main();	
+    						Strings.ChaJump = "false";
     					}
         				if(KeyPressed.equalsIgnoreCase("aus")) {
         					
@@ -64,25 +68,38 @@ public class KeySchleife {
         				
         				gui.ySpace += -15;
         				
-        				if(gui.ySpace <= 0) {
-        					KeyPressedSpace = "false";
-        					gui.ySpace = 0;
-        					yOn = "false";
+        				if(Strings.KumpSchleife == true) {
+        					if(gui.ySpace + Strings.ChaY <= Strings.ChaHöhe) {
+        						KeyPressedSpace = "false";
+        						yOn = "false";
+        						gui.ySpace = 0;        						
+        						Strings.ChaY = Strings.ChaHöhe;
+        						Strings.StepGrass = "false";
+        						Strings.KumpSchleife = false;        						
+        					}
+        				}else{
+        				
+	        				if(gui.ySpace <= 0) {
+	        					KeyPressedSpace = "false";
+	        					gui.ySpace = 0;
+	        					Strings.StepGrass = "false";
+	        					yOn = "false";
+	        				}
         				}
         			}
         			
         		}
-        		
-        		if(!(KeyPressedRight.equalsIgnoreCase("aus"))) {          		 
+        		        		        		
+        		if(!(KeyPressedRight.equalsIgnoreCase("aus"))) {
         				if(Strings.Zusammenstoß.equalsIgnoreCase("true")) {
         					SchlumpfSpriteLaufen.Standbild = "aus";
 	        				SchlumpfSpriteLaufen.aa = 1;
         					if(!(stoßrechts.equalsIgnoreCase("true"))) {
         						stoßlinks = "true";
-        					}else{
+        					}else{        						        						
         						KeyPressedRight();
-        					}
-        					
+        						
+        					}        					
         					if(!(stoßrechts.equalsIgnoreCase("false"))) {			    			
 			    				stoßlinks = "true";
 			    				//gui.schleife = 1;
@@ -95,19 +112,24 @@ public class KeySchleife {
 			    			}
         				}else{
         					
+        					if(!(Strings.StepGrass.equalsIgnoreCase("true"))) {
+    							Strings.StepGrass = "true"; 
+    							Audio.mainStep();
+    						}
+        					
         					stoßlinks = "false";
         					KeyPressedRight();
         				}						        		
 		    		
         		}
         		
-        		if(KeyPressedLeft.equalsIgnoreCase("true")){   
+        		if(KeyPressedLeft.equalsIgnoreCase("true")){           			
         				if(Strings.Zusammenstoß.equalsIgnoreCase("true")) {
         					SchlumpfSpriteLaufen.Standbild = "aus";
 	        				SchlumpfSpriteLaufen.aa = 1;
         					if(!(stoßlinks.equalsIgnoreCase("true"))) {
         						stoßrechts = "true";
-        					}else{
+        					}else{        						        						
         						KeyPressedLeft();
         					}
         					        					
@@ -118,7 +140,13 @@ public class KeySchleife {
 		        				//SchlumpfSpriteLaufen.LaufenLinks = "false";		        								
 		        				gui.speed = 0;
 		        			}
-        				}else{          					
+        				}else{   
+        					
+        					if(!(Strings.StepGrass.equalsIgnoreCase("true"))) {
+        						Strings.StepGrass = "true"; 
+        						Audio.mainStep();
+        					}
+        					
         					stoßrechts = "false";
         					KeyPressedLeft();	        							    										    		
 			    		}	        		

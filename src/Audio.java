@@ -8,16 +8,19 @@ public class Audio {
 	
 	static Player ChaJump;
 	
+	static Player StepGrass;
+	
 	private Thread Audio = new Thread("Musik") {
       @Override
       public void run() {
-        try {
-        	playMp3.play();
-        	Strings.MenüMusik = "false";
-        } catch (Exception e) {
-            System.err.printf("%s\n", e.getMessage());
-        }
-      }
+	    try {
+	    	playMp3.play();
+	    	//Strings.MenüMusik = "false";
+	    	main();
+	    } catch (Exception e) {
+	        System.err.printf("%s\n", e.getMessage());
+	    }
+	  }      
     };
         	    	
     public static void ManüMusik() {} {
@@ -54,10 +57,49 @@ public class Audio {
           }
         }
       };
+      
+      public static void StepGrass() {} {
+      	try {			
+  			FileInputStream StepGrass3 = new FileInputStream(AudioPath.StepGrass);						
+  			BufferedInputStream StepGrass2 = new BufferedInputStream(StepGrass3);		
+  			
+  			StepGrass = new Player(StepGrass2);
+  			
+  		}catch(Exception e) {
+  			System.out.println(e);
+  		}
+      }
+      
+      private Thread ChaStepGrass = new Thread("ChaStepGrass") {
+          @Override
+          public void run() {
+            try {
+            	StepGrass.play();
+ 	           	Strings.StepGrass = "false";
+            } catch (Exception e) {
+            	System.err.printf("%s\n", e.getMessage());            	
+            }
+            
+          }
+      };
 	
 	
 	public static void main() {
         new Audio().start();
+    }
+	
+	public static void mainStep() {
+        new Audio().Stepstart();
+    }
+	
+	private void Stepstart() {    	  
+    	//if(Strings.StepGrass.equalsIgnoreCase("true")) {
+    		//System.out.println(480  - gui.ySpace - Strings.ChaY);
+    		if(480  - gui.ySpace - Strings.ChaY == 480) {
+	    		StepGrass();
+	    		ChaStepGrass.start();
+    		}
+    	//}
     }
 	
     private void start() {
@@ -67,6 +109,6 @@ public class Audio {
     	}
     	if(Strings.MenüMusik.equalsIgnoreCase("true")) {
     		Audio.start();
-    	}    	
+    	}   
     }
 }
