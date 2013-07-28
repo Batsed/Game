@@ -120,9 +120,7 @@ static int ySpace = 0;
 		//Fügt einen Keylistener hinzu
 		addKeyListener(new AL());	
 
-		
-		
-		time = new Timer(Geschwindigkeit,this);
+		time = new Timer(Geschwindigkeit ,this); 
 		time.start();
 	}
 
@@ -223,7 +221,11 @@ static int ySpace = 0;
 			String Fps = String.valueOf(fps);
 			bg.setFont(new Font("Sans", Font.PLAIN, 30)); 
 			bg.setColor(Color.WHITE); 
-		    bg.drawString("fps: " + Fps, 50, 50);
+			if(fps == 1) {
+				bg.drawString("Berechne fps..." ,50, 50);
+			}else{
+				bg.drawString("fps: " + Fps, 50, 50);
+			}
 		}
         
 		//Doublebuffer
