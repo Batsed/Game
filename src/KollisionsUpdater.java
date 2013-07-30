@@ -98,7 +98,11 @@ public class KollisionsUpdater {
 	}	
 	
 	public static void NoK() {
-	if(!(KeySchleife.KeyPressedSpace.equalsIgnoreCase("true"))) {				
+	if(!(KeySchleife.KeyPressedSpace.equalsIgnoreCase("true"))) {
+		Strings.ZKRec1 = false;	
+		Strings.ZKBrickReck1 = false;
+		Strings.ZKBrickReck2 = false;		
+		Strings.ZKBrickReck3 = false;		
 		if(Strings.AufBlock == false) {        			        			        		
 	    	if(Strings.ySchleife == true) {         			        			        		        			        		
 	    		Strings.ChaHöhe = 0;

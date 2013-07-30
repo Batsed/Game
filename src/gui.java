@@ -182,8 +182,8 @@ static int ySpace = 0;
 		bg.drawImage(Block, 250 - Brick, 450,null);
 		rect1.setBounds(250 - Brick,440, 50, 60);
 		//Block 3
-		//bg.drawImage(Block, 500 - Brick, 350, null);
-		//BrickReck2.setBounds(500 - Brick,340, 50, 60);
+		bg.drawImage(Block, 500 - Brick, 350, null);
+		BrickReck2.setBounds(500 - Brick,340, 50, 60);
 		//Block 4
 		bg.drawImage(Block, 750 - Brick, 250, null);
 		BrickReck3.setBounds(750 - Brick,240, 50, 60);

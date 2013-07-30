@@ -14,6 +14,8 @@ public class Zusammenstoﬂ {
 					Strings.ZKRec1 = true;
 					Strings.BlockHˆhe = 0; 
 					Strings.AnimationY = true;
+					KeySchleife.stoﬂlinks = "false";
+					KeySchleife.stoﬂrechts = "false";
 				}
 			}
 		}
@@ -24,6 +26,8 @@ public class Zusammenstoﬂ {
 				Strings.ZKBrickReck1 = true;
 				Strings.BlockHˆhe = 0;
 				Strings.AnimationY = true;
+				KeySchleife.stoﬂlinks = "false";
+				KeySchleife.stoﬂrechts = "false";
 				}
 			}
 		}
@@ -34,6 +38,8 @@ public class Zusammenstoﬂ {
 					Strings.ZKBrickReck2 = true;
 					Strings.BlockHˆhe = 0;
 					Strings.AnimationY = true;
+					KeySchleife.stoﬂlinks = "false";
+					KeySchleife.stoﬂrechts = "false";
 				}
 			}
 		}		
@@ -44,6 +50,8 @@ public class Zusammenstoﬂ {
 					Strings.ZKBrickReck3 = true;
 					Strings.BlockHˆhe = 0;
 					Strings.AnimationY = true;
+					KeySchleife.stoﬂlinks = "false";
+					KeySchleife.stoﬂrechts = "false";
 				}
 			}
 		}

@@ -98,7 +98,6 @@ public class KeySchleife {
 						stoﬂlinks = "true";		
  						if(Strings.EinerSprung == false) {							
 							if(KeySchleife.KeyPressedSpace == "true") {
-								System.out.println("durch");
 								stoﬂlinks = "true";
 								Strings.EinerSprung = true;	
 							}																								
@@ -117,7 +116,7 @@ public class KeySchleife {
 	    				gui.speed = 0;
 	    			}				
 				}else{
-						stoﬂlinks = "false";
+					stoﬂlinks = "false";
 					
 					if(!(Strings.StepGrass.equalsIgnoreCase("true"))) {
 						Strings.StepGrass = "true"; 
@@ -140,7 +139,6 @@ public class KeySchleife {
 						stoﬂrechts = "true";	
 						if(Strings.EinerSprung == false) {							
 							if(KeySchleife.KeyPressedSpace == "true") {
-								System.out.println("durch");
 								stoﬂrechts = "true";
 								Strings.EinerSprung = true;	
 							}																								

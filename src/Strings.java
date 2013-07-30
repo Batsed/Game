@@ -31,6 +31,8 @@ public class Strings {
 	
 	static boolean EinerSprung = false;
 	
+	static boolean Global = false;
+	
 	//Brickrects
 	static boolean ZKBrickReck1 = false;
 	
