@@ -83,7 +83,7 @@ static int BodenBreiteMal2 = BodenBreiteMal1 * 2;
 static int BodenBreiteMal3 = BodenBreiteMal1 * 3;
 
 //Geschwindigkeit der Perfomance
-int Geschwindigkeit = 1;
+int Geschwindigkeit = 1 / 500;
 
 //Auf diesen Bild wird dann gezeichnet
 Image offscreen;
@@ -135,8 +135,7 @@ static int ySpace = 0;
 		KeySchleife.BildAnimation();
 		
 		//Animationen
-		if(ChaFrames == 3){
-		
+		if(ChaFrames == 3){		
 		SchlumpfSpriteLaufen.ChaAnimation();
 		ChaFrames = 0;
 		}else{
@@ -285,14 +284,14 @@ static int ySpace = 0;
 
 			 Strings.key = e.getKeyCode();
 			 
-			 if(Strings.key == KeyEvent.VK_LEFT){	
+			 if(Strings.key == KeyEvent.VK_LEFT){					 
 				 KeySchleife.ChaLeftUpdateSchleife = 1;
 				 KeySchleife.KeyPressed = "aus";	
 				 KeySchleife.KeyPressedLeft = "false";
 				 SchlumpfSpriteLaufen.LaufenLinks = "false";
 				 SchlumpfSpriteLaufen.Standbild = "aus";
 				 SchlumpfSpriteLaufen.aa = 1;				
-				 speed = 0;
+				 speed = 0;				 
 			 }
 
 			 if(Strings.key == KeyEvent.VK_RIGHT){					 
@@ -302,8 +301,7 @@ static int ySpace = 0;
 				KeySchleife.KeyPressedRight = "aus";
 				SchlumpfSpriteLaufen.Standbild = "aus";
 				SchlumpfSpriteLaufen.aa = 1;				
-				speed = 0;																
-
+				speed = 0;						 
 			 }
 			 if(Strings.key == KeyEvent.VK_SHIFT) {
 				 KeySchleife.run = 0;
@@ -318,6 +316,8 @@ static int ySpace = 0;
 			 if(Strings.key == KeyEvent.VK_F3) {
 					if(fpsvisible.equalsIgnoreCase("true")) {
 						fpsvisible = "false";
+						fps = 1;
+						frames = 0;
 					}else{
 						fpsvisible = "true";
 					}
@@ -336,9 +336,7 @@ static int ySpace = 0;
 						KeySchleife.KeyPressedSpace = "true";	
 					}								
 				}
-			 
-
-				
+	
 				if (Strings.key == KeyEvent.VK_LEFT ){
 					if(KeySchleife.ChaLeftUpdateSchleife == 1) {
 						KeySchleife.ChaLeftUpdate = "true"; 
@@ -346,11 +344,9 @@ static int ySpace = 0;
 						KeySchleife.KeyPressed = "an";	
 					}
 					KeySchleife.KeyPressedLeft = "true";
-					SchlumpfSpriteLaufen.RightLeft = "left";										
+					SchlumpfSpriteLaufen.RightLeft = "left";
+					
 				} 
-
-	
-				
 
 				if(Strings.key == KeyEvent.VK_RIGHT) {	
 					KeySchleife.KeyPressedRight = "an";
@@ -360,6 +356,7 @@ static int ySpace = 0;
 					if(KeySchleifeAnAus == 3) {					
 						KeySchleifeAnAus = 1;										
 					}
+					
 				}
 			 }
 	

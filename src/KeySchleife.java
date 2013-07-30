@@ -88,6 +88,7 @@ public class KeySchleife {
 		}
 		        		        		
 		if(!(KeyPressedRight.equalsIgnoreCase("aus"))) {
+			if(!(KeyPressedLeft.equalsIgnoreCase("true"))) { 
 				if(Strings.Zusammenstoﬂ.equalsIgnoreCase("true")) {
 					SchlumpfSpriteLaufen.Standbild = "aus";
     				SchlumpfSpriteLaufen.aa = 1;
@@ -105,7 +106,7 @@ public class KeySchleife {
 	    				SchlumpfSpriteLaufen.Standbild = "aus";
 	    				SchlumpfSpriteLaufen.aa = 1;				
 	    				gui.speed = 0;
-	    			}
+	    			}				
 				}else{
 					
 					if(!(Strings.StepGrass.equalsIgnoreCase("true"))) {
@@ -116,10 +117,14 @@ public class KeySchleife {
 					stoﬂlinks = "false";
 					KeyPressedRight();
 				}						        		
-    		
+			}else{
+				SchlumpfSpriteLaufen.Standbild = "aus";
+				SchlumpfSpriteLaufen.aa = 1;
+			}
 		}
 		
-		if(KeyPressedLeft.equalsIgnoreCase("true")){           			
+		if(KeyPressedLeft.equalsIgnoreCase("true")){ 
+			if(!(KeyPressedRight.equalsIgnoreCase("an"))) {
 				if(Strings.Zusammenstoﬂ.equalsIgnoreCase("true")) {
 					SchlumpfSpriteLaufen.Standbild = "aus";
     				SchlumpfSpriteLaufen.aa = 1;
@@ -145,7 +150,11 @@ public class KeySchleife {
 					
 					stoﬂrechts = "false";
 					KeyPressedLeft();	        							    										    		
-	    		}	        		
+				}	
+			}else{
+				SchlumpfSpriteLaufen.Standbild = "aus";
+				SchlumpfSpriteLaufen.aa = 1;
+			}
 		}
     }
         		     		        	        		

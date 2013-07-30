@@ -41,9 +41,9 @@ public class SchlumpfSpriteLaufen {
 
 	static String RightLeft = "right";
 
-	static int one = 1;
+	static int one = 1;	
 	
-	public static void ChaAnimation() {	        												        													
+	public static void ChaAnimation() {	    
 		String standbild = Standbild;
 		String laufenLinks = LaufenLinks;
 		if(!(standbild.equalsIgnoreCase("aus"))) {
