@@ -9,7 +9,7 @@ public class Zusammenstoß {
 		
 		if(Strings.ZKRec1 == false) {
 			if(gui.rect1.intersects(gui.rect2)) {
-				if(!(470 >= 608 - gui.ySpace - Strings.ChaY)) { 
+				if(!(460 >= 608 - gui.ySpace - Strings.ChaY)) { 
 					Strings.Zusammenstoß = "true";
 					Strings.ZKRec1 = true;
 					Strings.BlockHöhe = 0; 
@@ -19,7 +19,7 @@ public class Zusammenstoß {
 		}
 		if(Strings.ZKBrickReck1 == false) {			
 			if(gui.BrickReck1.intersects(gui.rect2)){
-				if(!(580 >= 608 - gui.ySpace - Strings.ChaY)) {  
+				if(!(560 >= 608 - gui.ySpace - Strings.ChaY)) {  
 				Strings.Zusammenstoß = "true";
 				Strings.ZKBrickReck1 = true;
 				Strings.BlockHöhe = 0;
@@ -29,7 +29,7 @@ public class Zusammenstoß {
 		}
 		if(Strings.ZKBrickReck2 == false) {
 			if(gui.BrickReck2.intersects(gui.rect2)) {
-				if(!(370 >= 608 - gui.ySpace - Strings.ChaY)) { 
+				if(!(360 >= 608 - gui.ySpace - Strings.ChaY)) { 
 					Strings.Zusammenstoß = "true";
 					Strings.ZKBrickReck2 = true;
 					Strings.BlockHöhe = 0;
@@ -39,7 +39,7 @@ public class Zusammenstoß {
 		}		
 		if(Strings.ZKBrickReck3 == false) {
 			if(gui.BrickReck3.intersects(gui.rect2)) {
-				if(!(270 >= 608 - gui.ySpace - Strings.ChaY)) { 
+				if(!(260 >= 608 - gui.ySpace - Strings.ChaY)) { 
 					Strings.Zusammenstoß = "true";
 					Strings.ZKBrickReck3 = true;
 					Strings.BlockHöhe = 0;

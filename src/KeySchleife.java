@@ -72,7 +72,8 @@ public class KeySchleife {
 						gui.ySpace = 0;        						
 						Strings.ChaY = Strings.ChaHˆhe;
 						Strings.StepGrass = "false";
-						Strings.KumpSchleife = false;        						
+						Strings.KumpSchleife = false;   
+						Strings.EinerSprung = false;
 					}
 				}else{
 				
@@ -81,19 +82,27 @@ public class KeySchleife {
     					gui.ySpace = 0;
     					Strings.StepGrass = "false";
     					yOn = "false";
+    					Strings.EinerSprung = false;
     				}
 				}
 			}
 			
 		}
-		        		        		
+		
 		if(!(KeyPressedRight.equalsIgnoreCase("aus"))) {
 			if(!(KeyPressedLeft.equalsIgnoreCase("true"))) { 
 				if(Strings.Zusammenstoﬂ.equalsIgnoreCase("true")) {
 					SchlumpfSpriteLaufen.Standbild = "aus";
     				SchlumpfSpriteLaufen.aa = 1;
-					if(!(stoﬂrechts.equalsIgnoreCase("true"))) {
-						stoﬂlinks = "true";
+					if(!(stoﬂrechts.equalsIgnoreCase("true"))) {							
+						stoﬂlinks = "true";		
+ 						if(Strings.EinerSprung == false) {							
+							if(KeySchleife.KeyPressedSpace == "true") {
+								System.out.println("durch");
+								stoﬂlinks = "true";
+								Strings.EinerSprung = true;	
+							}																								
+						}
 					}else{        						        						
 						KeyPressedRight();						
 					}        					
@@ -108,13 +117,12 @@ public class KeySchleife {
 	    				gui.speed = 0;
 	    			}				
 				}else{
+						stoﬂlinks = "false";
 					
 					if(!(Strings.StepGrass.equalsIgnoreCase("true"))) {
 						Strings.StepGrass = "true"; 
 						Audio.mainStep();
-					}
-					
-					stoﬂlinks = "false";
+					}															
 					KeyPressedRight();
 				}						        		
 			}else{
@@ -125,11 +133,19 @@ public class KeySchleife {
 		
 		if(KeyPressedLeft.equalsIgnoreCase("true")){ 
 			if(!(KeyPressedRight.equalsIgnoreCase("an"))) {
-				if(Strings.Zusammenstoﬂ.equalsIgnoreCase("true")) {
+				if(Strings.Zusammenstoﬂ.equalsIgnoreCase("true")) {					
 					SchlumpfSpriteLaufen.Standbild = "aus";
     				SchlumpfSpriteLaufen.aa = 1;
 					if(!(stoﬂlinks.equalsIgnoreCase("true"))) {
-						stoﬂrechts = "true";
+						stoﬂrechts = "true";	
+						if(Strings.EinerSprung == false) {							
+							if(KeySchleife.KeyPressedSpace == "true") {
+								System.out.println("durch");
+								stoﬂrechts = "true";
+								Strings.EinerSprung = true;	
+							}																								
+						}
+						
 					}else{        						        						
 						KeyPressedLeft();
 					}
@@ -147,8 +163,8 @@ public class KeySchleife {
 						Strings.StepGrass = "true"; 
 						Audio.mainStep();
 					}
+					stoﬂrechts = "false";					
 					
-					stoﬂrechts = "false";
 					KeyPressedLeft();	        							    										    		
 				}	
 			}else{

@@ -29,6 +29,8 @@ public class Strings {
 	
 	static int BlockHöhe = 0; 
 	
+	static boolean EinerSprung = false;
+	
 	//Brickrects
 	static boolean ZKBrickReck1 = false;
 	
