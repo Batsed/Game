@@ -120,7 +120,7 @@ static int ySpace = 0;
 		//Fügt einen Keylistener hinzu
 		addKeyListener(new AL());	
 
-		time = new Timer(Geschwindigkeit ,this); 
+		time = new Timer(1 / 10000 ,this); 
 		time.start();
 	}
 

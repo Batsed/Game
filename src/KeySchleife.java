@@ -45,19 +45,19 @@ public class KeySchleife {
         				if(KeyPressed.equalsIgnoreCase("aus")) {
         					
         					if(gui.ySpace <= 180) {
-                				gui.ySpace += 15;            				
+                				gui.ySpace += 7;            				
                 			}
         				}else{
         					if(gui.ySpace <= 100) {
-                				gui.ySpace += 15;            				
+                				gui.ySpace += 7;            				
                 			}
             				if(gui.ySpace >= 100) {
             					if(!(gui.ySpace >= 170)) {        						        					
-            					gui.ySpace += 8; 
+            					gui.ySpace += 4; 
             					}
             				}
             				if(gui.ySpace >= 170) {
-            					gui.ySpace += 2;
+            					gui.ySpace += 1;
             				}
         				}        				
         			}
@@ -66,7 +66,7 @@ public class KeySchleife {
         			}
         			if(yOn.equalsIgnoreCase("true")) {
         				
-        				gui.ySpace += -15;
+        				gui.ySpace += -7;
         				
         				if(Strings.KumpSchleife == true) {
         					if(gui.ySpace + Strings.ChaY <= Strings.ChaHöhe) {
@@ -153,7 +153,7 @@ public class KeySchleife {
         		}
         		
         		try {
-					Thread.sleep(25);
+					Thread.sleep(12);
 		        } catch (InterruptedException e) {
 		        	e.printStackTrace();
 		        }	
@@ -164,13 +164,13 @@ public class KeySchleife {
 	
 	public static void KeyPressedRight() {
 		if(KeyPressedShift.equalsIgnoreCase("true")) {
-    		run = 5;
+    		run = 2;
     	}
 		
-		gui.speed = 15 + run;			    				    								    							        				        
+		gui.speed = 7 + run;			    				    								    							        				        
     	
-    	gui.anzahl += gui.speed - 8;
-		gui.anzahl2 += gui.speed - 8;
+    	gui.anzahl += gui.speed - 5;
+		gui.anzahl2 += gui.speed - 5;
 		gui.BodenAnzahl += gui.speed;
 		gui.BodenAnzahl2 += gui.speed;
 		gui.Brick += gui.speed;
@@ -192,13 +192,13 @@ public class KeySchleife {
 	
 	public static void KeyPressedLeft () {
 		if(KeyPressedShift.equalsIgnoreCase("true")) {
-    		run = 5;
+    		run = 2;
     	}
 		
-		gui.speed = -15 - run;
+		gui.speed = -7 - run;
 
-		gui.anzahl += gui.speed + 8;
-		gui.anzahl2 += gui.speed + 8;	
+		gui.anzahl += gui.speed + 5;
+		gui.anzahl2 += gui.speed + 5;	
 		gui.BodenAnzahl += gui.speed;
 		gui.BodenAnzahl2 += gui.speed;
 		gui.Brick += gui.speed;

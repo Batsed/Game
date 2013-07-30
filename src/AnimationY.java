@@ -19,7 +19,7 @@ public class AnimationY {
 				}
 				if(!(Strings.ChaY <= Strings.BlockHöhe)) {
 					if(Strings.AnimationY == true) {
-						Strings.ChaY =  Strings.ChaY - 15;					
+						Strings.ChaY =  Strings.ChaY - 7;					
 					}
 				
 			}			
