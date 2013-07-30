@@ -28,6 +28,16 @@ public class Strings {
 	static int ChaY;
 	
 	static int BlockHöhe = 0; 
+	
+	//Brickrects
+	static boolean ZKBrickReck1 = false;
+	
+	static boolean ZKBrickReck2 = false;
+	
+	static boolean ZKBrickReck3 = false;
+	
+	static boolean ZKRec1 = false;
+			
 
 	public static void Strings() {
 		ChaJump = "false";
