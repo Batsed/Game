@@ -48,6 +48,7 @@ static JLabel label2;
         //Starten der Menü Musik
         Audio.main();                
         
+        //Button einblendung
         animation();
 	}
 

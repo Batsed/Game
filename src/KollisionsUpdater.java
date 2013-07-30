@@ -2,9 +2,13 @@
 public class KollisionsUpdater {
 	
 	public static void BrickReck1() {
-		Strings.ZKBrickReck1 = true;
+		if(KeySchleife.KeyPressedSpace == "false") {
+			Strings.ZKRec1 = false;	
+			Strings.ZKBrickReck1 = true;
+			Strings.ZKBrickReck2 = false;		
+			Strings.ZKBrickReck3 = false;
+		}
 		Zusammenstoß.ZKBrickReck();
-		Strings.ZKBrickReck1 = false;
     	if(580 >= 608 - gui.ySpace - Strings.ChaY) { 
     		Strings.BlockHöhe = 50;
     		Strings.ChaHöhe = 50;
@@ -15,10 +19,14 @@ public class KollisionsUpdater {
 			}
 		}							
 	}
-	public static void rect1() {	
-		Strings.ZKRec1 = true;
+	public static void rect1() {
+		if(KeySchleife.KeyPressedSpace == "false") {
+			Strings.ZKRec1 = true;	
+			Strings.ZKBrickReck1 = false;
+			Strings.ZKBrickReck2 = false;		
+			Strings.ZKBrickReck3 = false;
+		}
 		Zusammenstoß.ZKBrickReck();
-		Strings.ZKRec1 = false;
 		if(470 >= 608 - gui.ySpace - Strings.ChaY) { 
 			Strings.ChaHöhe = 150;
 			Strings.BlockHöhe = 150; 
@@ -30,11 +38,15 @@ public class KollisionsUpdater {
 		}						
 	}			
 	
-	public static void BrickReck2() {	
-		Strings.ZKBrickReck2 = true;
+	public static void BrickReck2() {
+		if(KeySchleife.KeyPressedSpace == "false") {
+			Strings.ZKRec1 = false;	
+			Strings.ZKBrickReck1 = false;
+			Strings.ZKBrickReck2 = true;		
+			Strings.ZKBrickReck3 = false;
+		}
 		Zusammenstoß.ZKBrickReck();
-		Strings.ZKBrickReck2 = false;
-		if(370 >= 608 - gui.ySpace - Strings.ChaY) { 
+		if(360 >= 608 - gui.ySpace - Strings.ChaY) { 
 			Strings.ChaHöhe = 250;
 			Strings.BlockHöhe = 250; 
 			HöhenMesser();				
@@ -47,10 +59,14 @@ public class KollisionsUpdater {
 	}
 	
 	public static void BrickReck3() {	
-		Strings.ZKBrickReck3 = true;
+		if(KeySchleife.KeyPressedSpace == "false") {
+			Strings.ZKRec1 = false;	
+			Strings.ZKBrickReck1 = false;
+			Strings.ZKBrickReck2 = false;		
+			Strings.ZKBrickReck3 = true;
+		}
 		Zusammenstoß.ZKBrickReck();
-		Strings.ZKBrickReck3 = false;
-		if(370 >= 608 - gui.ySpace - Strings.ChaY) { 
+		if(270 >= 608 - gui.ySpace - Strings.ChaY) { 
 			Strings.ChaHöhe = 350;
 			Strings.BlockHöhe = 350; 
 			HöhenMesser();				

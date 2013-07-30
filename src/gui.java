@@ -61,6 +61,9 @@ static Rectangle BrickReck3 = new Rectangle();
 
 static Rectangle rect2 = new Rectangle();
 
+//Schnelligkeit der Character Animation
+int ChaFrames = 3;
+
 //Höhe für offscreenimage
 int Bildhöhe = frame.fenster.getHeight();
 
@@ -94,7 +97,7 @@ static int KeySchleifeAnAus = 3;
 
 static int ySpace = 0;
 
-	public gui() throws Exception { 				
+	public gui() throws Exception { 								
 		
 		setFocusable(true);					        		       			
 		
@@ -113,14 +116,12 @@ static int ySpace = 0;
 		ImageIcon o2 = new ImageIcon(Block2);
 		Block = o2.getImage();
 		
-		KeySchleife.main();
-		
 		//Öffnet neuen Thread für Character
-		SchlumpfSpriteLaufen.main();
+		//SchlumpfSpriteLaufen.main();
 		//Fügt einen Keylistener hinzu
 		addKeyListener(new AL());	
 
-		time = new Timer(1 / 10000 ,this); 
+		time = new Timer(Geschwindigkeit,this); 
 		time.start();
 	}
 
@@ -130,6 +131,17 @@ static int ySpace = 0;
 	}		
 
 	public void paint(Graphics g){
+		
+		KeySchleife.BildAnimation();
+		
+		//Animationen
+		if(ChaFrames == 3){
+		
+		SchlumpfSpriteLaufen.ChaAnimation();
+		ChaFrames = 0;
+		}else{
+			ChaFrames = 1 + ChaFrames;
+		}
 		
 		offscreen = createImage(BildbreiteMal1,Bildhöhe);
 		bg = offscreen.getGraphics();
@@ -198,10 +210,7 @@ static int ySpace = 0;
 		        	//bg.drawRect(590, 480 - ySpace  - Strings.ChaY, 60, 120);
 		        	rect2.setBounds(590, 480 - ySpace  - Strings.ChaY, 60, 120);
 		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y - 384, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY, this);
-		        }
-		        		        
-		        
-		        
+		        }		       
 			}
 		}    	
 		//Ende vom Zeichnen des Characters				

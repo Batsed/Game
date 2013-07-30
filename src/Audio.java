@@ -97,7 +97,7 @@ public class Audio {
     		//System.out.println(480  - gui.ySpace - Strings.ChaY);
     		if(480  - gui.ySpace - Strings.ChaY == 480) {
 	    		StepGrass();
-	    		ChaStepGrass.start();
+	    		//ChaStepGrass.start();
     		}
     	//}
     }
@@ -105,10 +105,10 @@ public class Audio {
     private void start() {
     	if(Strings.ChaJump.equalsIgnoreCase("true")) {
     		ChaJump();
-    		CharacterJump.start();
+    		//CharacterJump.start();
     	}
     	if(Strings.MenüMusik.equalsIgnoreCase("true")) {
-    		Audio.start();
+    		//Audio.start();
     	}   
     }
 }
