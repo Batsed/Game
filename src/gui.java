@@ -260,6 +260,8 @@ static int ySpace = 0;
 			if(!(BrickReck2.intersects(rect2))){
 				if(!(rect1.intersects(rect2))){
 					if(!(BrickReck3.intersects(rect2))) {
+						
+						
 						if(KeySchleife.stoﬂrechts == "true") {
 							KeySchleife.stoﬂlinks = "false";							
 						}					

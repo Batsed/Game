@@ -31,6 +31,7 @@ public class KeySchleife {
 	
     public static void BildAnimation() {
 		AnimationY.AnimationY();
+		//System.out.println("rechts: " + stoﬂrechts + " links: " + stoﬂlinks);
 		
 		if(KeyPressedSpace.equalsIgnoreCase("true")) {
 			if(!(yOn.equalsIgnoreCase("true"))) {
@@ -94,14 +95,10 @@ public class KeySchleife {
 				if(Strings.Zusammenstoﬂ.equalsIgnoreCase("true")) {
 					SchlumpfSpriteLaufen.Standbild = "aus";
     				SchlumpfSpriteLaufen.aa = 1;
-					if(!(stoﬂrechts.equalsIgnoreCase("true"))) {							
-						stoﬂlinks = "true";		
- 						if(Strings.EinerSprung == false) {							
-							if(KeySchleife.KeyPressedSpace == "true") {
-								stoﬂlinks = "true";
-								Strings.EinerSprung = true;	
-							}																								
-						}
+					if(!(stoﬂrechts.equalsIgnoreCase("true"))) {
+						if(KeySchleife.KeyPressedSpace == "false") {
+							stoﬂlinks = "true";	
+						}						
 					}else{        						        						
 						KeyPressedRight();						
 					}        					
@@ -136,14 +133,9 @@ public class KeySchleife {
 					SchlumpfSpriteLaufen.Standbild = "aus";
     				SchlumpfSpriteLaufen.aa = 1;
 					if(!(stoﬂlinks.equalsIgnoreCase("true"))) {
-						stoﬂrechts = "true";	
-						if(Strings.EinerSprung == false) {							
-							if(KeySchleife.KeyPressedSpace == "true") {
-								stoﬂrechts = "true";
-								Strings.EinerSprung = true;	
-							}																								
-						}
-						
+						if(KeySchleife.KeyPressedSpace == "false") {
+							stoﬂrechts = "true";	
+						}						
 					}else{        						        						
 						KeyPressedLeft();
 					}
