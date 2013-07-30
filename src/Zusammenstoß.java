@@ -35,24 +35,24 @@ public class Zusammenstoß {
 		}				
 	}
 	public static void Blocker() {
-		Strings.Zusammenstoß = "true";
-		Strings.ZKBrickReck3 = true;
-		Strings.BlockHöhe = 0;
-		Strings.AnimationY = true;
-		KeySchleife.stoßlinks = "false";
-		KeySchleife.stoßrechts = "false";
+		if(Strings.ySchleife == false) {
+			Strings.Zusammenstoß = "true";
+			Strings.ZKBrickReck3 = true;
+			Strings.BlockHöhe = 0;
+			KeySchleife.stoßlinks = "false";
+			KeySchleife.stoßrechts = "false";
+		}
 		if(Strings.ySchleife == true) {         			        			        		        			        		
     		Strings.ChaHöhe = 0;
     		Strings.KumpSchleife = true;	        			        		
-
-        	Strings.AnimationY = true;
+        	
+        	Strings.BlockHöhe = 0;
         	
         	Strings.KollisionsRechte = false;	        		        	
         	
         	Strings.ySchleife = false;
 			}	    								
-		Strings.AufBlock = false;			
-		Strings.BlockHöhe = 0;
+		Strings.AufBlock = false;					
 		Strings.Zusammenstoß = "false";
 	}
 }
