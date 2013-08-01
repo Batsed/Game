@@ -44,12 +44,16 @@ static int BodenAnzahl2 = 0;
 
 static int Brick = 0;
 
+//Geschwindigkeit von KeySchleife
+long KeyfirstFrame;
+long KeycurrentFrame;
+
 //fps
 long firstFrame;
 int frames;
 long currentFrame;
 int fps;
-String fpsvisible = "false";
+static String fpsvisible = "false";
 
 //Seconds
 int Seconds;
@@ -60,9 +64,6 @@ static Rectangle BrickReck2 = new Rectangle();
 static Rectangle BrickReck3 = new Rectangle();
 
 static Rectangle rect2 = new Rectangle();
-
-//Schnelligkeit der Character Animation
-int ChaFrames = 3;
 
 //Höhe für offscreenimage
 int Bildhöhe = frame.fenster.getHeight();
@@ -83,7 +84,7 @@ static int BodenBreiteMal2 = BodenBreiteMal1 * 2;
 static int BodenBreiteMal3 = BodenBreiteMal1 * 3;
 
 //Geschwindigkeit der Perfomance
-int Geschwindigkeit = 1 / 500;
+int Geschwindigkeit = 10;
 
 //Auf diesen Bild wird dann gezeichnet
 Image offscreen;
@@ -116,10 +117,14 @@ static int ySpace = 0;
 		ImageIcon o2 = new ImageIcon(Block2);
 		Block = o2.getImage();
 		
-		//Öffnet neuen Thread für Character
-		//SchlumpfSpriteLaufen.main();
 		//Fügt einen Keylistener hinzu
 		addKeyListener(new AL());	
+		
+		//Lädt Character		
+		SchlumpfSpriteLaufen.main();
+		
+		//Berechnet Bilder
+		KeySchleife.main();
 
 		time = new Timer(Geschwindigkeit,this); 
 		time.start();
@@ -131,16 +136,6 @@ static int ySpace = 0;
 	}		
 
 	public void paint(Graphics g){
-		
-		KeySchleife.BildAnimation();
-		
-		//Animationen
-		if(ChaFrames == 3){		
-		SchlumpfSpriteLaufen.ChaAnimation();
-		ChaFrames = 0;
-		}else{
-			ChaFrames = 1 + ChaFrames;
-		}
 		
 		offscreen = createImage(BildbreiteMal1,Bildhöhe);
 		bg = offscreen.getGraphics();
@@ -221,13 +216,16 @@ static int ySpace = 0;
 		if(fpsvisible.equalsIgnoreCase("true")){						
 			frames++;
 			currentFrame = System.currentTimeMillis();
-			if(currentFrame > firstFrame + 1000){
+			if(currentFrame > firstFrame + 1000){				
 				firstFrame = currentFrame;
 				fps = frames;
 				frames = 0;
-			}
-			String Fps = String.valueOf(fps);
-			bg.setFont(new Font("Sans", Font.PLAIN, 30)); 
+			}			
+			int FpsGlobal = fps + Strings.Keyfps + Strings.Chafps;
+			int FpsDurchschnitt2 = FpsGlobal / 3;
+			int FpsDurchschnitt = FpsDurchschnitt2 - 17;
+			String Fps = String.valueOf(FpsDurchschnitt);
+			bg.setFont(new Font("Sans", Font.PLAIN, 30)); 			
 			bg.setColor(Color.WHITE); 
 			if(fps == 1) {
 				bg.drawString("Berechne fps..." ,50, 50);

@@ -41,6 +41,21 @@ public class Strings {
 	static boolean ZKBrickReck3 = false;
 	
 	static boolean ZKRec1 = false;
+	
+	//Unterbrechung des Springens
+	static boolean BlockJump = false;
+	
+	//Fps berechnung für Keyschleife
+	static long KeyfirstFrame;
+	static int Keyframes;
+	static long KeycurrentFrame;
+	static int Keyfps;
+	
+	//Fps berechnung für Keyschleife
+	static long ChafirstFrame;
+	static int Chaframes;
+	static long ChacurrentFrame;
+	static int Chafps;
 			
 
 	public static void Strings() {

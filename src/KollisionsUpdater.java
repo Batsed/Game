@@ -8,12 +8,7 @@ public class KollisionsUpdater {
     		Strings.ChaHˆhe = 50;
     		HˆhenMesser();    		
     	}else{
-    		if(KeySchleife.KeyPressedSpace == "true") {
-				Strings.Zusammenstoﬂ = "true";
-			}
-			if(!(Strings.ySchleife == true)) {
-				Strings.Zusammenstoﬂ = "true";        			  
-			}
+    		Zusammenstoﬂ();
 		}	
     	if(KeySchleife.KeyPressedSpace == "false") {
 			Strings.ZKRec1 = false;	
@@ -30,12 +25,7 @@ public class KollisionsUpdater {
 			Strings.BlockHˆhe = 150; 
 			HˆhenMesser();				
 		}else{
-			if(KeySchleife.KeyPressedSpace == "true") {				
-				Strings.Zusammenstoﬂ = "true";
-			}
-			if(!(Strings.ySchleife == true)) {				
-				Strings.Zusammenstoﬂ = "true";        			  
-			}
+			Zusammenstoﬂ();
 		}
 		if(KeySchleife.KeyPressedSpace == "false") {
 			Strings.ZKRec1 = true;	
@@ -47,40 +37,47 @@ public class KollisionsUpdater {
 	
 	public static void BrickReck2() {		
 		Zusammenstoﬂ.ZKBrickReck();
+		if(410 >= 480 - gui.ySpace - Strings.ChaY){		
+			if(!(380 >= 480 - gui.ySpace - Strings.ChaY)) {
+				Strings.ChaHˆhe = 0;
+				Strings.BlockJump = true;
+				KeySchleife.yOn = "true";
+			}			
+		}else{
+			Zusammenstoﬂ();
+		}
 		if(360 >= 608 - gui.ySpace - Strings.ChaY) { 
 			Strings.ChaHˆhe = 250;
 			Strings.BlockHˆhe = 250; 
 			HˆhenMesser();				
 		}else{
-			if(KeySchleife.KeyPressedSpace == "true") {
-				Strings.Zusammenstoﬂ = "true";
-			}
-			if(!(Strings.ySchleife == true)) {						
-				Strings.Zusammenstoﬂ = "true";        			  
-			}
-		}
+			Zusammenstoﬂ();
+		}		
 		if(KeySchleife.KeyPressedSpace == "false") {
 			Strings.ZKRec1 = false;	
 			Strings.ZKBrickReck1 = false;
 			Strings.ZKBrickReck2 = true;		
 			Strings.ZKBrickReck3 = false;
-		}
-				
+		}				
 	}
 	
 	public static void BrickReck3() {			
 		Zusammenstoﬂ.ZKBrickReck();
+		if(310 >= 480 - gui.ySpace - Strings.ChaY){
+			if(!(280 >= 480 - gui.ySpace - Strings.ChaY)) {
+				Strings.ChaHˆhe = 0;
+				Strings.BlockJump = true;
+				KeySchleife.yOn = "true";
+			}
+		}else{
+			Zusammenstoﬂ();
+		}
 		if(260 >= 608 - gui.ySpace - Strings.ChaY) { 
 			Strings.ChaHˆhe = 350;
 			Strings.BlockHˆhe = 350; 
 			HˆhenMesser();				
 		}else{
-			if(KeySchleife.KeyPressedSpace == "true") {
-				Strings.Zusammenstoﬂ = "true";
-			}
-			if(!(Strings.ySchleife == true)) {						
-				Strings.Zusammenstoﬂ = "true";        			  
-			}
+			Zusammenstoﬂ();
 		}
 		if(KeySchleife.KeyPressedSpace == "false") {
 			Strings.ZKRec1 = false;	
@@ -95,7 +92,16 @@ public class KollisionsUpdater {
 		Strings.Zusammenstoﬂ = "false";        			
 		Strings.ySchleife = true;        		        		        		        		     	          		      		            		         	
 		Strings.AufBlock = true;
-	}	
+	}
+	
+	public static void Zusammenstoﬂ() {
+		if(KeySchleife.KeyPressedSpace == "true") {
+			Strings.Zusammenstoﬂ = "true";
+		}
+		if(!(Strings.ySchleife == true)) {						
+			Strings.Zusammenstoﬂ = "true";        			  
+		}
+	}
 	
 	public static void NoK() {
 	if(!(KeySchleife.KeyPressedSpace.equalsIgnoreCase("true"))) {		
