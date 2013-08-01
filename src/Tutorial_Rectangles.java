@@ -12,4 +12,10 @@ public class Tutorial_Rectangles {
 	static Rectangle BrickReck2 = new Rectangle();
 	static Rectangle BrickReck3 = new Rectangle();	
 	
+	//Erste Wand
+	static Rectangle WallBrick1 = new Rectangle();
+	
+	//Boden
+	static Rectangle Boden = new Rectangle();
+	
 }

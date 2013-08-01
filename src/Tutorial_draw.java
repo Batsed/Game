@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 
 public class Tutorial_draw {
 
@@ -21,9 +23,14 @@ public class Tutorial_draw {
 			gui.bg.drawImage(LoadTutorial.Boden, LoadTutorial.BodenBreiteMal2 - LoadTutorial.BodenAnzahl, 600,null);
 
 			gui.bg.drawImage(LoadTutorial.Boden, LoadTutorial.BodenBreiteMal3 - LoadTutorial.BodenAnzahl, 600,null);
+			
+			Tutorial_Rectangles.Boden.setBounds(0, 590, 1280, 80);
+			//gui.bg.setColor(Color.GREEN);
+			//gui.bg.drawRect(0, 590, 1280, 80);
 
 			//Ende vom Zeichnen des Bodens
 			
+			//Block1
 			gui.bg.drawImage(LoadTutorial.Block, 0 - Tutorial_Rectangles.Brick + 700, 550,null);
 			Tutorial_Rectangles.BrickReck1.setBounds(0 - Tutorial_Rectangles.Brick + 700,540, 50, 60);
 			//Block 2			
@@ -36,11 +43,23 @@ public class Tutorial_draw {
 			gui.bg.drawImage(LoadTutorial.Block, 150 - Tutorial_Rectangles.Brick + 700, 250, null);
 			Tutorial_Rectangles.BrickReck3.setBounds(150 - Tutorial_Rectangles.Brick + 700,240, 50, 60);
 			
-			//Kolliesionen überprüfen	
-			if(370 >= 608 - gui.ySpace - Strings.ChaY) {
-				//System.out.println("Brick: " + (370) + " Cha: " + (608 - ySpace - Strings.ChaY));
-				//System.out.println("Cha ist höher");
-			}
+			//Wand1
+			gui.bg.drawImage(LoadTutorial.Block, 150 - Tutorial_Rectangles.Brick + 1200, 550, null);
+			gui.bg.drawImage(LoadTutorial.Block, 150 - Tutorial_Rectangles.Brick + 1200, 500, null);
+			gui.bg.drawImage(LoadTutorial.Block, 150 - Tutorial_Rectangles.Brick + 1200, 450, null);
+			gui.bg.drawImage(LoadTutorial.Block, 150 - Tutorial_Rectangles.Brick + 1200, 400, null);
+			gui.bg.drawImage(LoadTutorial.Block, 150 - Tutorial_Rectangles.Brick + 1200, 350, null);
+			gui.bg.drawImage(LoadTutorial.Block, 150 - Tutorial_Rectangles.Brick + 1200, 300, null);
+			gui.bg.drawImage(LoadTutorial.Block, 150 - Tutorial_Rectangles.Brick + 1200, 250, null);
+			gui.bg.drawImage(LoadTutorial.Block, 150 - Tutorial_Rectangles.Brick + 1200, 200, null);
+			gui.bg.drawImage(LoadTutorial.Block, 150 - Tutorial_Rectangles.Brick + 1200, 150, null);
+			
+			Tutorial_Rectangles.WallBrick1.setBounds(150 - Tutorial_Rectangles.Brick + 1200,150, 50, 450);
+			gui.bg.setColor(Color.GREEN);
+			gui.bg.drawRect(150 - Tutorial_Rectangles.Brick + 1200,140, 50, 460);
+		}
+		
+		public static void BlockUpdater() {
 			if(Tutorial_Rectangles.BrickReck1.intersects(gui.rect2)){				 
 				KollisionsUpdater.BrickReck1();
 	        }
@@ -53,16 +72,26 @@ public class Tutorial_draw {
 			if(Tutorial_Rectangles.BrickReck3.intersects(gui.rect2)) {
 				KollisionsUpdater.BrickReck3();
 			}
+			if(Tutorial_Rectangles.Boden.intersects(gui.rect2)) {
+				KollisionsUpdater.Boden();
+			}
+			
+			//Erste Wand
+			if(Tutorial_Rectangles.WallBrick1.intersects(gui.rect2)) {
+				KollisionsUpdater.WallBrick();
+			}
+															
 			if(!(Tutorial_Rectangles.BrickReck1.intersects(gui.rect2))){
 				if(!(Tutorial_Rectangles.BrickReck2.intersects(gui.rect2))){
 					if(!(Tutorial_Rectangles.rect1.intersects(gui.rect2))){
 						if(!(Tutorial_Rectangles.BrickReck3.intersects(gui.rect2))) {
-							
-							
-							if(KeySchleife.stoßrechts == "true") {
-								KeySchleife.stoßlinks = "false";							
-							}					
-						KollisionsUpdater.NoK();
+							if(!(Tutorial_Rectangles.WallBrick1.intersects(gui.rect2))) {
+								
+									Strings.ChaAufBlock = false;
+																			
+									KollisionsUpdater.NoK();
+								
+							}
 						}
 					}
 				}

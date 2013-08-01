@@ -15,6 +15,7 @@ static JLabel image;
 static URL hauptpfadUrl;
 static String hauptpfadString;
 static String Brick;
+static String BrickWand;
 
 
 	@SuppressWarnings("rawtypes")
@@ -59,6 +60,10 @@ static String Brick;
 		//Brick
 		String Brick2 = (hauptpfad + "Texturepack/brick.png");
 		Brick = Brick2.substring(6);
+		
+		//Brick Wand
+		String BrickWand2 = (hauptpfad + "Texturepack/BrickWall.png");
+		BrickWand = BrickWand2.substring(6);
 		
 	}
 

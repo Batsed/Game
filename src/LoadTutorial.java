@@ -36,6 +36,9 @@ public class LoadTutorial {
 	//Bild vom Block
 	static Image Block;
 	
+	//Bild von Wand
+	static Image BrickWand;
+	
 	public static void Tutorial(){
 		
 		//Lädt das Bild vom Spielhintergrund
@@ -51,7 +54,12 @@ public class LoadTutorial {
 		//Lädt das Bild vom Boden
 		String Pfad2 = Texturepack.Boden;
 		ImageIcon o = new ImageIcon(Pfad2);
-		Boden = o.getImage();		
+		Boden = o.getImage();	
+		
+		//Lädt das 50x450 Hohe Wand
+		String BrickWand2 = Texturepack.BrickWand;
+		ImageIcon x = new ImageIcon(BrickWand2);
+		BrickWand = x.getImage();
 	}
 	
 }

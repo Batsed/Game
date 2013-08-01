@@ -3,7 +3,7 @@ public class AnimationY {
 	
 	public static void AnimationY() {
 		
-		if(Strings.AnimationY == true) {		
+		if(Strings.AnimationY == true) {
 			if(Strings.ChaY <= Strings.BlockHöhe) {			
 				Strings.ChaY = Strings.BlockHöhe;
 				Strings.StepGrass = "false";

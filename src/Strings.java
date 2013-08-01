@@ -28,6 +28,10 @@ public class Strings {
 	
 	static int ChaY;
 	
+	static int ClimbY = 0;
+	
+	static int ClimbHöhe = 0;
+	
 	static int BlockHöhe = 0; 
 	
 	static boolean EinerSprung = false;
@@ -43,6 +47,17 @@ public class Strings {
 	
 	static boolean ZKRec1 = false;
 	
+	static boolean ZKBrickWand = false;
+	
+	//Bodenkolliesion
+	static boolean ZKBoden = false;
+	
+	//Mitte des Zusammenstößigen Blocks oder sonstieges
+	static int BlockMitte = 0;
+	
+	//Bodenhöhe
+	static int BodenHöhe = 0;
+			
 	//Unterbrechung des Springens
 	static boolean BlockJump = false;
 	

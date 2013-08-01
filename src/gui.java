@@ -112,14 +112,18 @@ static int ySpace = 0;
 		        if(!(CharHöhe + y >= 513)) {
 		    		//bg.drawRect(590, 480 - ySpace  - Strings.ChaY, 60, 120);
 		    		rect2.setBounds(590, 480 - ySpace  - Strings.ChaY, 60, 120);
-		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY, this);
+		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY - Strings.ClimbY, this);
 		        }else{
 		        	//bg.drawRect(590, 480 - ySpace  - Strings.ChaY, 60, 120);
 		        	rect2.setBounds(590, 480 - ySpace  - Strings.ChaY, 60, 120);
-		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y - 384, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY, this);
+		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y - 384, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY - Strings.ClimbY, this);
 		        }		       
 			}
-		}    	
+		} 
+		
+		//Kollisionsabfrage
+		Tutorial_draw.BlockUpdater();
+		
 		//Ende vom Zeichnen des Characters						
 		
 		//Anzeige für Fps
@@ -190,6 +194,9 @@ static int ySpace = 0;
 				 KeySchleife.run = 0;
 				 KeySchleife.KeyPressedShift = "false";
 			 }
+			 if(Strings.key == KeyEvent.VK_CONTROL) {
+				 KeySchleife.KeyPressedControl = false;
+			 }
 		 }
 		 //Ende vom überprüfen ob eine Taste losgelassen wurde
 
@@ -216,7 +223,9 @@ static int ySpace = 0;
 				}
 				if(Strings.key == KeyEvent.VK_SPACE) {
 					if(!(Strings.AnimationY == true)) {
-						KeySchleife.KeyPressedSpace = "true";	
+						if(Strings.ClimbY <= 0) {
+							KeySchleife.KeyPressedSpace = "true";
+						}						
 					}								
 				}
 	
@@ -240,6 +249,9 @@ static int ySpace = 0;
 						KeySchleifeAnAus = 1;										
 					}
 					
+				}
+				if(Strings.key == KeyEvent.VK_CONTROL) {
+					KeySchleife.KeyPressedControl = true;
 				}
 			 }
 	
