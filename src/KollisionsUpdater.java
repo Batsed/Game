@@ -4,11 +4,13 @@ public class KollisionsUpdater {
 	public static void BrickReck1() {		
 		Zusammenstoß.ZKBrickReck();
     	if(560 >= 608 - gui.ySpace - Strings.ChaY) { 
+    		Strings.ChaAufBlock = true;
     		Strings.BlockHöhe = 50;
     		Strings.ChaHöhe = 50;
     		HöhenMesser();    		
     	}else{
     		Zusammenstoß();
+    		Strings.ChaAufBlock = false;
 		}	
     	if(KeySchleife.KeyPressedSpace == "false") {
 			Strings.ZKRec1 = false;	
@@ -21,11 +23,13 @@ public class KollisionsUpdater {
 	public static void rect1() {		
 		Zusammenstoß.ZKBrickReck();
 		if(460 >= 608 - gui.ySpace - Strings.ChaY) { 
+			Strings.ChaAufBlock = true;
 			Strings.ChaHöhe = 150;
 			Strings.BlockHöhe = 150; 
 			HöhenMesser();				
 		}else{
 			Zusammenstoß();
+			Strings.ChaAufBlock = false;
 		}
 		if(KeySchleife.KeyPressedSpace == "false") {
 			Strings.ZKRec1 = true;	
@@ -45,13 +49,16 @@ public class KollisionsUpdater {
 			}			
 		}else{
 			Zusammenstoß();
+			Strings.ChaAufBlock = false;
 		}
-		if(360 >= 608 - gui.ySpace - Strings.ChaY) { 
+		if(360 >= 608 - gui.ySpace - Strings.ChaY) {
+			Strings.ChaAufBlock = true;
 			Strings.ChaHöhe = 250;
 			Strings.BlockHöhe = 250; 
 			HöhenMesser();				
 		}else{
 			Zusammenstoß();
+			Strings.ChaAufBlock = false;
 		}		
 		if(KeySchleife.KeyPressedSpace == "false") {
 			Strings.ZKRec1 = false;	
@@ -71,13 +78,16 @@ public class KollisionsUpdater {
 			}
 		}else{
 			Zusammenstoß();
+			Strings.ChaAufBlock = false;
 		}
 		if(260 >= 608 - gui.ySpace - Strings.ChaY) { 
+			Strings.ChaAufBlock = true;
 			Strings.ChaHöhe = 350;
 			Strings.BlockHöhe = 350; 
 			HöhenMesser();				
 		}else{
 			Zusammenstoß();
+			Strings.ChaAufBlock = false;
 		}
 		if(KeySchleife.KeyPressedSpace == "false") {
 			Strings.ZKRec1 = false;	

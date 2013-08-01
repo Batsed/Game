@@ -1,4 +1,5 @@
 
+
 public class Strings {
 
 	static String ChaJump;
@@ -56,6 +57,9 @@ public class Strings {
 	static int Chaframes;
 	static long ChacurrentFrame;
 	static int Chafps;
+	
+	//Abfrage ob man auf einem Block steht
+	static boolean ChaAufBlock = false;
 			
 
 	public static void Strings() {

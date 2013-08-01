@@ -162,7 +162,7 @@ static JLabel label2;
 				
 		
 		if (e.getSource() == spielen) {
-			if(!(gui.img == null)) {
+			if(!(LoadTutorial.img == null)) {
 				frame.setVisible(false);
 				fenster.setVisible(true);
 				spielen.setVisible(false);

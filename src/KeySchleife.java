@@ -199,19 +199,19 @@ public class KeySchleife {
 		
 		gui.speed = 6 + run;			    				    								    							        				        
     	
-    	gui.anzahl += gui.speed - 5;
-		gui.anzahl2 += gui.speed - 5;
-		gui.BodenAnzahl += gui.speed;
-		gui.BodenAnzahl2 += gui.speed;
-		gui.Brick += gui.speed;
+		LoadTutorial.anzahl += gui.speed - 5;
+		LoadTutorial.anzahl2 += gui.speed - 5;
+		LoadTutorial.BodenAnzahl += gui.speed;
+		LoadTutorial.BodenAnzahl2 += gui.speed;
+		Tutorial_Rectangles.Brick += gui.speed;
 		
-		if(gui.anzahl >= gui.BildbreiteMal3) {
-			gui.anzahl = 0;
-			gui.anzahl2 = 0;
+		if(LoadTutorial.anzahl >= LoadTutorial.BildbreiteMal3) {
+			LoadTutorial.anzahl = 0;
+			LoadTutorial.anzahl2 = 0;
 		}	
-		if(gui.BodenAnzahl >= gui.BodenBreiteMal3) {
-			gui.BodenAnzahl = 0;
-			gui.BodenAnzahl2 = 0;
+		if(LoadTutorial.BodenAnzahl >= LoadTutorial.BodenBreiteMal3) {
+			LoadTutorial.BodenAnzahl = 0;
+			LoadTutorial.BodenAnzahl2 = 0;
 		}
 		if(gui.schleife == 1) {
 			SchlumpfSpriteLaufen.an();
@@ -227,27 +227,27 @@ public class KeySchleife {
 		
 		gui.speed = -6 - run;
 
-		gui.anzahl += gui.speed + 5;
-		gui.anzahl2 += gui.speed + 5;	
-		gui.BodenAnzahl += gui.speed;
-		gui.BodenAnzahl2 += gui.speed;
-		gui.Brick += gui.speed;
+		LoadTutorial.anzahl += gui.speed + 5;
+		LoadTutorial.anzahl2 += gui.speed + 5;	
+		LoadTutorial.BodenAnzahl += gui.speed;
+		LoadTutorial.BodenAnzahl2 += gui.speed;
+		Tutorial_Rectangles.Brick += gui.speed;
 		
 		//Gamebackground
-		if(gui.anzahl <= 0) {
-			gui.anzahl = gui.BildbreiteMal2;					
+		if(LoadTutorial.anzahl <= 0) {
+			LoadTutorial.anzahl = LoadTutorial.BildbreiteMal2;					
 		}				
 		
-		if(gui.anzahl2 <= gui.BildbreiteMal1 - (gui.BildbreiteMal1 * 2)) {
-			gui.anzahl2 = gui.BildbreiteMal1;						
+		if(LoadTutorial.anzahl2 <= LoadTutorial.BildbreiteMal1 - (LoadTutorial.BildbreiteMal1 * 2)) {
+			LoadTutorial.anzahl2 = LoadTutorial.BildbreiteMal1;						
 		}
 		    				
 		//Boden
-		if(gui.BodenAnzahl <= 0) {
-			gui.BodenAnzahl = gui.BodenBreiteMal1;
+		if(LoadTutorial.BodenAnzahl <= 0) {
+			LoadTutorial.BodenAnzahl = LoadTutorial.BodenBreiteMal1;
 		}
-		if(gui.BodenAnzahl == gui.BodenBreiteMal1) {
-			gui.BodenAnzahl2 = gui.BodenBreiteMal1;
+		if(LoadTutorial.BodenAnzahl == LoadTutorial.BodenBreiteMal1) {
+			LoadTutorial.BodenAnzahl2 = LoadTutorial.BodenBreiteMal1;
 		}
 		SchlumpfSpriteLaufen.Standbild = "an";
 		SchlumpfSpriteLaufen.LaufenLinks = "true";

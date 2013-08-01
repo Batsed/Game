@@ -23,26 +23,8 @@ public class gui extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 Timer time;
 
-//Bild vom Gamebackground
-static Image img;
-
-//Bild vom Boden
-static Image Boden;
-
-//Block
-static Image Block;
-
 //Geschwindigkeit des scrollens des Bildes
 static int speed; 
-
-//Aktuelle Breite des Bildes
-static int anzahl = 0; 
-static int anzahl2 = 0;
-
-static int BodenAnzahl = 0;
-static int BodenAnzahl2 = 0;
-
-static int Brick = 0;
 
 //Geschwindigkeit von KeySchleife
 long KeyfirstFrame;
@@ -58,30 +40,10 @@ static String fpsvisible = "false";
 //Seconds
 int Seconds;
 
-static Rectangle rect1 = new Rectangle();
-static Rectangle BrickReck1 = new Rectangle();
-static Rectangle BrickReck2 = new Rectangle();
-static Rectangle BrickReck3 = new Rectangle();
-
 static Rectangle rect2 = new Rectangle();
 
 //Höhe für offscreenimage
 int Bildhöhe = frame.fenster.getHeight();
-
-//Bildbreite für Gamebackground
-static int ImageWidthSpeed  = -15;
-static int BildbreiteMal1 = 1920 + ImageWidthSpeed;
-//Bildbreite * 2 für Gamebackground
-static int BildbreiteMal2 = BildbreiteMal1 * 2;
-//Bildbreite * 3 für Gamebackground
-static int BildbreiteMal3 = BildbreiteMal1 * 3;
-
-//Bildbreite * 1 für Boden
-static int BodenBreiteMal1 = 1000;
-//Bildbreite * 2 für Boden
-static int BodenBreiteMal2 = BodenBreiteMal1 * 2;
-//Bildbreite * 3 für Boden
-static int BodenBreiteMal3 = BodenBreiteMal1 * 3;
 
 //Geschwindigkeit der Perfomance
 int Geschwindigkeit = 10;
@@ -100,22 +62,9 @@ static int ySpace = 0;
 
 	public gui() throws Exception { 								
 		
-		setFocusable(true);					        		       			
+		setFocusable(true);					        		       							
 		
-		//Lädt das Bild vom Spielhintergrund
-		String Pfad = Texturepack.game_background;
-		ImageIcon u = new ImageIcon(Pfad);
-		img = u.getImage();	
-		
-		//Lädt das Bild vom Boden
-		String Pfad2 = Texturepack.Boden;
-		ImageIcon o = new ImageIcon(Pfad2);
-		Boden = o.getImage();	
-		
-		//Lädt Block
-		String Block2 = Texturepack.Brick;
-		ImageIcon o2 = new ImageIcon(Block2);
-		Block = o2.getImage();
+		LoadTutorial.Tutorial();
 		
 		//Fügt einen Keylistener hinzu
 		addKeyListener(new AL());	
@@ -137,51 +86,15 @@ static int ySpace = 0;
 
 	public void paint(Graphics g){
 		
-		offscreen = createImage(BildbreiteMal1,Bildhöhe);
+		offscreen = createImage(LoadTutorial.BildbreiteMal1,Bildhöhe);
 		bg = offscreen.getGraphics();
 
-		bg.clearRect(0,0,BildbreiteMal1,Bildhöhe);									
+		bg.clearRect(0,0,LoadTutorial.BildbreiteMal1,Bildhöhe);									
 
 		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;										
+		Graphics2D g2d = (Graphics2D) g;	
 		
-		//Anfang vom Zeichnen des Gamehintergrunds
-		bg.drawImage(img, 0 - anzahl2, 0,null);			
-
-		bg.drawImage(img, BildbreiteMal1 - anzahl, 0,null);				
-
-		bg.drawImage(img, BildbreiteMal2 - anzahl, 0,null);			
-
-		bg.drawImage(img, BildbreiteMal3 - anzahl, 0,null);
-		//Ende vom Zeichnen des Gamehintergrunds
-		
-		//Anfang vom Zeichnen des Bodens
-		bg.drawImage(Boden, 0 - BodenAnzahl2, 600,null);
-
-		bg.drawImage(Boden, BodenBreiteMal1 - BodenAnzahl, 600,null);
-
-		bg.drawImage(Boden, BodenBreiteMal2 - BodenAnzahl, 600,null);
-
-		bg.drawImage(Boden, BodenBreiteMal3 - BodenAnzahl, 600,null);
-
-		//Ende vom Zeichnen des Bodens
-		
-		//Anfang vom Zeichnen des Blocks
-		//bg.setColor(Color.GREEN);	
-		//bg.drawRect(500 - Brick, 340, 50, 60);
-		
-		//Block 1
-		bg.drawImage(Block, 0 - Brick, 550,null);
-		BrickReck1.setBounds(0 - Brick,540, 50, 60);
-		//Block 2			
-		bg.drawImage(Block, 250 - Brick, 450,null);
-		rect1.setBounds(250 - Brick,440, 50, 60);
-		//Block 3
-		bg.drawImage(Block, 500 - Brick, 350, null);
-		BrickReck2.setBounds(500 - Brick,340, 50, 60);
-		//Block 4
-		bg.drawImage(Block, 750 - Brick, 250, null);
-		BrickReck3.setBounds(750 - Brick,240, 50, 60);
+		Tutorial_draw.Tutorial_draw();
 		
 		//Anfang vom Zeichnen des Characters
 		if(!(SchlumpfSpriteLaufen.character == null)) {
@@ -207,10 +120,7 @@ static int ySpace = 0;
 		        }		       
 			}
 		}    	
-		//Ende vom Zeichnen des Characters				
-		
-		//Überprüfen 
-		
+		//Ende vom Zeichnen des Characters						
 		
 		//Anzeige für Fps
 		if(fpsvisible.equalsIgnoreCase("true")){						
@@ -237,37 +147,7 @@ static int ySpace = 0;
 		//Doublebuffer
 		g2d.drawImage(offscreen,0,0,null);
 		
-		//Kolliesionen überprüfen	
-		if(370 >= 608 - ySpace - Strings.ChaY) {
-			//System.out.println("Brick: " + (370) + " Cha: " + (608 - ySpace - Strings.ChaY));
-			//System.out.println("Cha ist höher");
-		}
-		if(BrickReck1.intersects(rect2)){				 
-			KollisionsUpdater.BrickReck1();
-        }
-		if(rect1.intersects(rect2)){	
-			KollisionsUpdater.rect1();		
-		}
-		if(BrickReck2.intersects(rect2)) {
-			KollisionsUpdater.BrickReck2();
-		}
-		if(BrickReck3.intersects(rect2)) {
-			KollisionsUpdater.BrickReck3();
-		}
-		if(!(BrickReck1.intersects(rect2))){
-			if(!(BrickReck2.intersects(rect2))){
-				if(!(rect1.intersects(rect2))){
-					if(!(BrickReck3.intersects(rect2))) {
-						
-						
-						if(KeySchleife.stoßrechts == "true") {
-							KeySchleife.stoßlinks = "false";							
-						}					
-					KollisionsUpdater.NoK();
-					}
-				}
-			}
-		}		
+		
 	}	
 
 	public void update(Graphics g)
