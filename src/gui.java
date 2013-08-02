@@ -8,12 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
-
-
 
 
 public class gui extends JPanel implements ActionListener {
@@ -94,7 +90,7 @@ static int ySpace = 0;
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;	
 		
-		Tutorial_draw.Tutorial_draw();
+		Tutorial_draw.Tutorial_draw();	
 		
 		//Anfang vom Zeichnen des Characters
 		if(!(SchlumpfSpriteLaufen.character == null)) {
@@ -124,7 +120,16 @@ static int ySpace = 0;
 		//Kollisionsabfrage
 		Tutorial_draw.BlockUpdater();
 		
-		//Ende vom Zeichnen des Characters						
+		//Ende vom Zeichnen des Characters		
+		
+		//Anzeige für Climp Power
+		bg.setFont(new Font("Sans", Font.PLAIN, 30)); 			
+		bg.setColor(Color.WHITE); 
+		if(Strings.ClimpPower <= 0) {	
+			bg.drawString("Climb Power: 0",50, 90);
+		}else{
+			bg.drawString("Climb Power: " + Strings.ClimpPower,50, 90);
+		}
 		
 		//Anzeige für Fps
 		if(fpsvisible.equalsIgnoreCase("true")){						
@@ -138,9 +143,7 @@ static int ySpace = 0;
 			int FpsGlobal = fps + Strings.Keyfps + Strings.Chafps;
 			int FpsDurchschnitt2 = FpsGlobal / 3;
 			int FpsDurchschnitt = FpsDurchschnitt2 - 17;
-			String Fps = String.valueOf(FpsDurchschnitt);
-			bg.setFont(new Font("Sans", Font.PLAIN, 30)); 			
-			bg.setColor(Color.WHITE); 
+			String Fps = String.valueOf(FpsDurchschnitt);			
 			if(fps == 1) {
 				bg.drawString("Berechne fps..." ,50, 50);
 			}else{
@@ -220,8 +223,7 @@ static int ySpace = 0;
 				}
 				if(Strings.key == KeyEvent.VK_SHIFT) {
 					KeySchleife.KeyPressedShift = "true";
-				}
-
+				}				
 				if(Strings.key == KeyEvent.VK_SPACE) {					
 					if(!(Strings.AnimationY == true)) {					
 						if(Strings.Climb == false) {							
@@ -253,8 +255,15 @@ static int ySpace = 0;
 					}
 					
 				}
-				if(Strings.key == KeyEvent.VK_CONTROL) {
-					KeySchleife.KeyPressedControl = true;					
+				if(Strings.key == KeyEvent.VK_CONTROL) {					
+					if(Strings.ClimpPower <= 0) {
+						KeySchleife.KeyPressedControl = false;							
+					}else{
+						KeySchleife.KeyPressedControl = true;
+					}
+												
+					
+										
 				}
 			 }
 	

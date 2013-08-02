@@ -115,6 +115,7 @@ public class KollisionsUpdater {
 			Strings.ChaHöhe = 450;			
 			HöhenMesser();				
 		}else{
+			Strings.ChaAufBlock = false;
 			Strings.BlockMitte = 150 - Tutorial_Rectangles.Brick + 1200 - 25;
 			Zusammenstoß.ZKBrickReck();
 			Zusammenstoß();

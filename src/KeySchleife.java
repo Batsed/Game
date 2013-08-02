@@ -48,6 +48,9 @@ public class KeySchleife {
 				}
 				
 				AnimationY.AnimationY();
+				
+				//Climb Power
+				ClimbPower.ClimbPower();
 				//System.out.println("rechts: " + stoﬂrechts + " links: " + stoﬂlinks);
 				
 				if(KeyPressedControl == true) {
@@ -55,6 +58,7 @@ public class KeySchleife {
 						if(Strings.BlockJump == false) {
 							Strings.Climb = true; 
 							Strings.ChaY += 2;
+							Strings.ClimpPower -= 1;														
 						}
 					}
 					if(Strings.Zusammenstoﬂ.equalsIgnoreCase("false")) {

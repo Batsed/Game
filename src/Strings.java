@@ -28,7 +28,11 @@ public class Strings {
 	
 	static int ChaY;
 	
+	//Climb
 	static boolean Climb = false;
+	
+	static int ClimpPower = 230;
+	
 	
 	static int BlockHöhe = 0; 
 	

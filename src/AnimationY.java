@@ -13,7 +13,7 @@ public class AnimationY {
 					Strings.Climb = false;
 				}
 			}
-			if(Strings.ChaY >= Strings.BlockHöhe) {					
+			if(Strings.ChaY >= Strings.BlockHöhe) {	
 				if(Strings.AnimationY == true) {
 					if(Strings.Climb == false) {
 						Strings.Climb = false;
