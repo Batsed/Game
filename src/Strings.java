@@ -28,9 +28,7 @@ public class Strings {
 	
 	static int ChaY;
 	
-	static int ClimbY = 0;
-	
-	static int ClimbHöhe = 0;
+	static boolean Climb = false;
 	
 	static int BlockHöhe = 0; 
 	

@@ -2,7 +2,7 @@
 public class KollisionsUpdater {
 	
 	public static void BrickReck1() {
-    	if(560 >= 608 - gui.ySpace - Strings.ChaY) {  
+    	if(560 >= 608 - gui.ySpace - Strings.ChaY) {      		
     		Strings.ChaAufBlock = true;
     		Strings.BlockHöhe = 50;
     		Strings.ChaHöhe = 50;
@@ -33,7 +33,7 @@ public class KollisionsUpdater {
 			Zusammenstoß.ZKBrickReck();
 			Zusammenstoß();
 		}		
-		if(KeySchleife.KeyPressedSpace == "false") {
+		if(KeySchleife.KeyPressedSpace == "false") {			
 			Strings.ZKRec1 = true;	
 			Strings.ZKBrickReck1 = false;
 			Strings.ZKBrickReck2 = false;		
@@ -108,12 +108,11 @@ public class KollisionsUpdater {
 	}
 	
 	//Erste Wand
-	public static void WallBrick() {		
-		if(150 >= 608 - gui.ySpace - Strings.ChaY - Strings.ClimbY) {
-			Strings.ClimbHöhe = 150;
+	public static void WallBrick() {	
+		if(160 >= 608 - gui.ySpace - Strings.ChaY) {
 			Strings.ChaAufBlock = true;
-			Strings.ChaHöhe = 450;
 			Strings.BlockHöhe = 450; 
+			Strings.ChaHöhe = 450;			
 			HöhenMesser();				
 		}else{
 			Strings.BlockMitte = 150 - Tutorial_Rectangles.Brick + 1200 - 25;
@@ -131,12 +130,11 @@ public class KollisionsUpdater {
 	}
 	
 	public static void Boden() {		
-		if(610 >= 608 - gui.ySpace - Strings.ChaY - Strings.ClimbY) {
+		if(610 >= 608 - gui.ySpace - Strings.ChaY) {			
 			Strings.BodenHöhe = 0; 
-			Strings.ClimbHöhe = 0;
-			Strings.ChaAufBlock = true;
+			Strings.ChaAufBlock = false;
 			Strings.ChaHöhe = 0;
-			Strings.BlockHöhe = 0; 
+			Strings.BlockHöhe = 0;
 			HöhenMesserBoden();				
 		}
 		Zusammenstoß.ZKBrickReck();

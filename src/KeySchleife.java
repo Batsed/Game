@@ -52,21 +52,42 @@ public class KeySchleife {
 				
 				if(KeyPressedControl == true) {
 					if(Strings.Zusammenstoß.equalsIgnoreCase("true")) {
-						Strings.ClimbY += 2;
+						if(Strings.BlockJump == false) {
+							Strings.Climb = true; 
+							Strings.ChaY += 2;
+						}
+					}
+					if(Strings.Zusammenstoß.equalsIgnoreCase("false")) {
+						if(Strings.ySchleife == false) {
+							if(Strings.ChaAufBlock == false) {								
+								if(Strings.Climb == true) {									
+									Strings.AnimationY = true;										
+									if(KeySchleife.KeyPressedSpace.equalsIgnoreCase("false")) {											
+										//KeyPressedSpace = "false";										
+									}									
+								}
+							}						
+						}						
 					}
 				}else{
-					if(!(Strings.ClimbY <= 0)){
-						Strings.ClimbY -= 5;
+					if(Strings.ySchleife == false) {
+						if(Strings.ChaAufBlock == false) {
+							if(Strings.Climb == true) {
+								Strings.AnimationY = true;
+								Strings.Climb = false;									
+							}
+						}						
 					}
-				}							
 				
-				if(KeyPressedSpace.equalsIgnoreCase("true")) {
-					if(Strings.ClimbY >= Strings.ClimbHöhe) {
+				}
+				
+				if(KeyPressedSpace.equalsIgnoreCase("true")) {						
+					if(Strings.Climb == false) {							
 						if(!(yOn.equalsIgnoreCase("true"))) {
-							if(gui.ySpace <= Strings.BodenHöhe) {
+							if(gui.ySpace <= 0) {
 								Strings.ChaJump = "true";
 								Audio.main();	
-							}
+							}								
 							if(Strings.BlockJump == false) {
 								if(KeyPressed.equalsIgnoreCase("aus")) {
 									
@@ -87,7 +108,8 @@ public class KeySchleife {
 				    				}
 								}  
 							}
-						}
+						}													
+						
 						if(gui.ySpace >= 180) {
 							yOn = "true";        				
 						}
@@ -95,11 +117,11 @@ public class KeySchleife {
 							
 							gui.ySpace += -5;
 							
-							if(Strings.KumpSchleife == true) {
-								if(gui.ySpace + Strings.ChaY <= Strings.ChaHöhe) {
+							if(Strings.KumpSchleife == true) {								
+								if(gui.ySpace + Strings.ChaY <= Strings.ChaHöhe) {								
 									KeyPressedSpace = "false";
 									yOn = "false";
-									Strings.ChaY = Strings.ChaHöhe;
+									Strings.ChaY = Strings.ChaHöhe;									
 									gui.ySpace = 0;        															
 									Strings.StepGrass = "false";
 									Strings.KumpSchleife = false;   
@@ -119,70 +141,73 @@ public class KeySchleife {
 							}
 						}
 						
+					}else{
+						Strings.ChaY = gui.ySpace +  Strings.ChaY;
+						KeyPressedSpace = "false";    					
+    					Strings.StepGrass = "false";
+    					gui.ySpace = 0;
+    					yOn = "false";    					
 					}
 				}
 				
-				if(!(KeyPressedRight.equalsIgnoreCase("aus"))) {
-					if(Strings.ClimbHöhe <= 608 - gui.ySpace - Strings.ChaY - Strings.ClimbY) {
-						if(!(KeyPressedLeft.equalsIgnoreCase("true"))) { 
-							if(Strings.Zusammenstoß.equalsIgnoreCase("true")) {
-								SchlumpfSpriteLaufen.Standbild = "aus";
-			    				SchlumpfSpriteLaufen.aa = 1;
-
-			    				if(Strings.BlockMitte - 50 >= 550 + 20) {
-			    					KeyPressedRight();
-			    				}else{
-			    					if(Strings.BlockMitte - 50 <= 500 + 20) {
-			    						if(!(Strings.BlockMitte - 50 >= 520 + 20)){
-			    							KeyPressedRight();
-			    						}
-			    					}
-			    				}			
-							}else{
-								
-								if(!(Strings.StepGrass.equalsIgnoreCase("true"))) {
-									Strings.StepGrass = "true"; 
-									Audio.mainStep();
-								}															
-								KeyPressedRight();
-							}						        		
-						}else{
+				if(!(KeyPressedRight.equalsIgnoreCase("aus"))) {						
+					if(!(KeyPressedLeft.equalsIgnoreCase("true"))) { 
+						if(Strings.Zusammenstoß.equalsIgnoreCase("true")) {
 							SchlumpfSpriteLaufen.Standbild = "aus";
-							SchlumpfSpriteLaufen.aa = 1;
-						}
+		    				SchlumpfSpriteLaufen.aa = 1;
+
+		    				if(Strings.BlockMitte - 50 >= 550 + 20) {
+		    					KeyPressedRight();
+		    				}else{
+		    					if(Strings.BlockMitte - 50 <= 500 + 20) {
+		    						if(!(Strings.BlockMitte - 50 >= 520 + 20)){
+		    							KeyPressedRight();
+		    						}
+		    					}
+		    				}			
+						}else{
+							
+							if(Strings.StepGrass.equalsIgnoreCase("false")) {
+								Strings.StepGrass = "true"; 
+								Audio.mainStep();
+							}															
+							KeyPressedRight();
+						}						        		
+					}else{
+						SchlumpfSpriteLaufen.Standbild = "aus";
+						SchlumpfSpriteLaufen.aa = 1;
 					}
 				}
 				
 				if(KeyPressedLeft.equalsIgnoreCase("true")){ 
-					if(Strings.ClimbHöhe <= 608 - gui.ySpace - Strings.ChaY - Strings.ClimbY) {
-						if(!(KeyPressedRight.equalsIgnoreCase("an"))) {
-							if(Strings.Zusammenstoß.equalsIgnoreCase("true")) {					
-								SchlumpfSpriteLaufen.Standbild = "aus";
-			    				SchlumpfSpriteLaufen.aa = 1;
-			    				
-			    				if(Strings.BlockMitte + 25 <= 550) {
-			    					KeyPressedLeft();
-			    				}else{
-			    					if(Strings.BlockMitte + 25 >= 550) {
-			    						if(!(Strings.BlockMitte + 25 <= 610)) {
-			    							KeyPressedLeft();
-			    						}
-			    					}
-			    				}
-							}else{   
-								
-								if(!(Strings.StepGrass.equalsIgnoreCase("true"))) {
-									Strings.StepGrass = "true"; 
-									Audio.mainStep();
-								}					
-								
-								KeyPressedLeft();	        							    										    		
-							}	
-						}else{
+					if(!(KeyPressedRight.equalsIgnoreCase("an"))) {
+						if(Strings.Zusammenstoß.equalsIgnoreCase("true")) {					
 							SchlumpfSpriteLaufen.Standbild = "aus";
-							SchlumpfSpriteLaufen.aa = 1;
-						}
+		    				SchlumpfSpriteLaufen.aa = 1;
+		    				
+		    				if(Strings.BlockMitte + 25 <= 550) {
+		    					KeyPressedLeft();
+		    				}else{
+		    					if(Strings.BlockMitte + 25 >= 550) {
+		    						if(!(Strings.BlockMitte + 25 <= 610)) {
+		    							KeyPressedLeft();
+		    						}
+		    					}
+		    				}
+						}else{   
+							
+							if(!(Strings.StepGrass.equalsIgnoreCase("true"))) {
+								Strings.StepGrass = "true"; 
+								Audio.mainStep();
+							}					
+							
+							KeyPressedLeft();	        							    										    		
+						}	
+					}else{
+						SchlumpfSpriteLaufen.Standbild = "aus";
+						SchlumpfSpriteLaufen.aa = 1;
 					}
+					
 				}
 				try {
 					Thread.sleep(9);

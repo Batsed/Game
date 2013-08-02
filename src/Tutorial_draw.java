@@ -54,9 +54,9 @@ public class Tutorial_draw {
 			gui.bg.drawImage(LoadTutorial.Block, 150 - Tutorial_Rectangles.Brick + 1200, 200, null);
 			gui.bg.drawImage(LoadTutorial.Block, 150 - Tutorial_Rectangles.Brick + 1200, 150, null);
 			
-			Tutorial_Rectangles.WallBrick1.setBounds(150 - Tutorial_Rectangles.Brick + 1200,150, 50, 450);
-			gui.bg.setColor(Color.GREEN);
-			gui.bg.drawRect(150 - Tutorial_Rectangles.Brick + 1200,140, 50, 460);
+			Tutorial_Rectangles.WallBrick1.setBounds(150 - Tutorial_Rectangles.Brick + 1200,140, 50, 460);
+			//gui.bg.setColor(Color.GREEN);
+			//gui.bg.drawRect(150 - Tutorial_Rectangles.Brick + 1200,140, 50, 460);
 		}
 		
 		public static void BlockUpdater() {
@@ -86,8 +86,11 @@ public class Tutorial_draw {
 					if(!(Tutorial_Rectangles.rect1.intersects(gui.rect2))){
 						if(!(Tutorial_Rectangles.BrickReck3.intersects(gui.rect2))) {
 							if(!(Tutorial_Rectangles.WallBrick1.intersects(gui.rect2))) {
-								
-									Strings.ChaAufBlock = false;
+									
+								if(!(Tutorial_Rectangles.Boden.intersects(gui.rect2))) {
+									Strings.AnimationY = true;
+								}
+									Strings.ChaAufBlock = false;								
 																			
 									KollisionsUpdater.NoK();
 								
