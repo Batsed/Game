@@ -17,7 +17,7 @@ public class gui extends JPanel implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-Timer time;
+static Timer time;
 
 //Geschwindigkeit des scrollens des Bildes
 static int speed; 
@@ -27,9 +27,9 @@ long KeyfirstFrame;
 long KeycurrentFrame;
 
 //fps
-long firstFrame;
+static long firstFrame;
 int frames;
-long currentFrame;
+static long currentFrame;
 int fps;
 static String fpsvisible = "false";
 
@@ -42,7 +42,7 @@ static Rectangle rect2 = new Rectangle();
 int Bildhöhe = frame.fenster.getHeight();
 
 //Geschwindigkeit der Perfomance
-int Geschwindigkeit = 10;
+int Geschwindigkeit = 1;
 
 //Auf diesen Bild wird dann gezeichnet
 Image offscreen;
@@ -71,7 +71,7 @@ static int ySpace = 0;
 		//Berechnet Bilder
 		KeySchleife.main();
 		
-		time = new Timer(Geschwindigkeit,this); 
+		time = new Timer(Geschwindigkeit, this); 
 		time.start();
 	}
 
@@ -80,84 +80,83 @@ static int ySpace = 0;
 		repaint();
 	}		
 
-	public void paint(Graphics g){				
-		if(Strings.KollisionsUpdate == true) {													
-			offscreen = createImage(LoadTutorial.BildbreiteMal1,Bildhöhe);
-			bg = offscreen.getGraphics();
-	
-			bg.clearRect(0,0,LoadTutorial.BildbreiteMal1,Bildhöhe);									
-	
-			super.paint(g);
-			Graphics2D g2d = (Graphics2D) g;	
-					
-			//Zeichnen des Tutorials
-			Tutorial_draw.Tutorial_draw();
-			
-			//Anfang vom Zeichnen des Characters
-			if(!(SchlumpfSpriteLaufen.character == null)) {
-				if(!(SchlumpfSpriteLaufen.y + SchlumpfSpriteLaufen.characterHöheFrame < SchlumpfSpriteLaufen.characterHöheFrame)){
-					//double degrees = 180;
-					//AffineTransformOp op = new AffineTransformOp(AffineTransform.getRotateInstance(Math.toRadians(degrees),(double)SchlumpfSpriteLaufen.character.getWidth()/2.0, (double)SchlumpfSpriteLaufen.character.getHeight()/2.0), AffineTransformOp.TYPE_BILINEAR); 
-					//BufferedImage character2 = op.filter(SchlumpfSpriteLaufen.character, null);  
-					
-	
-					int y = SchlumpfSpriteLaufen.y;
-			        int x = SchlumpfSpriteLaufen.x;
-			        int CharBreite = SchlumpfSpriteLaufen.characterBreiteFrame;
-			        int CharHöhe = SchlumpfSpriteLaufen.characterHöheFrame;
-			        
-			        if(!(CharHöhe + y >= 513)) {
-			    		//bg.drawRect(590, 480 - ySpace  - Strings.ChaY, 60, 120);
-			    		rect2.setBounds(590, 480 - ySpace  - Strings.ChaY, 60, 120);
-			        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY, this);
-			        }else{
-			        	//bg.drawRect(590, 480 - ySpace  - Strings.ChaY, 60, 120);
-			        	rect2.setBounds(590, 480 - ySpace  - Strings.ChaY, 60, 120);
-			        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y - 384, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY, this);
-			        }		       
-				}
-			} 				
-			
-			//Ende vom Zeichnen des Characters		
-			
-			//Anzeige für Climp Power
-			bg.setFont(new Font("Sans", Font.PLAIN, 30)); 			
-			bg.setColor(Color.WHITE); 
-			if(Strings.ClimpPower <= 0) {	
-				bg.drawString("Climb Power: 0",50, 90);
-			}else{
-				bg.drawString("Climb Power: " + Strings.ClimpPower,50, 90);
+	public void paint(Graphics g){																
+		offscreen = createImage(LoadTutorial.BildbreiteMal1,Bildhöhe);
+		bg = offscreen.getGraphics();
+
+		bg.clearRect(0,0,LoadTutorial.BildbreiteMal1,Bildhöhe);									
+
+		super.paint(g);
+		Graphics2D g2d = (Graphics2D) g;	
+		
+		//Zeichnen des Tutorials
+		Tutorial_draw.Tutorial_draw();				
+		
+		//Anfang vom Zeichnen des Characters
+		if(!(SchlumpfSpriteLaufen.character == null)) {
+			if(!(SchlumpfSpriteLaufen.y + SchlumpfSpriteLaufen.characterHöheFrame < SchlumpfSpriteLaufen.characterHöheFrame)){
+				//double degrees = 180;
+				//AffineTransformOp op = new AffineTransformOp(AffineTransform.getRotateInstance(Math.toRadians(degrees),(double)SchlumpfSpriteLaufen.character.getWidth()/2.0, (double)SchlumpfSpriteLaufen.character.getHeight()/2.0), AffineTransformOp.TYPE_BILINEAR); 
+				//BufferedImage character2 = op.filter(SchlumpfSpriteLaufen.character, null);  
+				
+
+				int y = SchlumpfSpriteLaufen.y;
+		        int x = SchlumpfSpriteLaufen.x;
+		        int CharBreite = SchlumpfSpriteLaufen.characterBreiteFrame;
+		        int CharHöhe = SchlumpfSpriteLaufen.characterHöheFrame;
+		        
+		        if(!(CharHöhe + y >= 513)) {
+		    		//bg.drawRect(590, 480 - ySpace  - Strings.ChaY, 60, 120);
+		    		rect2.setBounds(590, 480 - ySpace  - Strings.ChaY, 60, 120);
+		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY, this);
+		        }else{
+		        	//bg.drawRect(590, 480 - ySpace  - Strings.ChaY, 60, 120);
+		        	rect2.setBounds(590, 480 - ySpace  - Strings.ChaY, 60, 120);
+		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y - 384, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY, this);
+		        }		       
 			}
-			
-			//Anzeige für Fps
-			if(fpsvisible.equalsIgnoreCase("true")){						
-				frames++;
-				currentFrame = System.currentTimeMillis();
-				if(currentFrame > firstFrame + 1000){				
-					firstFrame = currentFrame;
-					fps = frames;
-					frames = 0;
-				}			
-				int FpsGlobal = fps + Strings.Keyfps + Strings.Chafps;
-				int FpsDurchschnitt2 = FpsGlobal / 3;
-				int FpsDurchschnitt = FpsDurchschnitt2 - 17;
-				String Fps = String.valueOf(FpsDurchschnitt);			
-				if(fps == 1) {
-					bg.drawString("Berechne fps..." ,50, 50);
-				}else{
-					bg.drawString("fps: " + Fps, 50, 50);
-				}
-			}
-	        
-			//Doublebuffer
-			g2d.drawImage(offscreen,0,0,null);									
+		} 				
+		
+		//Ende vom Zeichnen des Characters	
+		//Kollisionsabfrage
+		Tutorial_draw.BlockUpdater();
+		
+		//Anzeige für Climp Power
+		bg.setFont(new Font("Sans", Font.PLAIN, 30)); 			
+		bg.setColor(Color.WHITE); 
+		if(Strings.ClimpPower <= 0) {	
+			bg.drawString("Climb Power: 0",50, 90);
+		}else{
+			bg.drawString("Climb Power: " + Strings.ClimpPower,50, 90);
 		}
 		
-	}	
+		//Anzeige für Fps
+		if(fpsvisible.equalsIgnoreCase("true")){						
+			frames++;
+			currentFrame = System.currentTimeMillis();
+			if(currentFrame > firstFrame + 1000){				
+				firstFrame = currentFrame;
+				fps = frames;
+				frames = 0;
+			}			
+			//int FpsGlobal = fps + Strings.Keyfps + Strings.Chafps;
+			//int FpsDurchschnitt2 = FpsGlobal / 3;
+			//int FpsDurchschnitt = FpsDurchschnitt2 - 17;
+			String Fps = String.valueOf(fps);			
+			if(fps == 1) {
+				bg.drawString("Berechne fps..." ,50, 50);
+			}else{
+				bg.drawString("fps: " + Fps, 50, 50);
+			}
+		}
+        
+		//Doublebuffer
+		g2d.drawImage(offscreen,0,0,null);									
+	}
 
 	public void update(Graphics g)
 	{ 
-		paint(g); 
+		//paint(g); 
 	}
 	
 	//Keyevent

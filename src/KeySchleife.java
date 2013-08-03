@@ -35,27 +35,11 @@ public class KeySchleife {
 	
 	private Thread BildAnimation = new Thread() {  
 		public void run() {
-			while (true) { 
-				//System.out.println(Strings.KollisionsUpdate);
-				if(Strings.KollisionsUpdate == true) {
-					//Anzeige für Fps
-					if(gui.fpsvisible.equalsIgnoreCase("true")){	
-						Strings.Keyframes++;
-						Strings.KeycurrentFrame = System.currentTimeMillis();
-						if(Strings.KeycurrentFrame > Strings.KeyfirstFrame + 1000){				
-							Strings.KeyfirstFrame = Strings.KeycurrentFrame;
-							Strings.Keyfps = Strings.Keyframes;
-							Strings.Keyframes = 0;
-						}			
-					}
-					
-					AnimationY.AnimationY();
-					
-					//Kollisionsabfrage
-					if(Strings.KollisionsUpdate == true) { 
-						Strings.KollisionsUpdate = false;
-						Tutorial_draw.BlockUpdater();						
-					}
+			while (true) { 			
+				Strings.KeycurrentFrame = System.currentTimeMillis();
+				if(Strings.KeycurrentFrame > Strings.KeyfirstFrame + 7){				
+					Strings.KeyfirstFrame = Strings.KeycurrentFrame;					
+					AnimationY.AnimationY();															
 					
 					//Climb Power
 					ClimbPower.ClimbPower();
@@ -220,13 +204,13 @@ public class KeySchleife {
 							SchlumpfSpriteLaufen.aa = 1;
 						}
 						
-					}
-					try {
-						Thread.sleep(9);
-					}catch (InterruptedException e) {
-						e.printStackTrace();
-					} 					
-				}			
+					}	
+				}
+				try {
+					Thread.sleep(1);
+				}catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	};

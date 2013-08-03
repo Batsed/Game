@@ -28,9 +28,6 @@ public class Strings {
 	
 	static int ChaY;
 	
-	//Kollisions
-	static boolean KollisionsUpdate = true;
-	
 	//Climb
 	static boolean Climb = false;
 	

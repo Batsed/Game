@@ -99,6 +99,5 @@ public class Tutorial_draw {
 					}
 				}
 			}														
-			Strings.KollisionsUpdate = true;
 		}
 }
