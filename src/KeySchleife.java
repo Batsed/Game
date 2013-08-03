@@ -47,7 +47,7 @@ public class KeySchleife {
 					}			
 				}
 				
-				AnimationY.AnimationY();
+				AnimationY.AnimationY();								
 				
 				//Climb Power
 				ClimbPower.ClimbPower();
@@ -290,7 +290,7 @@ public class KeySchleife {
 	 }
 		     
 	 private void start() {
-		 BildAnimation.setPriority(10);
+		 BildAnimation.setPriority(1);
 		 BildAnimation.start();
 	 }
 }

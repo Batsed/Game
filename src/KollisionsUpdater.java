@@ -2,7 +2,8 @@
 public class KollisionsUpdater {
 	
 	public static void BrickReck1() {
-    	if(560 >= 608 - gui.ySpace - Strings.ChaY) {      		
+    	if(560 >= 608 - gui.ySpace - Strings.ChaY) {  
+    		Strings.Climb = false;
     		Strings.ChaAufBlock = true;
     		Strings.BlockHöhe = 50;
     		Strings.ChaHöhe = 50;
@@ -24,6 +25,7 @@ public class KollisionsUpdater {
 	}
 	public static void rect1() {
 		if(460 >= 608 - gui.ySpace - Strings.ChaY) { 
+			Strings.Climb = false;
 			Strings.ChaAufBlock = true;
 			Strings.ChaHöhe = 150;
 			Strings.BlockHöhe = 150; 
@@ -56,6 +58,7 @@ public class KollisionsUpdater {
 			Zusammenstoß();			
 		}
 		if(360 >= 608 - gui.ySpace - Strings.ChaY) {
+			Strings.Climb = false;
 			Strings.ChaAufBlock = true;
 			Strings.ChaHöhe = 250;
 			Strings.BlockHöhe = 250; 
@@ -88,6 +91,7 @@ public class KollisionsUpdater {
 			Zusammenstoß();
 		}
 		if(260 >= 608 - gui.ySpace - Strings.ChaY) { 
+			Strings.Climb = false;
 			Strings.ChaAufBlock = true;
 			Strings.ChaHöhe = 350;
 			Strings.BlockHöhe = 350; 
@@ -110,6 +114,7 @@ public class KollisionsUpdater {
 	//Erste Wand
 	public static void WallBrick() {	
 		if(160 >= 608 - gui.ySpace - Strings.ChaY) {
+			Strings.Climb = false;
 			Strings.ChaAufBlock = true;
 			Strings.BlockHöhe = 450; 
 			Strings.ChaHöhe = 450;			
@@ -131,7 +136,8 @@ public class KollisionsUpdater {
 	}
 	
 	public static void Boden() {		
-		if(610 >= 608 - gui.ySpace - Strings.ChaY) {			
+		if(610 >= 608 - gui.ySpace - Strings.ChaY) {	
+			Strings.Climb = false;
 			Strings.BodenHöhe = 0; 
 			Strings.ChaAufBlock = false;
 			Strings.ChaHöhe = 0;

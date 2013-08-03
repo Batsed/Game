@@ -70,7 +70,7 @@ static int ySpace = 0;
 		
 		//Berechnet Bilder
 		KeySchleife.main();
-
+		
 		time = new Timer(Geschwindigkeit,this); 
 		time.start();
 	}
@@ -90,7 +90,8 @@ static int ySpace = 0;
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;	
 		
-		Tutorial_draw.Tutorial_draw();	
+		//Zeichnen des Bildes
+		Tutorial_draw.Tutorial_draw();
 		
 		//Anfang vom Zeichnen des Characters
 		if(!(SchlumpfSpriteLaufen.character == null)) {
@@ -225,8 +226,8 @@ static int ySpace = 0;
 					KeySchleife.KeyPressedShift = "true";
 				}				
 				if(Strings.key == KeyEvent.VK_SPACE) {					
-					if(!(Strings.AnimationY == true)) {					
-						if(Strings.Climb == false) {							
+					if(!(Strings.AnimationY == true)) {						
+						if(Strings.Climb == false) {								
 							if(KeySchleife.KeyPressedControl == false) {
 								KeySchleife.KeyPressedSpace = "true";
 							}
