@@ -192,7 +192,7 @@ public class SchlumpfSpriteLaufen {
 	 }
 		     
 	 private void start() {
-		 SSLR.setPriority(2);			
+		//SSLR.setPriority(0);			
 		 SSLR.start();
 	 }
 	

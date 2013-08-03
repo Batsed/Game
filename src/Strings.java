@@ -28,12 +28,14 @@ public class Strings {
 	
 	static int ChaY;
 	
+	//Kollisions
+	static boolean KollisionsUpdate = true;
+	
 	//Climb
 	static boolean Climb = false;
 	
-	static int ClimpPower = 230;
-	
-	
+	static float ClimpPower = 230;
+		
 	static int BlockHöhe = 0; 
 	
 	static boolean EinerSprung = false;

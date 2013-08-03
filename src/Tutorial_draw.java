@@ -79,7 +79,7 @@ public class Tutorial_draw {
 			//Erste Wand
 			if(Tutorial_Rectangles.WallBrick1.intersects(gui.rect2)) {
 				KollisionsUpdater.WallBrick();
-			}
+			}			
 															
 			if(!(Tutorial_Rectangles.BrickReck1.intersects(gui.rect2))){
 				if(!(Tutorial_Rectangles.BrickReck2.intersects(gui.rect2))){
@@ -90,14 +90,15 @@ public class Tutorial_draw {
 								if(!(Tutorial_Rectangles.Boden.intersects(gui.rect2))) {
 									Strings.AnimationY = true;
 								}
-									Strings.ChaAufBlock = false;								
-																			
-									KollisionsUpdater.NoK();
+								Strings.ChaAufBlock = false;								
+									
+								KollisionsUpdater.NoK();
 								
 							}
 						}
 					}
 				}
-			}		
+			}														
+			Strings.KollisionsUpdate = true;
 		}
 }

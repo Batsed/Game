@@ -142,7 +142,7 @@ public class KollisionsUpdater {
 			Strings.ChaAufBlock = false;
 			Strings.ChaHöhe = 0;
 			Strings.BlockHöhe = 0;
-			HöhenMesserBoden();				
+			HöhenMesserBoden();			
 		}
 		Zusammenstoß.ZKBrickReck();
 		if(KeySchleife.KeyPressedSpace == "false") {
