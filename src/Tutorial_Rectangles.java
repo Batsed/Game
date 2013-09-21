@@ -17,5 +17,6 @@ public class Tutorial_Rectangles {
 	
 	//Boden
 	static Rectangle Boden = new Rectangle();
+	static Rectangle Boden2 = new Rectangle();
 	
 }

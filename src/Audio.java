@@ -5,6 +5,7 @@ import java.io.BufferedInputStream;
 public class Audio {
 	
 	static Player playMp3;
+	static Player playMenü;
 	
 	static Player ChaJump;
 	
@@ -14,8 +15,9 @@ public class Audio {
       @Override
       public void run() {
 	    try {
-	    	playMp3.play();
-	    	//Strings.MenüMusik = "false";
+	    	playMp3.play();	  
+	    	playMenü.play();	 	    	  	  
+	    	Strings.MenüMusik = "false";
 	    	main();
 	    } catch (Exception e) {
 	        System.err.printf("%s\n", e.getMessage());
@@ -26,7 +28,12 @@ public class Audio {
     public static void ManüMusik() {} {
     	try {			
 			FileInputStream fis = new FileInputStream(AudioPath.f);						
-			BufferedInputStream bis = new BufferedInputStream(fis);		
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			
+			FileInputStream fis2 = new FileInputStream(AudioPath.f3);
+			BufferedInputStream bis2 = new BufferedInputStream(fis2);
+			
+			playMenü = new Player(bis2);
 			
 			playMp3 = new Player(bis);			
 		}catch(Exception e) {

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,6 +30,7 @@ static JPanel kontainer;
 static JLabel label;
 static JFrame fenster;
 static JLabel label2;
+static ImageIcon Button;
 
 	public static void main (String[]args) throws Exception { 							
             
@@ -41,6 +43,10 @@ static JLabel label2;
 		frame.setTitle("Menü");
 		frame.setResizable(false);
         frame.setVisible(true);
+        
+        
+		String Block2 = Texturepack.Button;
+		Button = new ImageIcon(Block2);
         
         //Laden der Strings
         Strings.Strings();
@@ -71,9 +77,10 @@ static JLabel label2;
 		add(spielen);				
 		
 		schliessen = new JButton("Spiel starten");
-		schliessen.setBounds(370, 260, 540, 40);
+		schliessen.setBounds(370, 260, 540, 40);		
 		schliessen.addActionListener(this);
 		schliessen.setVisible(false);		
+		schliessen.setIcon(Button);
 		add(schliessen);				
 		
 		einstellung = new JButton("Einstellungen");
@@ -88,8 +95,7 @@ static JLabel label2;
 		info.addActionListener(this);
 		info.setVisible(false);
 		add(info);
-	
-		
+			
 	    ende = new JButton("Beenden");
 	    ende.setBounds(370, 500, 540, 40);
 	    ende.addActionListener(this);
@@ -117,6 +123,7 @@ static JLabel label2;
 			if(!(settings.BukkitPfad == null)) {
 				try {
 					Audio.playMp3.close();
+					Audio.playMenü.close();
 					Strings.MenüMusik = "false";
 					fenster();
 				} catch (LineUnavailableException
@@ -169,6 +176,7 @@ static JLabel label2;
 				schliessen.setVisible(true);
 				frame.setTitle("Menü");
 				Audio.playMp3.close();
+				Audio.playMenü.close();
 				Strings.MenüMusik = "false";
 			}else{
 				try {
@@ -192,6 +200,9 @@ static JLabel label2;
 			e2.printStackTrace();
 		}
 		schliessen.setVisible(true);
+		//schliessen.setBackground (new Color (255, 255, 255, 50));
+	    //schliessen.setOpaque(false);
+		
 		
 		try {
 			Thread.sleep(100);

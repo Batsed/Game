@@ -28,6 +28,10 @@ public class Strings {
 	
 	static int ChaY;
 	
+	static double SprintPower = 200;
+	
+	static boolean realPressedShift = false;
+	
 	//Climb
 	static boolean Climb = false;
 	

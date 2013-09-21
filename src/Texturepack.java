@@ -9,6 +9,7 @@ static String game_background;
 static String pic_url;
 static String ChaLinks;
 static String Boden;
+static String Button;
 static Image game_icon;
 static URL hauptpfad;
 static JLabel image;
@@ -28,6 +29,9 @@ static String BrickWand;
 	}
 	
 	public static void Texturepack(){
+		//Knopf Hintergund Bild
+		String KnopfBild2 = (hauptpfad + "Texturepack/Button.jpg");
+		Button = KnopfBild2.substring(6);
 		
 		//Boden
 		String Boden2 = (hauptpfad + "Texturepack/Boden.png");

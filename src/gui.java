@@ -84,38 +84,13 @@ static int ySpace = 0;
 		offscreen = createImage(LoadTutorial.BildbreiteMal1,Bildhöhe);
 		bg = offscreen.getGraphics();
 
-		bg.clearRect(0,0,LoadTutorial.BildbreiteMal1,Bildhöhe);									
+		//bg.clearRect(0,0,LoadTutorial.BildbreiteMal1,Bildhöhe);									
 
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;	
 		
 		//Zeichnen des Tutorials
-		Tutorial_draw.Tutorial_draw();				
-		
-		//Anfang vom Zeichnen des Characters
-		if(!(SchlumpfSpriteLaufen.character == null)) {
-			if(!(SchlumpfSpriteLaufen.y + SchlumpfSpriteLaufen.characterHöheFrame < SchlumpfSpriteLaufen.characterHöheFrame)){
-				//double degrees = 180;
-				//AffineTransformOp op = new AffineTransformOp(AffineTransform.getRotateInstance(Math.toRadians(degrees),(double)SchlumpfSpriteLaufen.character.getWidth()/2.0, (double)SchlumpfSpriteLaufen.character.getHeight()/2.0), AffineTransformOp.TYPE_BILINEAR); 
-				//BufferedImage character2 = op.filter(SchlumpfSpriteLaufen.character, null);  
-				
-
-				int y = SchlumpfSpriteLaufen.y;
-		        int x = SchlumpfSpriteLaufen.x;
-		        int CharBreite = SchlumpfSpriteLaufen.characterBreiteFrame;
-		        int CharHöhe = SchlumpfSpriteLaufen.characterHöheFrame;
-		        
-		        if(!(CharHöhe + y >= 513)) {
-		    		//bg.drawRect(590, 480 - ySpace  - Strings.ChaY, 60, 120);
-		    		rect2.setBounds(590, 480 - ySpace  - Strings.ChaY, 60, 120);
-		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY, this);
-		        }else{
-		        	//bg.drawRect(590, 480 - ySpace  - Strings.ChaY, 60, 120);
-		        	rect2.setBounds(590, 480 - ySpace  - Strings.ChaY, 60, 120);
-		        	bg.drawImage(SchlumpfSpriteLaufen.character.getSubimage(x, y - 384, CharBreite, CharHöhe), 550, 480  - ySpace - Strings.ChaY, this);
-		        }		       
-			}
-		} 				
+		Tutorial_draw.Tutorial_draw();											
 		
 		//Ende vom Zeichnen des Characters	
 		//Kollisionsabfrage
@@ -128,6 +103,24 @@ static int ySpace = 0;
 			bg.drawString("Climb Power: 0",50, 90);
 		}else{
 			bg.drawString("Climb Power: " + Strings.ClimpPower,50, 90);
+		}
+		
+		//Anezige für Sprint Power		
+		if(Strings.SprintPower <= 0) {	
+			bg.drawString("Sprint Power: 0",50, 130);
+		}else{
+			bg.drawString("Sprint Power: " + Strings.SprintPower,50, 130);
+		}
+		
+		//Aufladen der Sprint Power
+		if(KeySchleife.KeyPressedShift == "false") {
+			if(Strings.SprintPower >= 200) {
+				Strings.SprintPower = 200;
+			}else{
+				if(Strings.realPressedShift == false) {
+					Strings.SprintPower += 0.5;
+				}
+			}							
 		}
 		
 		//Anzeige für Fps
@@ -147,7 +140,7 @@ static int ySpace = 0;
 				bg.drawString("Berechne fps..." ,50, 50);
 			}else{
 				bg.drawString("fps: " + Fps, 50, 50);
-			}
+			}			
 		}
         
 		//Doublebuffer
@@ -163,7 +156,7 @@ static int ySpace = 0;
 	private class AL extends KeyAdapter{
 
 		 public AL() {
-
+			 
 		 }
 		 
 		 //Anfang vom überprüfen ob eine Taste losgelassen wurde
@@ -191,6 +184,7 @@ static int ySpace = 0;
 				speed = 0;						 
 			 }
 			 if(Strings.key == KeyEvent.VK_SHIFT) {
+				 Strings.realPressedShift = false;
 				 KeySchleife.run = 0;
 				 KeySchleife.KeyPressedShift = "false";
 			 }
@@ -199,7 +193,8 @@ static int ySpace = 0;
 			 }
 		 }
 		 //Ende vom überprüfen ob eine Taste losgelassen wurde
-
+		 		 
+		
 		//Anfang vom überprüfen ob eine Taste gedrückt wurde
 		 public void keyPressed(KeyEvent e){
 			 Strings.key = e.getKeyCode();  
@@ -219,12 +214,16 @@ static int ySpace = 0;
 					frame.visible();
 				}
 				if(Strings.key == KeyEvent.VK_SHIFT) {
-					KeySchleife.KeyPressedShift = "true";
-				}				
-				if(Strings.key == KeyEvent.VK_SPACE) {					
-					if(!(Strings.AnimationY == true)) {						
+					Strings.realPressedShift = true;
+					if(Strings.SprintPower > 0) {
+						System.out.println("durch");
+						KeySchleife.KeyPressedShift = "true";
+					}					
+				}
+				if(Strings.key == KeyEvent.VK_SPACE) {						
+					if(!(Strings.AnimationY == true)) {							
 						if(Strings.Climb == false) {								
-							if(KeySchleife.KeyPressedControl == false) {
+							if(KeySchleife.KeyPressedControl == false) {								
 								KeySchleife.KeyPressedSpace = "true";
 							}
 						}
@@ -241,7 +240,8 @@ static int ySpace = 0;
 					SchlumpfSpriteLaufen.RightLeft = "left";
 					
 				} 
-
+				
+				//Event für die Taste Pfeil Rechts
 				if(Strings.key == KeyEvent.VK_RIGHT) {	
 					KeySchleife.KeyPressedRight = "an";
 					KeySchleife.KeyPressed = "an";	
@@ -252,6 +252,8 @@ static int ySpace = 0;
 					}
 					
 				}
+				
+				//Event für die Taste STRG
 				if(Strings.key == KeyEvent.VK_CONTROL) {					
 					if(Strings.ClimpPower <= 0) {
 						KeySchleife.KeyPressedControl = false;							

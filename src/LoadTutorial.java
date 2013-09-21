@@ -19,13 +19,17 @@ public class LoadTutorial {
 	static int BildbreiteMal2 = BildbreiteMal1 * 2;
 	//Bildbreite * 3 für Gamebackground
 	static int BildbreiteMal3 = BildbreiteMal1 * 3;
+	//Bildbreite * 4 für  Gamebackground
+	static int BildbreiteMal4 = BildbreiteMal1 * 4;
 
 	//Bildbreite * 1 für Boden
-	static int BodenBreiteMal1 = 1000;
+	static int BodenBreiteMal1 = 2380;
 	//Bildbreite * 2 für Boden
 	static int BodenBreiteMal2 = BodenBreiteMal1 * 2;
 	//Bildbreite * 3 für Boden
 	static int BodenBreiteMal3 = BodenBreiteMal1 * 3;
+	//Bildbreite + 4 für Boden
+	static int BodenBreiteMal4 = BodenBreiteMal1 * 4;
 	
 	//Bild vom Gamebackground
 	static Image img;

@@ -135,13 +135,14 @@ public class KollisionsUpdater {
     	}
 	}
 	
-	public static void Boden() {		
-		if(610 >= 608 - gui.ySpace - Strings.ChaY) {	
+	public static void Boden() {			
+		if(560 >= 608 - gui.ySpace - Strings.ChaY) {	
+			System.out.println("Durch");
 			Strings.Climb = false;
-			Strings.BodenHöhe = 0; 
+			Strings.BodenHöhe = 40; 
 			Strings.ChaAufBlock = false;
-			Strings.ChaHöhe = 0;
-			Strings.BlockHöhe = 0;
+			Strings.ChaHöhe = 40;
+			Strings.BlockHöhe = 40;
 			HöhenMesserBoden();			
 		}
 		Zusammenstoß.ZKBrickReck();

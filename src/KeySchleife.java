@@ -33,10 +33,18 @@ public class KeySchleife {
 	
 	static String stoßlinks2 = "false";
 	
+	int BHöhe = Strings.BodenHöhe;
+	
 	private Thread BildAnimation = new Thread() {  
 		public void run() {
 			while (true) { 			
 				Strings.KeycurrentFrame = System.currentTimeMillis();
+				
+				//Abragung ob LShit gedrückt wird
+				if(Strings.SprintPower <= 0) {											
+					KeySchleife.KeyPressedShift = "false";
+				}
+				
 				if(Strings.KeycurrentFrame > Strings.KeyfirstFrame + 7){				
 					Strings.KeyfirstFrame = Strings.KeycurrentFrame;					
 					AnimationY.AnimationY();															
@@ -56,7 +64,7 @@ public class KeySchleife {
 						if(Strings.Zusammenstoß.equalsIgnoreCase("false")) {
 							if(Strings.ySchleife == false) {
 								if(Strings.ChaAufBlock == false) {								
-									if(Strings.Climb == true) {									
+									if(Strings.Climb == true) {										
 										Strings.AnimationY = true;										
 										if(KeySchleife.KeyPressedSpace.equalsIgnoreCase("false")) {											
 											//KeyPressedSpace = "false";										
@@ -68,14 +76,14 @@ public class KeySchleife {
 					}else{
 						if(Strings.ySchleife == false) {							
 							//if(Strings.ChaAufBlock == false) {								
-								if(Strings.Climb == true) {
+								if(Strings.Climb == true) {									
 									Strings.AnimationY = true;
 									Strings.Climb = false;									
 								}
 							//}						
 						}
 					
-					}
+					}					
 					
 					if(KeyPressedSpace.equalsIgnoreCase("true")) {						
 						if(Strings.Climb == false) {							
@@ -87,33 +95,33 @@ public class KeySchleife {
 								if(Strings.BlockJump == false) {
 									if(KeyPressed.equalsIgnoreCase("aus")) {
 										
-										if(gui.ySpace <= 180) {
+										if(gui.ySpace <= 180 + BHöhe) {
 					        				gui.ySpace += 5;            				
 					        			}
 									}else{
-										if(gui.ySpace <= 100) {
+										if(gui.ySpace <= 100 + BHöhe) {
 					        				gui.ySpace += 5;            				
 					        			}
-					    				if(gui.ySpace >= 100) {
-					    					if(!(gui.ySpace >= 170)) {        						        					
+					    				if(gui.ySpace >= 100 + BHöhe) {
+					    					if(!(gui.ySpace >= 170 + BHöhe)) {        						        					
 					    					gui.ySpace += 4; 
 					    					}
 					    				}
-					    				if(gui.ySpace >= 170) {
+					    				if(gui.ySpace >= 170 + BHöhe) {
 					    					gui.ySpace += 3;
 					    				}
 									}  
 								}
 							}													
 							
-							if(gui.ySpace >= 180) {
+							if(gui.ySpace >= 180 + BHöhe) {
 								yOn = "true";        				
 							}
 							if(yOn.equalsIgnoreCase("true")) {
 								
 								gui.ySpace += -5;
 								
-								if(Strings.KumpSchleife == true) {								
+								if(Strings.KumpSchleife == true) {										
 									if(gui.ySpace + Strings.ChaY <= Strings.ChaHöhe) {								
 										KeyPressedSpace = "false";
 										yOn = "false";
@@ -124,11 +132,10 @@ public class KeySchleife {
 										Strings.EinerSprung = false;
 										Strings.BlockJump = false;
 									}
-								}else{
-								
-				    				if(gui.ySpace <= Strings.BodenHöhe) {
+								}else{								
+				    				if(gui.ySpace <= Strings.BodenHöhe) {	
 				    					KeyPressedSpace = "false";
-				    					gui.ySpace = Strings.BodenHöhe;
+				    					gui.ySpace = BHöhe;
 				    					Strings.StepGrass = "false";
 				    					yOn = "false";
 				    					Strings.EinerSprung = false;
@@ -141,7 +148,7 @@ public class KeySchleife {
 							Strings.ChaY = gui.ySpace +  Strings.ChaY;
 							KeyPressedSpace = "false";    					
 	    					Strings.StepGrass = "false";
-	    					gui.ySpace = 0;
+	    					gui.ySpace = BHöhe;
 	    					yOn = "false";    					
 						}
 					}
@@ -165,7 +172,7 @@ public class KeySchleife {
 								
 								if(Strings.StepGrass.equalsIgnoreCase("false")) {
 									Strings.StepGrass = "true"; 
-									Audio.mainStep();
+									//Audio.mainStep();
 								}															
 								KeyPressedRight();
 							}						        		
@@ -190,11 +197,10 @@ public class KeySchleife {
 			    						}
 			    					}
 			    				}
-							}else{   
-								
+							}else{   								
 								if(!(Strings.StepGrass.equalsIgnoreCase("true"))) {
 									Strings.StepGrass = "true"; 
-									Audio.mainStep();
+									//Audio.mainStep();
 								}					
 								
 								KeyPressedLeft();	        							    										    		
@@ -219,15 +225,16 @@ public class KeySchleife {
 			
 	public static void KeyPressedRight() {
 		if(KeyPressedShift.equalsIgnoreCase("true")) {
+			Strings.SprintPower -= 0.5;
     		run = 1;
     	}
 		
 		gui.speed = 6 + run;			    				    								    							        				        
     	
 		LoadTutorial.anzahl += gui.speed - 5;
-		LoadTutorial.anzahl2 += gui.speed - 5;
+		LoadTutorial.anzahl2 -= gui.speed - 5;
 		LoadTutorial.BodenAnzahl += gui.speed;
-		LoadTutorial.BodenAnzahl2 += gui.speed;
+		LoadTutorial.BodenAnzahl2 -= gui.speed;
 		Tutorial_Rectangles.Brick += gui.speed;
 		
 		if(LoadTutorial.anzahl >= LoadTutorial.BildbreiteMal3) {
@@ -247,33 +254,36 @@ public class KeySchleife {
 	
 	public static void KeyPressedLeft () {
 		if(KeyPressedShift.equalsIgnoreCase("true")) {
+			Strings.SprintPower -= 0.5;
     		run = 1;
     	}
 		
-		gui.speed = -6 - run;
+		gui.speed =  -6 - run;
 
 		LoadTutorial.anzahl += gui.speed + 5;
-		LoadTutorial.anzahl2 += gui.speed + 5;	
+		LoadTutorial.anzahl2 -= gui.speed + 5;	
 		LoadTutorial.BodenAnzahl += gui.speed;
-		LoadTutorial.BodenAnzahl2 += gui.speed;
+		LoadTutorial.BodenAnzahl2 -= gui.speed;
 		Tutorial_Rectangles.Brick += gui.speed;
 		
-		//Gamebackground
+		//Gamebackground		
 		if(LoadTutorial.anzahl <= 0) {
-			LoadTutorial.anzahl = LoadTutorial.BildbreiteMal2;					
+			LoadTutorial.anzahl = LoadTutorial.BildbreiteMal2;				
 		}				
 		
-		if(LoadTutorial.anzahl2 <= LoadTutorial.BildbreiteMal1 - (LoadTutorial.BildbreiteMal1 * 2)) {
-			LoadTutorial.anzahl2 = LoadTutorial.BildbreiteMal1;						
-		}
-		    				
+		if(LoadTutorial.anzahl <= LoadTutorial.BildbreiteMal1) {
+			if(LoadTutorial.anzahl2 >= 0)
+			LoadTutorial.anzahl2 = -LoadTutorial.BildbreiteMal1;				
+		}		  				
 		//Boden
 		if(LoadTutorial.BodenAnzahl <= 0) {
-			LoadTutorial.BodenAnzahl = LoadTutorial.BodenBreiteMal1;
+			LoadTutorial.BodenAnzahl = LoadTutorial.BodenBreiteMal2;			
+		}	
+		if(LoadTutorial.BodenAnzahl <= LoadTutorial.BodenBreiteMal1) {
+			if(LoadTutorial.BodenAnzahl2 >= 0)
+			LoadTutorial.BodenAnzahl2 = -LoadTutorial.BodenBreiteMal1;	
 		}
-		if(LoadTutorial.BodenAnzahl == LoadTutorial.BodenBreiteMal1) {
-			LoadTutorial.BodenAnzahl2 = LoadTutorial.BodenBreiteMal1;
-		}
+		
 		SchlumpfSpriteLaufen.Standbild = "an";
 		SchlumpfSpriteLaufen.LaufenLinks = "true";
 	}
@@ -283,7 +293,7 @@ public class KeySchleife {
 	 }
 		     
 	 private void start() {
-		 BildAnimation.setPriority(10);
+		 //BildAnimation.setPriority(10);
 		 BildAnimation.start();
 	 }
 }

@@ -12,6 +12,15 @@ public class AnimationY {
 					Strings.BlockJump = false;					
 					Strings.Climb = false;
 				}
+			}else{
+				if(Strings.AnimationY == true) {
+					if(Strings.ChaY <= Strings.BodenHöhe) {
+						Strings.StepGrass = "false";				
+						Strings.AnimationY = false;	
+						Strings.BlockJump = false;					
+						Strings.Climb = false;
+					}
+				}
 			}
 			if(Strings.ChaY >= Strings.BlockHöhe) {	
 				if(Strings.AnimationY == true) {
