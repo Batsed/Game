@@ -215,10 +215,13 @@ static int ySpace = 0;
 				}
 				if(Strings.key == KeyEvent.VK_SHIFT) {
 					Strings.realPressedShift = true;
-					if(Strings.SprintPower > 0) {
-						System.out.println("durch");
+					if(Strings.SprintPower > 0) {						
 						KeySchleife.KeyPressedShift = "true";
-					}					
+					}else{
+						KeySchleife.KeyPressedShift = "false";
+						KeySchleife.run = 0;
+					}
+					
 				}
 				if(Strings.key == KeyEvent.VK_SPACE) {						
 					if(!(Strings.AnimationY == true)) {							
@@ -259,14 +262,8 @@ static int ySpace = 0;
 						KeySchleife.KeyPressedControl = false;							
 					}else{
 						KeySchleife.KeyPressedControl = true;
-					}
-												
-					
-										
-				}
-			 }
-	
-			
-		//Ende vom überprüfen ob eine Taste gedrückt wurde
+					}	
+				}	
+		 }
 	}
 }
