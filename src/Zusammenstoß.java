@@ -5,42 +5,42 @@ public class Zusammenstoß {
 	public static void ZKBrickReck() {					
 		if(Strings.ZKRec1 == false) {
 			if(Tutorial_Rectangles.rect1.intersects(gui.rect2)) {
-				if(!(460 >= 608 - gui.ySpace - Strings.ChaY)) { 
+				if(!(460 >= 608 - Tutorial_draw.KameraHöhe)) { 
 					Blocker();
 				}								
 			}
 		}
 		if(Strings.ZKBrickReck1 == false) {			
 			if(Tutorial_Rectangles.BrickReck1.intersects(gui.rect2)){
-				if(!(560 >= 608 - gui.ySpace - Strings.ChaY)) {  
+				if(!(560 >= 608 - Tutorial_draw.KameraHöhe)) {  
 					Blocker();
 				}
 			}
 		}
 		if(Strings.ZKBrickReck2 == false) {
 			if(Tutorial_Rectangles.BrickReck2.intersects(gui.rect2)) {
-				if(!(360 >= 608 - gui.ySpace - Strings.ChaY)) { 
+				if(!(360 >= 608 - Tutorial_draw.KameraHöhe)) { 
 					Blocker();
 				}			
 		}	}
 				
 		if(Strings.ZKBrickReck3 == false) {
 			if(Tutorial_Rectangles.BrickReck3.intersects(gui.rect2)) {
-				if(!(260 >= 608 - gui.ySpace - Strings.ChaY)) { 
+				if(!(260 >= 608 - Tutorial_draw.KameraHöhe)) { 
 					Blocker();
 				}
 			}
 		}
 		if(Strings.ZKBrickWand == false) {
 			if(Tutorial_Rectangles.WallBrick1.intersects(gui.rect2)) {
-				if(!(160 >= 608 - gui.ySpace - Strings.ChaY)) { 
+				if(!(160 >= 608 - Tutorial_draw.KameraHöhe)) { 
 					Blocker();
 				}
 			}				
 		}
 		if(Strings.ZKBoden == false) {
 			if(Tutorial_Rectangles.Boden.intersects(gui.rect2)) {
-				if(!(610 >= 608 - gui.ySpace - Strings.ChaY)) { 
+				if(!(610 >= 608 - Tutorial_draw.KameraHöhe)) { 
 					Blocker();
 				}
 			}			

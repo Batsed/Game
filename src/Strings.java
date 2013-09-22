@@ -32,6 +32,9 @@ public class Strings {
 	
 	static boolean realPressedShift = false;
 	
+	//Cha kann nicht weiter gehen
+	static int Stand = 1;
+	
 	//Climb
 	static boolean Climb = false;
 	

@@ -33,6 +33,13 @@ static long currentFrame;
 int fps;
 static String fpsvisible = "false";
 
+//Charakterhöhe
+static int ChaSelberHähe = 128;
+static int ChaHeight = 300;
+static int ChaHeightFuß = ChaHeight + 128;
+
+static int Physix;
+
 //Seconds
 int Seconds;
 
@@ -84,17 +91,16 @@ static int ySpace = 0;
 		offscreen = createImage(LoadTutorial.BildbreiteMal1,Bildhöhe);
 		bg = offscreen.getGraphics();
 
-		//bg.clearRect(0,0,LoadTutorial.BildbreiteMal1,Bildhöhe);									
+		bg.clearRect(0,0,LoadTutorial.BildbreiteMal1,Bildhöhe);									
 
 		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;	
+		Graphics2D g2d = (Graphics2D) g;												
 		
-		//Zeichnen des Tutorials
-		Tutorial_draw.Tutorial_draw();											
-		
-		//Ende vom Zeichnen des Characters	
 		//Kollisionsabfrage
 		Tutorial_draw.BlockUpdater();
+		
+		//Zeichnen des Tutorials
+		Tutorial_draw.Tutorial_draw();
 		
 		//Anzeige für Climp Power
 		bg.setFont(new Font("Sans", Font.PLAIN, 30)); 			
@@ -103,7 +109,7 @@ static int ySpace = 0;
 			bg.drawString("Climb Power: 0",50, 90);
 		}else{
 			bg.drawString("Climb Power: " + Strings.ClimpPower,50, 90);
-		}
+		}		
 		
 		//Anezige für Sprint Power		
 		if(Strings.SprintPower <= 0) {	
@@ -141,8 +147,9 @@ static int ySpace = 0;
 			}else{
 				bg.drawString("fps: " + Fps, 50, 50);
 			}			
-		}
-        
+		}        		
+				
+		Tutorial_Strings.Tutorial_Strings();
 		//Doublebuffer
 		g2d.drawImage(offscreen,0,0,null);									
 	}

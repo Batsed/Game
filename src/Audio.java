@@ -15,8 +15,8 @@ public class Audio {
       @Override
       public void run() {
 	    try {
-	    	playMp3.play();	  
-	    	playMenü.play();	 	    	  	  
+	    	playMenü.play();
+	    	playMp3.play();	  	    		 	    	  	 
 	    	Strings.MenüMusik = "false";
 	    	main();
 	    } catch (Exception e) {

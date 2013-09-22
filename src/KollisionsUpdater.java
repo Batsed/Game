@@ -1,15 +1,15 @@
 
 public class KollisionsUpdater {
 	
-	public static void BrickReck1() {
-    	if(560 >= 608 - gui.ySpace - Strings.ChaY) {  
+	public static void BrickReck1() {	
+    	if(560 >= gui.ChaHeightFuß - Tutorial_draw.KameraHöhe) {  
     		Strings.Climb = false;
     		Strings.ChaAufBlock = true;
-    		Strings.BlockHöhe = 50;
-    		Strings.ChaHöhe = 50;
+    		Strings.BlockHöhe = 55;
+    		Strings.ChaHöhe = 55;
     		HöhenMesser();    		
-    	}else{
-    		Strings.BlockMitte = 0 - Tutorial_Rectangles.Brick + 700 - 25;
+    	}else{    	    		
+    		Strings.BlockMitte = 0 - Tutorial_Rectangles.Brick + 700 - 25 + Tutorial_draw.KameraBreite;
     		Zusammenstoß.ZKBrickReck();
     		Zusammenstoß();
 		}	 
@@ -24,14 +24,14 @@ public class KollisionsUpdater {
 		
 	}
 	public static void rect1() {
-		if(460 >= 608 - gui.ySpace - Strings.ChaY) { 
+		if(460 >= gui.ChaHeightFuß - Tutorial_draw.KameraHöhe) { 
 			Strings.Climb = false;
 			Strings.ChaAufBlock = true;
-			Strings.ChaHöhe = 150;
-			Strings.BlockHöhe = 150; 
+			Strings.ChaHöhe = 155;
+			Strings.BlockHöhe = 155; 
 			HöhenMesser();				
 		}else{
-			Strings.BlockMitte = 50 - Tutorial_Rectangles.Brick + 700 - 25;
+			Strings.BlockMitte = 50 - Tutorial_Rectangles.Brick + 700 - 25 + Tutorial_draw.KameraBreite;
 			Zusammenstoß.ZKBrickReck();
 			Zusammenstoß();
 		}		
@@ -46,25 +46,25 @@ public class KollisionsUpdater {
 	}			
 	
 	public static void BrickReck2() {	
-		if(410 >= 480 - gui.ySpace - Strings.ChaY){		
-			if(!(380 >= 480 - gui.ySpace - Strings.ChaY)) {
+		if(410 >= gui.ChaHeight - Tutorial_draw.KameraHöhe){		
+			if(!(380 >= gui.ChaHeight - Tutorial_draw.KameraHöhe)) {
 				Strings.ChaHöhe = 0;
 				Strings.BlockJump = true;
 				KeySchleife.yOn = "true";
 			}			
 		}else{
-			Strings.BlockMitte = 100 - Tutorial_Rectangles.Brick + 700 - 25;
+			Strings.BlockMitte = 100 - Tutorial_Rectangles.Brick + 700 - 25 + Tutorial_draw.KameraBreite;
 			Zusammenstoß.ZKBrickReck();
 			Zusammenstoß();			
 		}
-		if(360 >= 608 - gui.ySpace - Strings.ChaY) {
+		if(360 >= gui.ChaHeightFuß - Tutorial_draw.KameraHöhe) {
 			Strings.Climb = false;
 			Strings.ChaAufBlock = true;
-			Strings.ChaHöhe = 250;
-			Strings.BlockHöhe = 250; 
+			Strings.ChaHöhe = 255;
+			Strings.BlockHöhe = 255; 
 			HöhenMesser();				
 		}else{
-			Strings.BlockMitte = 100 - Tutorial_Rectangles.Brick + 700 - 25;
+			Strings.BlockMitte = 100 - Tutorial_Rectangles.Brick + 700 - 25 + Tutorial_draw.KameraBreite;
 			Zusammenstoß.ZKBrickReck();
 			Zusammenstoß();
 		}			
@@ -79,25 +79,25 @@ public class KollisionsUpdater {
 	}
 	
 	public static void BrickReck3() {	
-		if(310 >= 480 - gui.ySpace - Strings.ChaY){
-			if(!(280 >= 480 - gui.ySpace - Strings.ChaY)) {
+		if(310 >= gui.ChaHeight - Tutorial_draw.KameraHöhe){
+			if(!(280 >= gui.ChaHeight - Tutorial_draw.KameraHöhe)) {
 				Strings.ChaHöhe = 0;
 				Strings.BlockJump = true;
 				KeySchleife.yOn = "true";
 			}
 		}else{
-			Strings.BlockMitte = 150 - Tutorial_Rectangles.Brick + 700 - 25;
+			Strings.BlockMitte = 150 - Tutorial_Rectangles.Brick + 700 - 25 + Tutorial_draw.KameraBreite;
 			Zusammenstoß.ZKBrickReck();
 			Zusammenstoß();
 		}
-		if(260 >= 608 - gui.ySpace - Strings.ChaY) { 
+		if(260 >= gui.ChaHeightFuß - Tutorial_draw.KameraHöhe) { 
 			Strings.Climb = false;
 			Strings.ChaAufBlock = true;
-			Strings.ChaHöhe = 350;
-			Strings.BlockHöhe = 350; 
+			Strings.ChaHöhe = 355;
+			Strings.BlockHöhe = 355; 
 			HöhenMesser();				
 		}else{
-			Strings.BlockMitte = 150 - Tutorial_Rectangles.Brick + 700 - 25;
+			Strings.BlockMitte = 150 - Tutorial_Rectangles.Brick + 700 - 25 + Tutorial_draw.KameraBreite;
 			Zusammenstoß.ZKBrickReck();
 			Zusammenstoß();			
 		}			
@@ -113,15 +113,15 @@ public class KollisionsUpdater {
 	
 	//Erste Wand
 	public static void WallBrick() {	
-		if(160 >= 608 - gui.ySpace - Strings.ChaY) {
+		if(160 >= gui.ChaHeightFuß - Tutorial_draw.KameraHöhe) {
 			Strings.Climb = false;
 			Strings.ChaAufBlock = true;
-			Strings.BlockHöhe = 450; 
-			Strings.ChaHöhe = 450;			
+			Strings.BlockHöhe = 455; 
+			Strings.ChaHöhe = 455;			
 			HöhenMesser();				
 		}else{
 			Strings.ChaAufBlock = false;
-			Strings.BlockMitte = 150 - Tutorial_Rectangles.Brick + 1200 - 25;
+			Strings.BlockMitte = 150 - Tutorial_Rectangles.Brick + 1200 - 25 + Tutorial_draw.KameraBreite;
 			Zusammenstoß.ZKBrickReck();
 			Zusammenstoß();
 		}
@@ -136,13 +136,12 @@ public class KollisionsUpdater {
 	}
 	
 	public static void Boden() {			
-		if(560 >= 608 - gui.ySpace - Strings.ChaY) {	
-			System.out.println("Durch");
+		if(560 >= gui.ChaHeightFuß - Tutorial_draw.KameraHöhe) {				
 			Strings.Climb = false;
 			Strings.BodenHöhe = 40; 
 			Strings.ChaAufBlock = false;
-			Strings.ChaHöhe = 40;
-			Strings.BlockHöhe = 40;
+			Strings.ChaHöhe = 45;
+			Strings.BlockHöhe = 45;
 			HöhenMesserBoden();			
 		}
 		Zusammenstoß.ZKBrickReck();

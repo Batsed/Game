@@ -40,6 +40,8 @@ public class KeySchleife {
 			while (true) { 			
 				Strings.KeycurrentFrame = System.currentTimeMillis();
 				
+				ChaDown();
+				
 				//Abragung ob LShit gedrückt wird
 				if(Strings.SprintPower <= 0) {											
 					KeySchleife.KeyPressedShift = "false";
@@ -228,7 +230,7 @@ public class KeySchleife {
 			Strings.SprintPower -= 0.5;
     		run = 1;
     	}
-		
+				
 		gui.speed = 6 + run;			    				    								    							        				        
     	
 		LoadTutorial.anzahl += gui.speed - 5;
@@ -243,7 +245,7 @@ public class KeySchleife {
 		}	
 		if(LoadTutorial.BodenAnzahl >= LoadTutorial.BodenBreiteMal3) {
 			LoadTutorial.BodenAnzahl = 0;
-			LoadTutorial.BodenAnzahl2 = 0;
+			LoadTutorial.BodenAnzahl2 = 0;			
 		}
 		if(gui.schleife == 1) {
 			SchlumpfSpriteLaufen.an();
@@ -266,6 +268,8 @@ public class KeySchleife {
 		LoadTutorial.BodenAnzahl2 -= gui.speed;
 		Tutorial_Rectangles.Brick += gui.speed;
 		
+		
+		
 		//Gamebackground		
 		if(LoadTutorial.anzahl <= 0) {
 			LoadTutorial.anzahl = LoadTutorial.BildbreiteMal2;				
@@ -277,10 +281,11 @@ public class KeySchleife {
 		}		  				
 		//Boden
 		if(LoadTutorial.BodenAnzahl <= 0) {
-			LoadTutorial.BodenAnzahl = LoadTutorial.BodenBreiteMal2;			
+			LoadTutorial.BodenAnzahl = LoadTutorial.BodenBreiteMal2;	
+			Strings.Stand -= 1;
 		}	
-		if(LoadTutorial.BodenAnzahl <= LoadTutorial.BodenBreiteMal1) {
-			if(LoadTutorial.BodenAnzahl2 >= 0)
+		if(LoadTutorial.BodenAnzahl <= LoadTutorial.BodenBreiteMal1) {			
+			if(LoadTutorial.BodenAnzahl2 >= 0)			
 			LoadTutorial.BodenAnzahl2 = -LoadTutorial.BodenBreiteMal1;	
 		}
 		
@@ -290,7 +295,24 @@ public class KeySchleife {
 	
 	public static void main() {
 		 new KeySchleife().start();
-	 }
+	}
+	
+	public static void ChaDown() {
+		if(gui.ySpace == 0) {					
+			if(Strings.ChaY == 0) {				
+				if(Tutorial_draw.KameraHöhe + 480 >= gui.ChaHeight) {					
+					if(Strings.Climb == false){		
+						if(Strings.Zusammenstoß.equalsIgnoreCase("false")) {				
+							if(KeySchleife.KeyPressedControl == false) {															
+									
+									gui.Physix -= 1;																								
+							}
+						}
+					}	
+				}
+			}			
+		}
+	}
 		     
 	 private void start() {
 		 //BildAnimation.setPriority(10);
